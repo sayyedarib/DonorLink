@@ -1,0 +1,13 @@
+.organizationSection{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    color: white;
+height: 70vh;
+}
+
+.organizationSection h1{
+    font-size: 30px;
+}

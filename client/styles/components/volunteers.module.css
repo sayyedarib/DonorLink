@@ -1,0 +1,20 @@
+.volunteerSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  color: white;
+  background: black;
+}
+
+.volunteerSection h1{
+    font-size: 35px;
+}
+
+.volunteerSection div{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
