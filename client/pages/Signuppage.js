@@ -53,8 +53,7 @@ const SignUpPage = () => {
               label="name"
               variant="outlined"
             />
-            <br />
-            <br />
+        <br />
             <TextField
               name="email"
               value={userSignUp.email}
