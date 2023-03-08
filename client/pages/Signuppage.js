@@ -4,6 +4,8 @@ import styles from "../styles/pages/signUpPage.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
+
+
 const SignUpPage = () => {
   const [userSignUp, setUserSignUp] = useState({
     name: "",
