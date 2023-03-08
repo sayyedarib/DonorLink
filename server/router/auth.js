@@ -3,6 +3,7 @@ const router = express.Router();
 const dotenv = require("dotenv");
 const signUpSchema = require("../models/signUpForm");
 const signUpForm = require("../models/signUpForm");
+const bcrypt = require('bcryptjs')
 dotenv.config({ path: "./config.env" });
 require("../db/connection");
 
@@ -43,6 +44,7 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({ error: "email or password not filled " });
+    
     }
 
     const userExists = await signUpForm.findOne({ email: email });
@@ -52,6 +54,7 @@ router.post("/login", async (req, res) => {
       if (!passwordMatch) {
         return res.status(400).json("Invalid credential");
       } else {
+        console.log("user signed in successfully");
         res.json("user signed in successfully");
       }
     } else {
