@@ -8,10 +8,10 @@ app.use(cors({
     origin:"http://localhost:3000",
     credentials:true,
 }));
-app.use(require("../router/auth"));
+app.use(require("./router/auth"));
 
 dotenv.config({path:'./config.env'});
-require('../db/connection');
+require('./db/connection');
 const PORT = process.env.PORT;
 
 
