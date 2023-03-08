@@ -31,4 +31,17 @@ signUpSchema.pre("save", async function (next) {
   next();
 });
 
+signUpSchema.methods.generateAuthToken = async function (){
+  try {
+    let tokenNew = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+    this.tokens = this.tokens.concat({ token: tokenNew });
+    await this.save();
+    console.log("token saved")
+    return tokenNew;
+  } catch (err) {
+    console.log("error in generating token ", err);
+  }
+}
+
+
 module.exports = mongoose.model("signUpData", signUpSchema);

@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const dotenv = require("dotenv");
-const signUpSchema = require("../models/signUpForm");
-const signUpForm = require("../models/signUpForm");
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken');
+
+const signUpForm = require("../models/signUpForm");
+
 dotenv.config({ path: "./config.env" });
 require("../db/connection");
 
@@ -50,7 +52,13 @@ router.post("/login", async (req, res) => {
     const userExists = await signUpForm.findOne({ email: email });
     if (userExists) {
       const passwordMatch = await bcrypt.compare(password, userExists.password);
+const token = await userExists.generateAuthToken();
 
+res.cookie("jwtoken", token, {
+  expires: new Date(Date.now() + 2589200000),
+  httpOnly: true,
+});
+console.log("token saved in cookie")
       if (!passwordMatch) {
         return res.status(400).json("Invalid credential");
       } else {
