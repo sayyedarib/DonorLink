@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./Navigation";
 import styles from "../styles/components/header.module.css";
-
+import Link from "next/link";
 const Header = () => {
   return (
     <>
@@ -12,8 +12,11 @@ const Header = () => {
           <h2>Spreading hope can inspire others to persevere through difficult times and see the possibilities for a brighter future. Together, sharing love and spreading hope can help create a world where we can all thrive and live to our fullest potential.</h2>
           <div className={styles.btnDiv}>
 
-            <button >Donate</button>
+            <button >
+            Donate</button>
+            <Link href="/Form/VolunteerRegistration">
             <button>Join Us</button>
+            </Link>
           </div>
         </div>
       </header>

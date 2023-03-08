@@ -1,27 +1,28 @@
 .header {
-    color: white;
-  height: 89vh;
+  color: white;
+  height: 100vh;
   width: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)), url("../../public/assets/images/background/Abstract.svg") center/cover no-repeat;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-/* font-size: 20px; */
+  position: relative;
+  top: -15px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)),
+    url("/assets/images/background/Abstract.svg") center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.header h1{
-    font-size: 70px;
-    font-weight: 900;
-    line-height: 1.2;
-    background: linear-gradient(to right, #5764de, #55b3d5);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    
+.header h1 {
+  font-size: 70px;
+  font-weight: 900;
+  line-height: 1.2;
+  background: linear-gradient(to right, #5764de, #55b3d5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .content {
-margin: 0 30%;
+  margin: 0 30%;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -35,14 +36,15 @@ margin: 0 30%;
   gap: 4rem;
 }
 
-.btnDiv button{
-    font-size: 15px;
-padding: 15px;
-background: linear-gradient(to right, #5764de, #55b3d5);
-border-radius: 5px;
-color: white;
-font-weight: 600;
-cursor: pointer;
+.btnDiv button {
+  border: none;
+  font-size: 15px;
+  padding: 15px 25px;
+  background: linear-gradient(to right, #222759, #5560d5);
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .header h1 {

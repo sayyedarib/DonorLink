@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const dotenv = require("dotenv");
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const signUpForm = require("../models/signUpForm");
+const volunteerForm = require("../models/volunteerRegistration");
 
 dotenv.config({ path: "./config.env" });
 require("../db/connection");
@@ -39,26 +40,24 @@ router.post("/signUp", async (req, res) => {
   }
 });
 
-
 //login Route
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({ error: "email or password not filled " });
-    
     }
 
     const userExists = await signUpForm.findOne({ email: email });
     if (userExists) {
       const passwordMatch = await bcrypt.compare(password, userExists.password);
-const token = await userExists.generateAuthToken();
+      const token = await userExists.generateAuthToken();
 
-res.cookie("jwtoken", token, {
-  expires: new Date(Date.now() + 2589200000),
-  httpOnly: true,
-});
-console.log("token saved in cookie")
+      res.cookie("jwtoken", token, {
+        expires: new Date(Date.now() + 2589200000),
+        httpOnly: true,
+      });
+      console.log("token saved in cookie");
       if (!passwordMatch) {
         return res.status(400).json("Invalid credential");
       } else {
@@ -72,6 +71,36 @@ console.log("token saved in cookie")
     console.log("catched error while login ", err);
   }
 });
+
+//volunteer registration route
+router.post("/volunteerRegistration", async (req, res) => {
+  try {
+    const { name, email, phone, bio, address } = req.body;
+
+    const response = await volunteerForm.findOne({ email: email });
+
+    if (response) {
+      console.log("email already exists");
+     return res.status(200).json("email already exists");
+    }
+
+    const data = new volunteerForm({
+      name,
+      email,
+      phone,
+      bio,
+      address,
+    });
+    await data.save();
+  } catch (err) {
+    console.log("got an error while volunteer registration ", err);
+  }
+});
+
+router.get('/volunteers',async (req,res)=>{
+  const volunteers = await volunteerForm.find();
+  res.json(volunteers)
+})
 
 router.get("/", (req, res) => {
   res.send("I'm a middleware");

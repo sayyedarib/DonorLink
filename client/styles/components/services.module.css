@@ -1,61 +1,66 @@
-.serviceCard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    cursor: pointer;
-    transition: all 300ms linear;
-    position: relative;
+.services {
+  display: flex;
+  position: relative;
+  top: -15px;
+  background: linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7)),
+  url("/assets/images/background/parabolic.svg") center/cover no-repeat;
 }
 
-.serviceCard:hover{
-    /* width: 80%; */
-    background: rgba(255, 255, 255, 0.262);
-}
-.serviceCard::after{
-    position: absolute;
-    content: "";
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0%;
-    height: 5px;
-    background: rgb(87, 100, 222);
-    background: linear-gradient(45deg, rgba(87, 100, 222, 1) 0%, rgba(85, 179, 213, 1) 100%);
-    transition: all 300ms linear;
+.serviceCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  cursor: pointer;
+  transition: all 300ms linear;
+  position: relative;
 }
 
-.serviceCard:hover::after{
-    width: 80%;
+.serviceCard:hover {
+  /* width: 80%; */
+  background: rgba(255, 255, 255, 0.262);
+}
+.serviceCard::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 5px;
+  background: rgb(87, 100, 222);
+  background: linear-gradient(
+    45deg,
+    rgba(87, 100, 222, 1) 0%,
+    rgba(85, 179, 213, 1) 100%
+  );
+  transition: all 300ms linear;
 }
 
-
-
-
-
-.text{
-    row-gap: 30px;
+.serviceCard:hover::after {
+  width: 80%;
 }
 
-.services{
-    display: flex;
-    flex-direction: column;
-    background-color: black;
-    color: white;
-    align-items: center;
-    gap: 3rem;
-    height: 100vh;
+.text {
+  row-gap: 30px;
 }
 
-
-.icon{
-    font-size: 30px;
-
+.services {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+  align-items: center;
+  gap: 3rem;
+  height: 100vh;
 }
 
+.icon {
+  font-size: 30px;
+}
 
-.services div{
-    display: flex;
-    gap: 2rem;
+.services div {
+  display: flex;
+  gap: 2rem;
 }

@@ -1,4 +1,6 @@
 .volunteerSection {
+  position: relative;
+  top: -15px;
   display: flex;
   flex-direction: column;
   gap: 10rem;

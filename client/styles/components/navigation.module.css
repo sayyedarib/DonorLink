@@ -1,6 +1,6 @@
 
   .nav {
-    background: #2D409E;
+    background: #162056;
     height: 80px;
     width: 100%;
     border-bottom: 1px solid black;
@@ -26,13 +26,14 @@
   }
   
   .nav ul li a {
+    text-decoration: none;
     color: white;
     font-size: 17px;
     padding: 7px 13px;
     border-radius: 3px;
     text-transform: uppercase;
   }
-  .nav li:hover,
+  .nav .link:hover,
   .active {
     background: #1b9bff;
     transition: 1s;
