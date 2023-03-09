@@ -3,9 +3,13 @@ const router = express.Router();
 const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
+// const sendMail = require("../controller/sendMail")
 
+//import schema
 const signUpForm = require("../models/signUpForm");
 const volunteerForm = require("../models/volunteerRegistration");
+const clothDonation = require("../models/clothDonation");
 
 dotenv.config({ path: "./config.env" });
 require("../db/connection");
@@ -75,13 +79,13 @@ router.post("/login", async (req, res) => {
 //volunteer registration route
 router.post("/volunteerRegistration", async (req, res) => {
   try {
-    const { name, email, phone, bio, address } = req.body;
+    const { name, email, phone, bio, address, coordinates } = req.body;
 
     const response = await volunteerForm.findOne({ email: email });
 
     if (response) {
       console.log("email already exists");
-     return res.status(200).json("email already exists");
+      return res.status(200).json("email already exists");
     }
 
     const data = new volunteerForm({
@@ -90,6 +94,7 @@ router.post("/volunteerRegistration", async (req, res) => {
       phone,
       bio,
       address,
+      coordinates,
     });
     await data.save();
   } catch (err) {
@@ -97,10 +102,78 @@ router.post("/volunteerRegistration", async (req, res) => {
   }
 });
 
-router.get('/volunteers',async (req,res)=>{
+//cloth donation
+router.post("/clothDonation", async (req, res) => {
+  console.log("I'm on server side now");
+  try {
+    const { name, email, phone, quantity, address, message, coordinates } =
+      req.body;
+
+    const data = new clothDonation({
+      name,
+      email,
+      phone,
+      quantity,
+      address,
+      message,
+      coordinates,
+    });
+
+    await data.save();
+    res.status(200).json("done");
+  } catch (err) {
+    console.log(
+      "got an error while posting cloth donation data to database ",
+      err
+    );
+  }
+});
+
+// router.post("/sendMail", sendMail);
+router.post("/sendMail", async (req, res) => {
+  try {
+    console.log("I'm inside send Mail")
+    const { name, email, phone, quantity, address, message, coordinates } =
+      req.body;
+console.log("send mail data: ",req.body);
+    // create reusable transporter object using the default SMTP transport
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "sayyedaribhussain4321@gmail.com",
+        pass: "mhzfludsaqzeedej",
+      },
+    });
+    console.log("I've crossed transporter")
+
+    // send mail with defined transport object
+    const info = await transporter.sendMail({
+      from: "sayyedaribhussain4321@gmail.com",
+      to: "sayyedaribhussain321@gmail.com",
+      subject: "New cloth donation form submitted",
+      html: `
+        <h6><strong>Name:</strong> ${name}</h6>
+        <h6><strong>Email:</strong> ${email}</h6>
+        <h6><strong>Phone:</strong> ${phone}</h6>
+        <h6><strong>Quantity:</strong> ${quantity}</h6>
+        <h6><strong>Address:</strong> ${address}</h6>
+        <h6><strong>Message:</strong> ${message}</h6>
+        <h6><strong>Coordinates:</strong> ${coordinates}</h6>
+      `,
+    });
+
+    // console.log('Message sent: %s', info.messageId);
+    res.status(200).json({ message: "Email sent successfully!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to send email!" });
+  }
+});
+
+router.get("/volunteers", async (req, res) => {
   const volunteers = await volunteerForm.find();
-  res.json(volunteers)
-})
+  res.json(volunteers);
+});
 
 router.get("/", (req, res) => {
   res.send("I'm a middleware");

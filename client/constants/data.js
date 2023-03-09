@@ -19,21 +19,21 @@ const provideHelpService = [
     icon: <MdFastfood />,
     title: "Donate food",
     text: "Lorem ipsum dolor sit mattis amet consectetur adipiscing",
-    link: "/donation/FoodDonation",
+    link: "/forms/foodDonation",
   },
   {
     id: 2,
     icon: <GiClothes />,
     title: "Donate Cloths",
     text: "Lorem ipsum dolor sit mattis amet consectetur adipiscing",
-    link: "/donation/ClothDonation",
+    link: "/forms/clothDonation",
   },
   {
     id: 3,
     icon: <MdBloodtype />,
     title: "Donate Blood",
     text: "Lorem ipsum dolor sit mattis amet consectetur adipiscing",
-    link: "/donation/DonateBlood",
+    link: "/forms/bloodDonation",
   },
 ];
 

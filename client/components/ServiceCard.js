@@ -8,7 +8,7 @@ const ServiceCard = ({service}) => {
       <div className={styles.serviceCard}>
         <span className={styles.icon}>{service.icon}</span>
         <h4 className={styles.title}>{service.title}</h4>
-        <p className={styles.text}>{service.text}</p>
+        <h6 className={styles.text}>{service.text}</h6>
         <Link href="/" className={styles.btn}>
           <BsArrowRightCircle size={30} />
         </Link>

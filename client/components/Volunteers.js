@@ -38,6 +38,7 @@ const Volunteers = () => {
                 name={data.name}
                 email={data.email}
                 bio={data.bio}
+                img="/assets/images/fill-gap/boy.png"
                 link="/"
               />
             );

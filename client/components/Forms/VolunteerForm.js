@@ -1,21 +1,26 @@
 import React, { useState } from "react";
-import styles from "../../styles/components/Forms/volunteer.module.css";
+import styles from "../../styles/components/forms/commonStyle.module.css";
 import axios from "axios";
-
+import useGeoLocation from "hooks/useGeoLocation";
 
 const VolunteerForm = () => {
+
+  const location = useGeoLocation();
   const [detail, setDetail] = useState({
     name: "",
     email: "",
     phone: "",
     bio: "",
     address: "",
+    coordinates:""
   });
   let name, value;
   const handleInput = (e) => {
     name = e.target.name;
     value = e.target.value;
-    setDetail({ ...detail, [name]: value });
+    setDetail({ ...detail, [name]: value,coordinates:`${location.loaded
+      ? JSON.stringify(location.coordinates)
+      : "Could not access the location"}` });
   };
 
 const handleClick=async (e)=>{
@@ -28,7 +33,8 @@ setDetail({    name: "",
 email: "",
 phone: "",
 bio: "",
-address: ""})
+address: "",
+coordinates:""})
 
 }catch(err){
   console.log("error while submitting volunteer registration form",err)
@@ -40,7 +46,7 @@ address: ""})
       <div className={styles.body}>
         <div className={styles.left}></div>
         <div className={styles.right}>
-          <h1>Registration Form</h1>
+          <h3>Registration Form</h3>
           <form method="post" className={styles.form}>
             <input
               value={detail.name}

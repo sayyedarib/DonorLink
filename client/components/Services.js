@@ -1,21 +1,27 @@
 import React from 'react'
 import styles from '../styles/components/services.module.css'
+import Link from 'next/link'
 import data from '../constants/data'
 import ServiceCard from './ServiceCard'
+
 
 const Services = () => {
   return (
     <>
       <section className={styles.services}>
-<h2>Provide Help</h2>
+<h3>Provide Help</h3>
 <div className={styles.provideHelp}>
 {data.provideHelpService.map(data=>{
     return(<>
+<Link href={data.link}>
+
 <ServiceCard service={data}/>
+</Link>
+    
     </>)
 })}
 </div>
-<h2>Get Help</h2>
+<h3>Get Help</h3>
 <div className={styles.getHelp}>
 {data.getHelpService.map(data=>{
     return(<>

@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
-const { collection } = require('./signUpForm');
 
-
-const volunteerFormSchema = mongoose.Schema({
+const clothDonationSchema = mongoose.Schema({
 name:{
     type:String,
     required:true
@@ -16,19 +14,23 @@ phone:{
     type:Number,
 required:true
 },
-bio:{
-    type:String,
-    required:false
+quantity:{
+    type:Number,
+required:true
 },
 address:{
     type:String,
     required:false
 },
+message:{
+    type:String,
+    required:false
+},
 coordinates:{
-    type: String,
+    type:String, 
     required:false
 }
-}, {collection:"volunteersData"});
+}, {collection:"clothDonationData"});
 
 
-module.exports = mongoose.model("volunteerFormModel", volunteerFormSchema);
+module.exports = mongoose.model("clothDonationData", clothDonationSchema);

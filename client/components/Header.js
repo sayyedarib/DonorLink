@@ -14,7 +14,7 @@ const Header = () => {
 
             <button >
             Donate</button>
-            <Link href="/Form/VolunteerRegistration">
+            <Link href="/forms/volunteerRegistration">
             <button>Join Us</button>
             </Link>
           </div>

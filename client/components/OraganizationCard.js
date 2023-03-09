@@ -8,7 +8,7 @@ const OraganizationCard = ({name, email, about, img, link}) => {
           <img src={img} alt="volunteer_image not found" />
           <h2>{name}</h2>
           <h3>{email}</h3>
-          <p>{about}</p>
+          <h6>{about}</h6>
       </Link>
         </div>
     </>

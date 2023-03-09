@@ -12,14 +12,6 @@
   justify-content: center;
 }
 
-.header h1 {
-  font-size: 70px;
-  font-weight: 900;
-  line-height: 1.2;
-  background: linear-gradient(to right, #5764de, #55b3d5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
 .content {
   margin: 0 30%;

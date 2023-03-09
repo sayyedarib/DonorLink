@@ -1,12 +1,12 @@
 .volunteerSection {
-  position: relative;
-  top: -15px;
   display: flex;
   flex-direction: column;
-  gap: 10rem;
+  position: relative;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  top: -15px;
+  gap: 10rem;
+  padding: 20px;
   color: white;
   background: black;
 }
