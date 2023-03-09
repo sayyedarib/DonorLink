@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const geolib = require("geolib");
 // const sendMail = require("../controller/sendMail")
 
 //import schema
@@ -131,11 +132,28 @@ router.post("/clothDonation", async (req, res) => {
 
 // router.post("/sendMail", sendMail);
 router.post("/sendMail", async (req, res) => {
+  const donorCoordinate = JSON.parse(req.body.coordinates);
+  const volunteers = await volunteerForm.find();
+
+  //calculate volunteers distance from donor
+  const volunteerWithDistance = volunteers.map((data) => {
+    const volunteerCoordinate = JSON.parse(data.coordinates);
+    const distance = geolib.getDistance(donorCoordinate, volunteerCoordinate);
+    console.log("distances ", distance);
+    return {
+      volunteer: data,
+      distance: distance,
+    };
+  });
+console.log("volunteer with distance 1",volunteerWithDistance);
+  volunteerWithDistance.sort((a, b) => a.distance - b.distance);
+
+  const emails = volunteers.map((data) => data.email);
   try {
-    console.log("I'm inside send Mail")
+    console.log("I'm inside send Mail");
     const { name, email, phone, quantity, address, message, coordinates } =
       req.body;
-console.log("send mail data: ",req.body);
+    console.log("send mail data: ", req.body);
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -144,13 +162,18 @@ console.log("send mail data: ",req.body);
         pass: "mhzfludsaqzeedej",
       },
     });
-    console.log("I've crossed transporter")
+    console.log("I've crossed transporter");
+    console.log(emails.join(","));
 
+    //send mail to nearest volunteer
+console.log("volunteer with distance ", volunteerWithDistance)
+    const nearestVolunteer = volunteerWithDistance[0].volunteer;
+console.log("nearest volunteer",nearestVolunteer);
     // send mail with defined transport object
     const info = await transporter.sendMail({
-      from: "sayyedaribhussain4321@gmail.com",
-      to: "sayyedaribhussain321@gmail.com",
-      subject: "New cloth donation form submitted",
+      from: `${name} has donated cloth`,
+      to: nearestVolunteer.email,
+      subject: "checking nearest volunteer",
       html: `
         <h6><strong>Name:</strong> ${name}</h6>
         <h6><strong>Email:</strong> ${email}</h6>
@@ -172,6 +195,7 @@ console.log("send mail data: ",req.body);
 
 router.get("/volunteers", async (req, res) => {
   const volunteers = await volunteerForm.find();
+  console.log(volunteers);
   res.json(volunteers);
 });
 
