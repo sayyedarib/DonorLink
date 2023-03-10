@@ -20,7 +20,7 @@ const PORT = process.env.PORT;
 
 
 app.get('/', (req, res)=>{
-    res.json("Assalamalaikum")
+    res.send("Assalamalaikum")
 });
 
 app.listen(PORT||8080,console.log(`listening to PORT ${PORT}`));
