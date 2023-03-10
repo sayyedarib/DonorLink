@@ -13,10 +13,12 @@ const Services = () => {
 <div className={styles.provideHelp}>
 {data.provideHelpService.map(data1=>{
     return(<>
+
     <div key={data1.id} >
 <Link href={data1.link}>
 
 <ServiceCard service={data1}/>
+
 </Link>
     </div>
     </>)
