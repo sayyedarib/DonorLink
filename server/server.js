@@ -23,4 +23,4 @@ app.get('/', (req, res)=>{
     res.json("Assalamalaikum")
 });
 
-app.listen(PORT,console.log(`listening to PORT ${PORT}`));
+app.listen(PORT||8080,console.log(`listening to PORT ${PORT}`));
