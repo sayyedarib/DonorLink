@@ -14,7 +14,6 @@ const Services = () => {
 {data.provideHelpService.map(data=>{
     return(<>
 <Link href={data.link}>
-
 <ServiceCard service={data}/>
 </Link>
     

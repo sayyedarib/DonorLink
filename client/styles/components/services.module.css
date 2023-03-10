@@ -1,11 +1,12 @@
+
 .services {
   display: flex;
   position: relative;
   top: -15px;
   background: linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7)),
   url("/assets/images/background/parabolic.svg") center/cover no-repeat;
+  
 }
-
 .serviceCard {
   display: flex;
   flex-direction: column;
@@ -15,11 +16,15 @@
   cursor: pointer;
   transition: all 300ms linear;
   position: relative;
+  
 }
+
 
 .serviceCard:hover {
   /* width: 80%; */
   background: rgba(255, 255, 255, 0.262);
+  transform: scale(1.1);
+  transition-duration: 1s;
 }
 .serviceCard::after {
   position: absolute;
@@ -44,6 +49,8 @@
 
 .text {
   row-gap: 30px;
+  /* font-style: italic; */
+  color:white
 }
 
 .services {
@@ -56,11 +63,19 @@
   padding: 20px;
 }
 
-.icon {
+.icon{
   font-size: 30px;
 }
 
 .services div {
   display: flex;
   gap: 2rem;
+}
+.title{
+/* text-decoration: none; */
+color:rgba(206, 243, 58, 0.7);
+
+}
+.provideHelp a{
+  text-decoration: none;
 }
