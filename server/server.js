@@ -17,10 +17,12 @@ dotenv.config({path:'./config.env'});
 require('./db/connection');
 const PORT = process.env.PORT;
 
-
+app.get('/test', (req, res)=>{
+    res.send("working now");
+})
 
 app.get('/', (req, res)=>{
-    res.json("Assalamalaikum")
+    res.send("Assalamalaikum")
 });
 
-app.listen(PORT,console.log(`listening to PORT ${PORT}`));
+app.listen(PORT||8080,console.log(`listening to PORT ${PORT}`));

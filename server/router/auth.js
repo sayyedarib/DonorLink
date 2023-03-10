@@ -199,8 +199,5 @@ router.get("/volunteers", async (req, res) => {
   res.json(volunteers);
 });
 
-router.get("/", (req, res) => {
-  res.send("I'm a middleware");
-});
 
 module.exports = router;
