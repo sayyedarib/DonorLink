@@ -3,6 +3,10 @@ const { collection } = require('./signUpForm');
 
 
 const volunteerFormSchema = mongoose.Schema({
+picture:{
+
+},
+
 name:{
     type:String,
     required:true
