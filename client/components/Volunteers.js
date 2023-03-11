@@ -32,13 +32,14 @@ const Volunteers = () => {
         <h1>Our Volunteers</h1>
         <div>
           {data.map((data) => {
+        console.log("volunteers data ",data)
             return (
               <VolunteerCard
                 key={data._id}
                 name={data.name}
                 email={data.email}
                 bio={data.bio}
-                img="/assets/images/fill-gap/boy.png"
+                picture={data.picture==""?"/assets/images/fill-gap/boy.png":data.picture}
                 link="/"
               />
             );
