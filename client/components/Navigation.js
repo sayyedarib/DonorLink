@@ -10,7 +10,7 @@ const Navbar = () => {
     <label htmlFor="check" className={styles.checkbtn}>
     <FontAwesomeIcon icon={faBars}/>
     </label>
-    <label className={styles.logo}>Navbar</label>
+    <label className={styles.logo}>DonorLink</label>
     <ul>
       <li><Link className={styles.active} href="/">Home</Link></li>
       <li><Link className={styles.link} href="/">About</Link></li>
