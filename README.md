@@ -1,5 +1,8 @@
+(only client side has been deployed on vercel but server side still remains to be deployed that's why that deployed version doesn't works porperly)
+
 # DonorLink
 Donor is a web application that connects donors with people in need. Built using Next.js, Express, and MongoDB Atlas, it enables donors to fill out a form and share their location, and uses geolocation to match them with nearby volunteers. The application also includes a payment gateway using Razorpay for secure online donations(payment gateway under working).
+
 
 # Features
 Easy-to-use form for donors to fill out
