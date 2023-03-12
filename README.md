@@ -25,6 +25,3 @@ If you would like to contribute to the development of ConnectX, please follow th
   </div>
 # Credits
 DonorLink was developed by Aarib and Aasif as part of DonorLink.
-
-# License
-This project is licensed under the MIT License - see the LICENSE.md file for details.
