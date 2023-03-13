@@ -11,16 +11,17 @@ DonorLink is a web application that connects donors with people in need. Built u
 
 
 # Features
-Easy-to-use form for donors to fill out
-Geolocation to match donors with nearby volunteers
-Nodemailer to send email notifications with donor locations to volunteers
-Razorpay payment gateway for secure online donations
+
+Join Us as Volunteer.
 
 ![volunteer (1)](https://user-images.githubusercontent.com/90370535/224564599-18ec391f-e46d-43d2-9547-02ba345fd613.png)
 
-
+Easy-to-use form for donors to fill out
 ![WhatsApp-Image-2023-03-12-at-23 43 00](https://user-images.githubusercontent.com/90370535/224564573-4f1ad1af-042a-4df5-aac1-40c98285f02f.png)
 
+Geolocation to match donors with nearby volunteers
+<br/>
+Nodemailer to send email notifications with donor locations to volunteers
 ![WhatsApp Image 2023-03-13 at 01 09 02](https://user-images.githubusercontent.com/90370535/224569159-a6569fbd-f89a-486e-b995-1192548dcbfe.png)
 
 # Getting started
