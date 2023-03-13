@@ -57,7 +57,7 @@ const Header = () => {
             needy people
           </h2>
           <div className={styles.btnDiv}>
-            <button onClick={checkoutHandler}>Donate</button>
+            <button onClick={checkoutHandler}>Support</button>
             <Link href="/forms/volunteerRegistration">
               <button>Join Us</button>
             </Link>
