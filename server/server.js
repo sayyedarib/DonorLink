@@ -13,6 +13,7 @@ app.get('/test', (req, res) => {
 });
 
 app.get('/', (req, res) => {
+  console.log("req of root of server ", req.body)
   res.send('Assalamalaikum');
 });
 

@@ -1,36 +1,35 @@
 import React, { useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 import styles from "../styles/pages/signUpPage.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-
+import { BACKEND_URL } from "next.config";
 
 const LoginPage = () => {
-    const [userLogin, setUserLogin] = useState({
-        email: "",
-        password: ""
+  const [userLogin, setUserLogin] = useState({
+    email: "",
+    password: "",
+  });
+  let name, value;
+  const handleInput = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    setUserLogin({ ...userLogin, [name]: value });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const { email, password } = userLogin;
+    const data = { email, password };
+    try {
+      const response = await axios.post(`${BACKEND_URL}/login`, data, {
+        withCredentials: true,
       });
-      let name, value;
-      const handleInput = (e) => {
-        name = e.target.name;
-        value = e.target.value;
-        setUserLogin({ ...userLogin, [name]: value });
-      };
-      
-      const handleLogin = async (e) => {
-        e.preventDefault();
-        const {email, password}=userLogin;
-        const data = { email, password };
-        try {
-          const response = await axios.post("http://localhost:3001/login", data, {
-            withCredentials: true,
-          });
-          setUserLogin({ email: "", password: ""});
-        } catch (err) {
-          console.log("error while posting login data to server: ", err);
-        }
-      };
-    
+      setUserLogin({ email: "", password: "" });
+    } catch (err) {
+      console.log("error while posting login data to server: ", err);
+    }
+  };
 
   return (
     <>
@@ -76,7 +75,7 @@ const LoginPage = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

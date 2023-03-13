@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 import styles from "../styles/pages/signUpPage.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-
-
+import { BACKEND_URL } from "next.config";
 
 const SignUpPage = () => {
   const [userSignUp, setUserSignUp] = useState({
@@ -19,13 +18,13 @@ const SignUpPage = () => {
     value = e.target.value;
     setUserSignUp({ ...userSignUp, [name]: value });
   };
-  
+
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const {name, email, password, cpassword}=userSignUp;
+    const { name, email, password, cpassword } = userSignUp;
     const data = { name, email, password, cpassword };
     try {
-      const response = await axios.post("http://localhost:3001/signUp", data, {
+      const response = await axios.post(`${BACKEND_URL}/signUp`, data, {
         withCredentials: true,
       });
       setUserSignUp({ name: "", email: "", password: "", cpassword: "" });
@@ -55,7 +54,7 @@ const SignUpPage = () => {
               label="name"
               variant="outlined"
             />
-        <br />
+            <br />
             <TextField
               name="email"
               value={userSignUp.email}

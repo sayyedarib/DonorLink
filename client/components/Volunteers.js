@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import VolunteerCard from "./VolunteerCard";
 import styles from "../styles/components/volunteers.module.css";
-
+import { BACKEND_URL } from "next.config";
 
 const Volunteers = () => {
   const [data, setData] = useState([]);
@@ -11,10 +11,8 @@ const Volunteers = () => {
     const fetchData = async () => {
       try {
         console.log("start checking response");
-        const response = await axios.get(
-          "http://localhost:3001/volunteers"
-        );
-        console.log("response ", response)
+        const response = await axios.get(`${BACKEND_URL}/volunteers`);
+        console.log("response ", response);
         const data = response.data;
         console.log(data);
         setData(data);
@@ -32,14 +30,18 @@ const Volunteers = () => {
         <h1>Our Volunteers</h1>
         <div>
           {data.map((data) => {
-        console.log("volunteers data ",data)
+            console.log("volunteers data ", data);
             return (
               <VolunteerCard
                 key={data._id}
                 name={data.name}
                 email={data.email}
                 bio={data.bio}
-                picture={data.picture==""?"/assets/images/fill-gap/boy.png":data.picture}
+                picture={
+                  data.picture == ""
+                    ? "/assets/images/fill-gap/boy.png"
+                    : data.picture
+                }
                 link="/"
               />
             );

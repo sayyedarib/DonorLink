@@ -3,6 +3,8 @@ import styles from "../../styles/components/Forms/commonStyle.module.css";
 import axios from "axios";
 import useGeoLocation from "hooks/useGeoLocation";
 import BasicSelect from "../Select";
+import { BACKEND_URL } from "next.config";
+
 const ClothDonationForm = () => {
   const location = useGeoLocation();
   const [volunteers, setVolunteers] = useState([]);
@@ -36,7 +38,7 @@ const ClothDonationForm = () => {
   //       try {
   //         console.log("start checking response");
   //         const response = await axios.get(
-  //           "http://localhost:3001/volunteers"
+  //           `http://localhost:3000`/volunteers"
   //         );
   //         console.log("response ", response)
   //         const data = response.data;
@@ -56,7 +58,7 @@ const ClothDonationForm = () => {
     try {
       console.log("start responsing");
       const response = await axios.post(
-        "http://localhost:3001/clothDonation",
+        `${BACKEND_URL}/clothDonation`,
         detail,
         {
           withCredentials: true,
@@ -66,7 +68,7 @@ const ClothDonationForm = () => {
       // request to mail the form data
       console.log("sending mail");
       const emailResponse = await axios.post(
-        "http://localhost:3001/sendMail",
+        `${BACKEND_URL}/sendMail`,
         detail,
         {
           withCredentials: true,
@@ -124,7 +126,6 @@ const ClothDonationForm = () => {
               required
             />
 
-
             <input
               value={detail.quantity}
               onChange={handleInput}
@@ -134,7 +135,7 @@ const ClothDonationForm = () => {
               placeholder="Quantity"
               required
             />
-            <BasicSelect/>
+            <BasicSelect />
             <textarea
               rows="5"
               value={detail.address}
