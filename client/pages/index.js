@@ -32,6 +32,8 @@ export default function Home() {
         integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
         crossOrigin="anonymous"
       ></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 
       <Header />
       <Services />

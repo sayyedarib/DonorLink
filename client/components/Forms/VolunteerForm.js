@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "../../styles/components/Forms/commonStyle.module.css";
 import axios from "axios";
 import useGeoLocation from "hooks/useGeoLocation";
+import  {BACKEND_URL} from "next.config";
+
 
 const VolunteerForm = () => {
   const location = useGeoLocation();
@@ -15,8 +17,6 @@ const VolunteerForm = () => {
     coordinates: "",
   });
 
-
-  
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertToBase64(file);
@@ -56,9 +56,11 @@ const VolunteerForm = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     console.log("click detail", detail);
+    console.log("I am Backend url: ", BACKEND_URL);
     try {
+
       const response = await axios.post(
-        "http://localhost:3001/volunteerRegistration",
+        `${BACKEND_URL}/volunteerRegistration`,
         detail,
         {
           withCredentials: true,

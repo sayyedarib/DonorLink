@@ -1,28 +1,20 @@
-const express = require('express');
-const cors = require('cors')
-const dotenv = require('dotenv');
-const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-
-app.use(cors({
-    origin:"http://localhost:3000",
-    credentials:true,
-}));
-app.use(require("./router/auth"));
-
-dotenv.config({path:'./config.env'});
+const app = require('./app');
+const { createRazorpayInstance } = require('./services/razorpay');
 require('./db/connection');
+const paymentSchema = require('./models/paymentSchema')
+
+
 const PORT = process.env.PORT;
 
-app.get('/test', (req, res)=>{
-    res.send("working now");
-})
+const instance = createRazorpayInstance();
 
-app.get('/', (req, res)=>{
-    res.send("Assalamalaikum")
+app.get('/test', (req, res) => {
+  res.send('working now');
 });
 
-app.listen(PORT||8080,console.log(`listening to PORT ${PORT}`));
+app.get('/', (req, res) => {
+  console.log("req of root of server ", req.body)
+  res.send('Assalamalaikum');
+});
+
+app.listen(PORT || 8080, console.log(`listening to PORT ${PORT}`));
