@@ -54,5 +54,6 @@
 @media (max-width:800px) {
    .right{
        width: 65%;
+       height: 50vh;
    }
 }
