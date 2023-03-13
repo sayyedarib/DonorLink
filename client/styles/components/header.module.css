@@ -2,7 +2,6 @@
   color: white;
   height: 90vh;
   width: 100%;
-  
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)),
     url("/assets/images/background/Abstract.svg") center/cover no-repeat;
   position: relative; /* make the header a positioning context */
@@ -43,4 +42,11 @@
 .header h1 {
   margin-bottom: 30px;
   color: white;
+}
+
+
+@media (max-width:800px) {
+  .content h2{font-size: 18px;}
+  .btnDiv{gap: 0;}
+  .btnDiv button{margin: 10px;}
 }
