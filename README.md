@@ -3,12 +3,7 @@
 # DonorLink
 DonorLink is a web application that connects donors with people in need. Built using Next.js, Express, and MongoDB Atlas, it enables donors to fill out a form and share their location, and uses geolocation to match them with nearby volunteers. The application also includes a payment gateway using Razorpay for secure online donations(payment gateway under working).
 
-
-![home_2](https://user-images.githubusercontent.com/90370535/224564640-00ee2b8e-db1d-471d-8c15-a0c4c3690570.png)
-
-![help](https://user-images.githubusercontent.com/90370535/224564652-e708504d-c920-4854-b4b4-34083acc90f0.png)
-![volunteer](https://user-images.githubusercontent.com/90370535/224567239-ab571dc1-df42-441c-af85-c9eccfcee83a.png)
-
+![11zon_created-GIF (1)](https://user-images.githubusercontent.com/90370535/224618269-0fa8efbf-7911-4410-a96c-25c261c99a8d.gif)
 
 # Features
 
@@ -55,5 +50,18 @@ If you would like to contribute to the development of DonorLink, please follow t
 <li>Create a pull request on the main repository</li>
 </ul>
   </div>
+  
+  # Future Plans
+We are continuously working to add new feature and make the website more user friendly:
+<div><ul>
+<li>Integrating payment gateway</li>
+  <li>Make authentication system</li>
+  <li>Incorporating login/signup feature</li>
+<li>Provide dashboard to volunteers</li>
+<li>Open the registration for NGOs</li>
+<li>Reseaching more to build trust</li>
+</ul>
+  </div>
+  
 # Credits
 DonorLink was developed by Aarib and Aasif as part of DonorLink in Vercera Hackathon.
