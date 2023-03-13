@@ -5,6 +5,9 @@ DonorLink is a web application that connects donors with people in need. Built u
 
 ![11zon_created-GIF (1)](https://user-images.githubusercontent.com/90370535/224618269-0fa8efbf-7911-4410-a96c-25c261c99a8d.gif)
 
+![1](https://user-images.githubusercontent.com/90370535/224812928-4db3d30e-9ac5-4c81-9099-6e25576d47f4.png)
+![2](https://user-images.githubusercontent.com/90370535/224813118-b27f6af1-ba0c-4b82-ad7d-3165be9d91bb.png)
+
 # Features
 
 Join Us as Volunteer.
@@ -12,7 +15,8 @@ Join Us as Volunteer.
 ![volunteer (1)](https://user-images.githubusercontent.com/90370535/224564599-18ec391f-e46d-43d2-9547-02ba345fd613.png)
 
 Easy-to-use form for donors to fill out
-![WhatsApp-Image-2023-03-12-at-23 43 00](https://user-images.githubusercontent.com/90370535/224564573-4f1ad1af-042a-4df5-aac1-40c98285f02f.png)
+![3](https://user-images.githubusercontent.com/90370535/224813098-713c3de0-d863-42d3-a5f1-542ec54cfbc2.png)
+
 
 Geolocation to match donors with nearby volunteers
 <br/>
