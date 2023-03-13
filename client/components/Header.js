@@ -47,7 +47,7 @@ const Header = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <header className={styles.header}>
         <div className={styles.content}>
           <h1>Who we are?</h1>
@@ -57,7 +57,7 @@ const Header = () => {
             needy people
           </h2>
           <div className={styles.btnDiv}>
-            <button onClick={checkoutHandler}>Donate</button>
+            <button onClick={checkoutHandler}>Support</button>
             <Link href="/forms/volunteerRegistration">
               <button>Join Us</button>
             </Link>

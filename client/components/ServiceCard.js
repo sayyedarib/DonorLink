@@ -5,9 +5,9 @@ import styles from '../styles/components/services.module.css'
 const ServiceCard = ({service}) => {
   return (
     <>
-      <div className={styles.serviceCard}>
+      <div style={{padding:"20px"}} className={styles.serviceCard}>
         <span className={styles.icon}>{service.icon}</span>
-        <h4 className={styles.title}>{service.title}</h4>
+        <h2 className={styles.title}>{service.title}</h2>
         <h6 className={styles.text}>{service.text}</h6>
         <Link href="/">
         <div>
