@@ -5,7 +5,7 @@ const Organizations = () => {
   return (
     <>
     <section className={styles.organizationSection}>
-      <h1>Partnered Organizations</h1>
+      <h1>Partnered Organizations<br/>|under construction|</h1>
     </section>
     </>
   )

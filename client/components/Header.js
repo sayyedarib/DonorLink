@@ -47,13 +47,8 @@ const Header = () => {
       <Navbar />
       <header className={styles.header}>
         <div className={styles.content}>
-          <h1>Sharing Love,spreading hope</h1>
-          <h2>
-            Spreading hope can inspire others to persevere through difficult
-            times and see the possibilities for a brighter future. Together,
-            sharing love and spreading hope can help create a world where we can
-            all thrive and live to our fullest potential.
-          </h2>
+          <h1>Who we are?</h1>
+          <h2>we are a unified platform of donation where volunteer can join us and help to collect cloths and food from donors. And donate it to needy people</h2>
           <div className={styles.btnDiv}>
             <button onClick={checkoutHandler}>Donate</button>
             <Link href="/forms/volunteerRegistration">
