@@ -24,7 +24,7 @@ const Services = () => {
     </>)
 })}
 </div>
-<h3>Get Help</h3>
+<h3>Get Help &lt;working&gt;</h3>
 <div className={styles.getHelp}>
 {data.getHelpService.map(data2=>{
     return(<>

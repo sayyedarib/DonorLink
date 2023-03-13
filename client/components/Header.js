@@ -47,7 +47,7 @@ const Header = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <header className={styles.header}>
         <div className={styles.content}>
           <h1>Who we are?</h1>

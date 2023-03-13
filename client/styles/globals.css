@@ -1,4 +1,4 @@
-@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 
 * {
   padding: 0;
@@ -6,12 +6,19 @@
   text-decoration: none;
   list-style: none;
   box-sizing: border-box;
+  font-family: "Roboto";
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
   font-size: 70px;
   font-weight: 900;
   line-height: 1.2;
+  margin: 10px;
   background: linear-gradient(to right, #5764de, #55b3d5);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -24,4 +31,11 @@ h3 {
   background: linear-gradient(to right, #5764de, #55b3d5);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+  body {
+    background-size: contain;
+    background-position: top center;
+  }
 }
