@@ -52,7 +52,7 @@ const Header = () => {
         <div className={styles.content}>
           <h1>Who we are?</h1>
           <h2>
-            we are a unified platform of donation where volunteer can join us
+            We are a unified platform of donation where volunteer can join us
             and help to collect cloths and food from donors. And donate it to
             needy people
           </h2>

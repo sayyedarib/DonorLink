@@ -24,7 +24,10 @@
     line-height: 80px;
     margin: 0 5px;
   }
-  
+  .logo a{
+    color:white;
+    text-decoration: none;
+  }
   .nav ul li a {
     text-decoration: none;
     color: white;
@@ -33,7 +36,7 @@
     border-radius: 3px;
     text-transform: uppercase;
   }
-  .nav .link:hover,
+  .nav ul .link:hover,
   .active {
     background: #1b9bff;
     transition: 1s;
