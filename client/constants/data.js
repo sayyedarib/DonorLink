@@ -25,7 +25,7 @@ const provideHelpService = [
     id: 2,
     icon: <GiClothes />,
     title: "Donate Cloths",
-    text: "Lorem ipsum dolor sit mattis amet consectetur adipiscing",
+    text: "cloth can save live of poors in winter, go ahead and donate",
     link: "/forms/clothDonation",
   },
   {

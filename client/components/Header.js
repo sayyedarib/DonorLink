@@ -9,7 +9,7 @@ const Header = () => {
       <header className={styles.header}>
         <div className={styles.content}>
           <h1>Who we are?</h1>
-          <h2>we are a unified platform of donation where volunteer can join us and help to collect cloths and food from donors.</h2>
+          <h2>we are a unified platform of donation where volunteer can join us and help to collect cloths and food from donors. And donate it to needy people</h2>
           <div className={styles.btnDiv}>
 
             <button >
