@@ -6,44 +6,44 @@ import axios from "axios";
 import { BACKEND_URL } from "next.config";
 
 const Header = () => {
-  const checkoutHandler = async () => {
-    let amount = 1000;
+  // const checkoutHandler = async () => {
+  //   let amount = 1000;
 
-    const {
-      data: { key },
-    } = await axios.get(`${BACKEND_URL}/api/getkey`);
+  //   const {
+  //     data: { key },
+  //   } = await axios.get(`${BACKEND_URL}/api/getkey`);
 
-    const {
-      data: { order },
-    } = await axios.post(`${BACKEND_URL}/api/checkout`, {
-      amount,
-    });
-    console.log(order);
+  //   const {
+  //     data: { order },
+  //   } = await axios.post(`${BACKEND_URL}/api/checkout`, {
+  //     amount,
+  //   });
+  //   console.log(order);
 
-    const options = {
-      key,
-      amount: order.amount,
-      currency: "INR",
-      name: "Aarib",
-      description: "Tutorial of RazorPay",
-      image: "assets/images/fill-gap/boy.png",
-      order_id: order.id,
-      callback_url: `${BACKEND_URL}/api/paymentverification`,
-      prefill: {
-        name: "Sayyed Arib Hussain",
-        email: "sayyedaribhussain4321@gmail.com",
-        contact: "+91 8604078497",
-      },
-      notes: {
-        address: "Razorpay Corporate Office",
-      },
-      theme: {
-        color: "#121212",
-      },
-    };
-    const razor = new window.Razorpay(options);
-    razor.open();
-  };
+  //   const options = {
+  //     key,
+  //     amount: order.amount,
+  //     currency: "INR",
+  //     name: "Aarib",
+  //     description: "Tutorial of RazorPay",
+  //     image: "assets/images/fill-gap/boy.svg",
+  //     order_id: order.id,
+  //     callback_url: `${BACKEND_URL}/api/paymentverification`,
+  //     prefill: {
+  //       name: "Sayyed Arib Hussain",
+  //       email: "sayyedaribhussain4321@gmail.com",
+  //       contact: "+91 8604078497",
+  //     },
+  //     notes: {
+  //       address: "Razorpay Corporate Office",
+  //     },
+  //     theme: {
+  //       color: "#121212",
+  //     },
+  //   };
+  //   const razor = new window.Razorpay(options);
+  //   razor.open();
+  // };
 
   return (
     <>
@@ -57,7 +57,7 @@ const Header = () => {
             needy people
           </h2>
           <div className={styles.btnDiv}>
-            <button onClick={checkoutHandler}>Support</button>
+            <button >Support</button>
             <Link href="/forms/volunteerRegistration">
               <button>Join Us</button>
             </Link>

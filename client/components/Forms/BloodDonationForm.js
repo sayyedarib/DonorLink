@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "../../styles/components/Forms/commonStyle.module.css";
 import axios from "axios";
 import useGeoLocation from "hooks/useGeoLocation";
-import BasicSelect from "../Select";
 import { BACKEND_URL } from "next.config";
 
 const ClothDonationForm = () => {
@@ -135,7 +134,7 @@ const ClothDonationForm = () => {
               placeholder="Quantity"
               required
             />
-            <BasicSelect />
+
             <textarea
               rows="5"
               value={detail.address}
