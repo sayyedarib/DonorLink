@@ -39,7 +39,7 @@ const Volunteers = () => {
                 bio={data.bio}
                 picture={
                   data.picture == ""
-                    ? "/assets/images/fill-gap/boy.png"
+                    ? "/assets/images/fill-gap/boy.svg"
                     : data.picture
                 }
                 link="/"
