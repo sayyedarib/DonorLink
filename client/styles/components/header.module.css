@@ -12,7 +12,10 @@
   position: absolute;
   top: 50%; /* position the top of the element at the middle of the header */
   left: 50%; /* position the left of the element at the middle of the header */
-  transform: translate(-50%, -50%); /* center the element both horizontally and vertically */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* center the element both horizontally and vertically */
   text-align: center; /* center the text horizontally */
 }
 
@@ -35,7 +38,7 @@
   cursor: pointer;
 }
 
-.btnDiv button:hover{
+.btnDiv button:hover {
   transform: scale(1.05);
 }
 
@@ -43,10 +46,32 @@
   margin-bottom: 30px;
   color: white;
 }
+.header h2 {
+  margin: 0 15px 30px 12px;
+  color: white;
+}
 
-
-@media (max-width:800px) {
-  .content h2{font-size: 18px;}
-  .btnDiv{gap: 0;}
-  .btnDiv button{margin: 10px;}
+@media (max-width: 800px) {
+  .header{
+    position: relative;
+    top: -80px;
+    display: flex;
+  }
+  .content{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items:flex-start;
+    justify-content: center;
+  }
+  .content h2 {
+    font-size: 18px;
+  }
+  .btnDiv {
+    gap: 0;
+  }
+  .btnDiv button {
+    margin: 10px;
+  }
 }

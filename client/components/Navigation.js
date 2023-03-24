@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const Navbar = () => {
   return (
     <nav className={styles.nav}>
-    <input type="checkbox" className={styles.check} />
+    <input type="checkbox" id="check" className={styles.check} />
     <label htmlFor="check" className={styles.checkbtn}>
     <FontAwesomeIcon icon={faBars}/>
     </label>

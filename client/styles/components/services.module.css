@@ -30,7 +30,10 @@
   justify-content: center;
   cursor: pointer;
   transition: all 300ms linear;
-  width: 350px;
+  /* width: 350px 300px; */
+  width: 100%; /* default to 33.33% width */
+  max-width: 300px; /* maximum width */
+  min-width: 100px; /* minimum width */
   text-align: center;
   padding: 20px;
   margin: 0 10px 20px;
@@ -90,3 +93,4 @@
 .link:hover {
   text-decoration: underline;
 }
+

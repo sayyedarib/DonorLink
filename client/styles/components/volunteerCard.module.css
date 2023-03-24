@@ -13,7 +13,7 @@
   transition: transform 0.2s ease-in-out;
   }
   
-  .volunteer.volunteer {
+.volunteer {
 margin: auto;
 display: flex;
 flex-direction: column;

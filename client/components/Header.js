@@ -1,11 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navigation";
 import styles from "../styles/components/header.module.css";
 import Link from "next/link";
 import axios from "axios";
 import { BACKEND_URL } from "next.config";
+import jwt_decode from "jwt-decode"
+
 
 const Header = () => {
+const [user, setUser] = useState({});
+
+const handleCallBackResponse =(response)=>{
+console.log("Encoded JWT ID token "+response.credential)
+const userObject = jwt_decode(response.credential);
+console.log(userObject);
+setUser(userObject);
+}
+
+const handleSignOut =()=>{
+setUser({});
+console.log(user)
+return
+}
+
+  useEffect(() => {
+    // global google
+    google.accounts.id.initialize({
+      client_id:
+        "587921623953-23fr6m7muhh45pf3j36rvi0lvmfse4aj.apps.googleusercontent.com",
+        callback:handleCallBackResponse
+    });
+
+google.accounts.id.renderButton(
+  document.getElementById("signInDiv"),
+  {theme:"outline", size: "large"}
+)
+
+
+google.accounts.id.prompt();
+  }, []);
+
   // const checkoutHandler = async () => {
   //   let amount = 1000;
 
@@ -57,11 +91,15 @@ const Header = () => {
             needy people
           </h2>
           <div className={styles.btnDiv}>
-            <button >Support</button>
+            <button>Support</button>
             <Link href="/forms/volunteerRegistration">
               <button>Join Us</button>
             </Link>
           </div>
+          {Object.keys(user).length!=0? <div> <img src={user.picture} alt="user_picture" /> 
+          <h3>Welcome {user.name}</h3>
+        <button onClick={(e)=>handleSignOut(e)} >Signout</button>
+          </div>:<div id="signInDiv"></div>}
         </div>
       </header>
     </>
