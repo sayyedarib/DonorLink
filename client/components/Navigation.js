@@ -49,7 +49,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          {Object.keys(userDetails).length != 0 ? (
+          {userDetails&&Object.keys(userDetails).length != 0 ? (
             <button className={styles.btn} onClick={()=>dispatch(signOutUser())}  >SignOut</button>
           ) : (
             <button
