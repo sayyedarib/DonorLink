@@ -15,16 +15,17 @@ export default function Home() {
   return (
     <>
       <Head>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+{/* <script src="https://accounts.google.com/gsi/client" async defer></script> */}
       </Head>
+      <Script src="https://accounts.google.com/gsi/client" async defer ></Script>
 
 {/* <script src="https://checkout.razorpay.com/v1/checkout.js"></script> */}
 <Navbar/>
       <Header />
-      {/* <Services /> */}
-      {/* <Volunteers /> */}
-      {/* <Organizations /> */}
-      {/* <Footer /> */}
+      <Services />
+      <Volunteers />
+      <Organizations />
+      <Footer />
     </>
   );
 }
