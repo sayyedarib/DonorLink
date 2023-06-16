@@ -11,7 +11,7 @@ const Volunteers = () => {
     const fetchData = async () => {
       try {
         console.log("start checking response");
-        const response = await axios.get(`${BACKEND_URL}/volunteers`);
+        const response = await axios.get(`${BACKEND_URL}/api/volunteers`);
         console.log("response ", response);
         const data = response.data;
         console.log(data);

@@ -60,7 +60,7 @@ const VolunteerForm = () => {
     try {
 
       const response = await axios.post(
-        `${BACKEND_URL}/volunteerRegistration`,
+        `${BACKEND_URL}/api/volunteerRegistration`,
         detail,
         {
           withCredentials: true,
