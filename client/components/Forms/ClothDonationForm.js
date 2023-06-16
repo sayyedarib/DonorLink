@@ -57,7 +57,7 @@ const ClothDonationForm = () => {
     try {
       console.log("start responsing");
       const response = await axios.post(
-        `${BACKEND_URL}/clothDonation`,
+        `${BACKEND_URL}/api/clothDonation`,
         detail,
         {
           withCredentials: true,
@@ -67,7 +67,7 @@ const ClothDonationForm = () => {
       // request to mail the form data
       console.log("sending mail");
       const emailResponse = await axios.post(
-        `${BACKEND_URL}/sendMail`,
+        `${BACKEND_URL}/api/sendMail`,
         detail,
         {
           withCredentials: true,
