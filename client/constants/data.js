@@ -1,8 +1,7 @@
 
 import { BiDonateBlood } from "react-icons/bi";
 
-import { AiOutlineReload } from "react-icons/ai";
-import { MdFastfood, MdBloodtype } from "react-icons/md";
+import { MdFastfood} from "react-icons/md";
 import { GiClothes,GiHeartOrgan } from "react-icons/gi";
 import { FaRupeeSign } from "react-icons/fa";
 

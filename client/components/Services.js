@@ -10,7 +10,7 @@ const Services = () => {
       <section className={styles.services}>
         <h3>Provide Help</h3>
         <div className={styles.provideHelp}>
-          {data.provideHelpService.map((data1) => {
+          {data?.provideHelpService?.map((data1) => {
             return (
               <>
                 <div key={data1.id}>
@@ -24,11 +24,11 @@ const Services = () => {
         </div>
         <h3>Get Help &lt;working&gt;</h3>
         <div className={styles.getHelp}>
-          {data.getHelpService.map((data2) => {
+          {data?.getHelpService?.map((data2) => {
             return (
               <>
                 <div key={data2.id}>
-                  <ServiceCard service={data2} />
+                  {/* <ServiceCard service={data2} /> */}
                 </div>
               </>
             );

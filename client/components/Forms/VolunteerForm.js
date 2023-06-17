@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import styles from "../../styles/components/Forms/commonStyle.module.css";
 import axios from "axios";
 import useGeoLocation from "hooks/useGeoLocation";
-import  {BACKEND_URL} from "next.config";
-
 
 const VolunteerForm = () => {
   const location = useGeoLocation();
@@ -41,7 +39,6 @@ const VolunteerForm = () => {
   const handleInput = (e) => {
     name = e.target.name;
     value = e.target.value;
-    console.log("detail ", detail);
     setDetail({
       ...detail,
       [name]: value,
@@ -55,12 +52,9 @@ const VolunteerForm = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log("click detail", detail);
-    console.log("I am Backend url: ", BACKEND_URL);
     try {
-
       const response = await axios.post(
-        `${BACKEND_URL}/api/volunteerRegistration`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerRegistration`,
         detail,
         {
           withCredentials: true,
@@ -80,10 +74,6 @@ const VolunteerForm = () => {
       console.log("error while submitting volunteer registration form", err);
     }
   };
-
-  useEffect(() => {
-    console.log("after base64 ", detail);
-  }, [handleClick]);
 
   return (
     <>

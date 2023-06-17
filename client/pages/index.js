@@ -1,17 +1,22 @@
 import Head from "next/head";
-import Image from "next/image";
+import axios from "axios";
 // import { Inter } from "@next/font/google";
 
 import Header from "@/components/Header";
-import Services from "@/components/Services";
+// import Services from "@/components/Services";
 import Volunteers from "@/components/Volunteers";
 import Organizations from "@/components/Organizations";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navigation";
 import Script from "next/script";
+import dynamic from 'next/dynamic';
+
+
+const Services = dynamic(() => import('@/components/Services'));
+
 // const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({data}) {
   return (
     <>
       <Head>
@@ -20,12 +25,24 @@ export default function Home() {
       <Script src="https://accounts.google.com/gsi/client" async defer ></Script>
 
 {/* <script src="https://checkout.razorpay.com/v1/checkout.js"></script> */}
-<Navbar/>
+      <Navbar/>
       <Header />
       <Services />
-      <Volunteers />
-      <Organizations />
-      <Footer />
+      <Volunteers volunteerData={data}/>
+      {/* <Organizations /> */}
+      {/* <Footer /> */}
     </>
   );
 }
+
+
+export const getServerSideProps = async (context) => {
+  console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
+  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteers`;
+  const {data} = await axios.get(url);
+  return {
+    props: {
+      data: data,
+    },
+  };
+};

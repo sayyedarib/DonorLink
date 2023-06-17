@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "../../styles/components/Forms/commonStyle.module.css";
 import axios from "axios";
 import useGeoLocation from "hooks/useGeoLocation";
-import { BACKEND_URL } from "next.config";
 
 const ClothDonationForm = () => {
   const location = useGeoLocation();
@@ -32,32 +31,13 @@ const ClothDonationForm = () => {
     });
   };
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         console.log("start checking response");
-  //         const response = await axios.get(
-  //           `http://localhost:3000`/volunteers"
-  //         );
-  //         console.log("response ", response)
-  //         const data = response.data;
-  //         console.log(data);
-  //         setVolunteers(data);
-  //         return data;
-  //       } catch (err) {
-  //         console.log("error while fetching volunteers data ", err);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
-
   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
       console.log("start responsing");
       const response = await axios.post(
-        `${BACKEND_URL}/api/clothDonation`,
+        `${prcess.env.NEXT_PUBLIC_BACKEND_URL}/api/clothDonation`,
         detail,
         {
           withCredentials: true,
@@ -67,7 +47,7 @@ const ClothDonationForm = () => {
       // request to mail the form data
       console.log("sending mail");
       const emailResponse = await axios.post(
-        `${BACKEND_URL}/api/sendMail`,
+        `${prcess.env.NEXT_PUBLIC_BACKEND_URL}/api/sendMail`,
         detail,
         {
           withCredentials: true,
