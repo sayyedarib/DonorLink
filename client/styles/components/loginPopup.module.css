@@ -1,20 +1,15 @@
 .body {
     display: flex;
-    height: 100vh;
     width: 100%;
-    padding: 20px;
-    position:sticky;
-    z-index: 999;
     align-items: center;
-    justify-content: center;
+    margin:auto;
   }
   
   .right {
-    width: 30%;
+    width: auto;
     display: flex;
     background: white;
     flex-direction: column;
-    margin: 10px;
     border-radius: 10px;
     justify-content: center;
     text-align: center;
@@ -72,6 +67,11 @@
       margin-left: auto;
     }
     
+    .googleSignBtn{
+      display:"flex";
+      justify-content:"center";
+      align-items:"center";
+    }
 
   @media (max-width:1300px) {
     .right{

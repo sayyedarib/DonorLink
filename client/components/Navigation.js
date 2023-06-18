@@ -1,22 +1,19 @@
-import { useState,useEffect } from "react";
+import { useState, useContext } from "react";
 import Link from "next/link";
 import styles from "../styles/components/navigation.module.css";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDispatch,useSelector } from "react-redux";
-import loginPopupSlice from "@/slices/loginPopupSlice";
-import userDetailSlice from "@/slices/userDetailSlice";
-
+import userContext from "@/context/auth/userContext";
+import LoginPopup from "./LoginPopup";
 
 const Navbar = () => {
-  const {userDetails} = useSelector((state)=>state.userDetail);
-  console.log("userDetails ", userDetails)
-  const [user, setUser] = useState({});
-  const { changeVisibility } = loginPopupSlice.actions;
-  const {signOutUser}= userDetailSlice.actions;
-  const dispatch = useDispatch();
+  const userContextDetail = useContext(userContext);
 
   return (
+    <>
+
+      <div>
+      </div>
     <nav className={styles.nav}>
       <input type="checkbox" id="check" className={styles.check} />
       <label htmlFor="check" className={styles.checkbtn}>
@@ -49,19 +46,38 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          {userDetails&&Object.keys(userDetails).length != 0 ? (
-            <button className={styles.btn} onClick={()=>dispatch(signOutUser())}  >SignOut</button>
-          ) : (
-            <button
+          {
+            (userContextDetail?.userStateData.name != "" ? (
+              <button
               className={styles.btn}
-              onClick={() => dispatch(changeVisibility())}
-            >
-              Login
-            </button>
-          )}
+              style={{ border: "none", overflow: "hidden", borderRadius: "100%", margin:"0", padding:"0", display:"flex", justifyContent:"center", alignItems:"center"}}
+                onClick={() => {
+                  userContextDetail?.updateLoginPopupVisibilty();
+                  userContextDetail?.signOut();
+                }}
+              >
+                <img src={userContextDetail?.userStateData.picture} style={{width:"2rem", height:"auto"}}/>
+              </button>
+            ) : (
+              <button
+                className={styles.btn}
+                onClick={() => {userContextDetail?.updateLoginPopupVisibilty()}}
+              >
+                Login
+              </button>
+            ))
+          }
         </li>
       </ul>
     </nav>
+    {userContextDetail?.loginPopupVisibility && (
+        <div className={styles.popupOverlay}>
+          <div className={styles.popupContent}>
+            <LoginPopup />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -60,7 +60,6 @@ const VolunteerForm = () => {
           withCredentials: true,
         }
       );
-
       setDetail({
         picture: "",
         name: "",
@@ -72,6 +71,7 @@ const VolunteerForm = () => {
       });
     } catch (err) {
       console.log("error while submitting volunteer registration form", err);
+    alert("email already exists")
     }
   };
 

@@ -28,7 +28,7 @@ const Services = () => {
             return (
               <>
                 <div key={data2.id}>
-                  {/* <ServiceCard service={data2} /> */}
+                  <ServiceCard service={data2} />
                 </div>
               </>
             );
