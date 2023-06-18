@@ -37,7 +37,7 @@ const ClothDonationForm = () => {
     try {
       console.log("start responsing");
       const response = await axios.post(
-        `${prcess.env.NEXT_PUBLIC_BACKEND_URL}/api/clothDonation`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/clothDonation`,
         detail,
         {
           withCredentials: true,
@@ -47,7 +47,7 @@ const ClothDonationForm = () => {
       // request to mail the form data
       console.log("sending mail");
       const emailResponse = await axios.post(
-        `${prcess.env.NEXT_PUBLIC_BACKEND_URL}/api/sendMail`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/sendMail`,
         detail,
         {
           withCredentials: true,

@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
       const response = await volunteerData.findOne({ email: email });
       if (response) {
         console.log("email already exists");
-        return res.status(200).json("email already exists");
+        return res.status(400).json("email already exists");
       }
       const data = new volunteerData({
         picture,

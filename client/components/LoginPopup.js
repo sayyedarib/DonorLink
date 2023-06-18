@@ -1,19 +1,17 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "../styles/components/loginPopup.module.css";
 import axios from "axios";
-import { BACKEND_URL } from "next.config";
 import jwt_decode from "jwt-decode";
-import { useDispatch,useSelector } from "react-redux";
-import loginPopupSlice from "@/slices/loginPopupSlice";
-import userDetailSlice from "@/slices/userDetailSlice";
+import userContext from "@/context/auth/userContext";
 
 const LoginPopup = () => {
-  const {userDetails} = useSelector((state)=>state. userDetail)
-  console.log(userDetails);
-  const { changeVisibility } = loginPopupSlice.actions;
+  const userContextDetail = useContext(userContext)
+  const [userDetail, setUserDetail] = useState({
+    name: "",
+    email:"",
+    picture:"",
+  });
 
-  const { userDetailUpdate } = userDetailSlice.actions;
-  const dispatch = useDispatch();
   console.log("inside popup");
   const [user, setUser] = useState({
     email: "",
@@ -21,11 +19,9 @@ const LoginPopup = () => {
   });
 
   const handleCallBackResponse = (response) => {
-    console.log("Encoded JWT ID token " + response.credential);
     const userObject = jwt_decode(response.credential);
-    console.log(userObject);
-  dispatch(userDetailUpdate(userObject));
-  dispatch(changeVisibility())
+    userContextDetail.updateUserData(userObject);
+    userContextDetail.updateLoginPopupVisibilty(false);
   };
 
   useEffect(() => {
@@ -44,7 +40,6 @@ const LoginPopup = () => {
     google.accounts.id.prompt();
   }, []);
 
-
   let name, value;
   const handleInput = (e) => {
     name = e.target.name;
@@ -54,18 +49,20 @@ const LoginPopup = () => {
     });
   };
 
-
   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
       console.log("start response");
-      const response = await axios.post(`${BACKEND_URL}/login`, userDetails, {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`,
+        userDetail,
+        {
+          withCredentials: true,
+        }
+      );
 
       // request to mail the form data
-
       setUser({
         email: "",
         password: "",
@@ -75,6 +72,10 @@ const LoginPopup = () => {
     }
   };
 
+const handleSignUp = ()=>{
+
+}
+
   return (
     <>
       <div className={styles.body}>
@@ -83,7 +84,7 @@ const LoginPopup = () => {
           <div className={styles.iconHeader}>
             <button
               className={styles.cross}
-              onClick={() => dispatch(changeVisibility())}
+              onClick={userContextDetail.updateLoginPopupVisibilty}
             >
               <img src="/assets/images/icon/close-icon.svg" />
             </button>
@@ -110,7 +111,17 @@ const LoginPopup = () => {
             />
             <input type="submit" value="Login" onClick={handleClick} />
             <h3>Or</h3>
-            <div id="signInDiv"></div>
+            <div className="googleSignBtn">
+              <div style={{ padding: "10px 30px" }} id="signInDiv"></div>
+            </div>
+            <div>
+              <span>
+                {" "}
+                not a user? <span onClick={handleSignUp}>
+                  Register now
+                </span>{" "}
+              </span>
+            </div>
           </form>
         </div>
       </div>

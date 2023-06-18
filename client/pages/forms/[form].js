@@ -11,7 +11,6 @@ const Form = () => {
   const {form}=router.query;
     return (
     <>
-    <Navbar/>
     {form=="clothDonation"&&
     <ClothDonationForm/>
     } 
@@ -28,4 +27,4 @@ const Form = () => {
   )
 }
 
-export default Form
+export default Form;

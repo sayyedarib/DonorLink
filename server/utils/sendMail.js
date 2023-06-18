@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const clothDonation = require("../models/clothDonation");
 const volunteerData = require("../models/volunteerRegistration");
+const geolib = require("geolib");
+const nodemailer = require("nodemailer");
 
 router.post("/", async (req, res) => {
     const donorCoordinate = JSON.parse(req.body.coordinates);
@@ -24,7 +26,7 @@ router.post("/", async (req, res) => {
       console.log("I'm inside send Mail");
       const { name, email, phone, quantity, address, message, coordinates } =
         req.body;
-      console.log("send mail data: ", req.body);
+      // console.log("send mail data: ", req.body);
       // create reusable transporter object using the default SMTP transport
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -37,9 +39,9 @@ router.post("/", async (req, res) => {
       console.log(emails.join(","));
   
       //send mail to nearest volunteer
-      console.log("volunteer with distance ", volunteerWithDistance);
+      // console.log("volunteer with distance ", volunteerWithDistance.name);
       const nearestVolunteer = volunteerWithDistance[0].volunteer;
-      console.log("nearest volunteer", nearestVolunteer);
+      console.log("nearest volunteer", nearestVolunteer.name);
       // send mail with defined transport object
       const info = await transporter.sendMail({
         from: `${name} has donated cloth`,
