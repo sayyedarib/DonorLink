@@ -18,6 +18,7 @@ const volunteerRegistrationRoute = require("./router/vounteer/volunteerRegistrat
 const clothDonationRoute = require("./router/donation/cloth");
 const volunteerListRoute = require("./router/vounteer/volunteerList")
 const sendMailRoute = require("./utils/sendMail");
+const recordsDataRoute = require("./router/countData")
 
 // const instance = createRazorpayInstance();
 
@@ -26,6 +27,7 @@ app.use("/api/volunteerRegistration", volunteerRegistrationRoute)
 app.use("/api/clothDonation", clothDonationRoute);
 app.use("/api/sendMail", sendMailRoute);
 app.use("/api/volunteers", volunteerListRoute);
+app.use("/api/recordsData", recordsDataRoute);
 
 // app.get("/api/getkey", (req, res) => {
 //   res.status(200).json({ key: process.env.RAZORPAY_ID });

@@ -8,7 +8,6 @@ import Navbar from "@/components/Navigation";
 config.autoAddCss = false;
 
 export default function App({ Component, pageProps }) {
-  // console.log("store ", store);
   return (
 
     <UserState>

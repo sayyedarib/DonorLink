@@ -1,5 +1,6 @@
 import Head from "next/head";
 import axios from "axios";
+import { useEffect, useState } from "react";
 // import { Inter } from "@next/font/google";
 
 import Header from "@/components/Header";
@@ -11,12 +12,70 @@ import Navbar from "@/components/Navigation";
 import Script from "next/script";
 import dynamic from "next/dynamic";
 import UserState from "@/context/auth/UserState";
+import Records from "@/components/Records";
 
 const Services = dynamic(() => import("@/components/Services"));
 
 // const inter = Inter({ subsets: ["latin"] });
 
-export default function Home({ data }) {
+export default function Home({ volunteersData }) {
+
+  
+
+  const [recordsData, setRecordsData] = useState({
+    donations:"0",
+    volunteers:"0",
+    distributions:"0"
+  });
+
+
+  const getRecordsData = async () => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/recordsData`
+    );
+    const fetchedRecordData = await res.json();
+    console.log("fetchedRecordData ", fetchedRecordData);
+    setRecordsData(fetchedRecordData);
+  };
+
+    // setRecordsData(fetchedRecordData);
+
+    // if (fetchedRecordData.length > 0) {
+    //   const filterData = fetchedRecordData.filter(
+    //     (mentor) =>
+    //       mentor.verified === true && mentor.token === "mentorIsVerified"
+    //   );
+
+      // setData([...recordsData, ...filterData]);
+      // setSkipValue(skipvalue + limit);
+      // setLoading(false);
+      // console.log("recordsData here", fetchedRecordData);
+    // }else{
+      // setCompleted(true);
+      // setLoading(false);
+    // }
+  
+
+  const handleInfiniteScroll = async () => {
+    try {
+      if (
+        (window.innerHeight + document.documentElement.scrollTop) * 1.2 >=
+        document.documentElement.scrollHeight
+      ) {
+        getRecordsData();
+        // setSkipValue(skipvalue+limit);
+      }
+    } catch (error) {
+      console.log("Error in handleInfiniteScroll function", error);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleInfiniteScroll);
+    return () => window.removeEventListener("scroll", handleInfiniteScroll);
+  }, []);
+
+
+
   return (
     <>
 
@@ -32,20 +91,21 @@ export default function Home({ data }) {
         {/* <script src="https://checkout.razorpay.com/v1/checkout.js"></script> */}
         <Header />
         <Services />
-        <Volunteers volunteerData={data} />
+        <Volunteers volunteerData={volunteersData} />
+        {<Records data={recordsData}/>}
         {/* <Organizations /> */}
         {/* <Footer /> */}
     </>
   );
-}
+};
 
 export const getServerSideProps = async (context) => {
-  console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
-  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteers`;
-  const { data } = await axios.get(url);
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteers`);
+  
   return {
     props: {
-      data: data,
+      volunteersData: data,
     },
   };
-};
+}
+;

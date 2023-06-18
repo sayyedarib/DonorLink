@@ -8,7 +8,7 @@ const Services = () => {
   return (
     <>
       <section className={styles.services}>
-        <h3>Provide Help</h3>
+        <h1>Provide Help</h1>
         <div className={styles.provideHelp}>
           {data?.provideHelpService?.map((data1) => {
             return (
@@ -22,7 +22,7 @@ const Services = () => {
             );
           })}
         </div>
-        <h3>Get Help &lt;working&gt;</h3>
+        <h1>Get Help</h1>
         <div className={styles.getHelp}>
           {data?.getHelpService?.map((data2) => {
             return (
