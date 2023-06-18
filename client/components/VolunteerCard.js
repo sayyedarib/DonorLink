@@ -1,24 +1,17 @@
 import Link from "next/link";
 import React from "react";
-import styles from "../styles/components/volunteerCard.module.css";
 
-const VolunteerCard = ({ picture,name, email, bio, link }) => {
+import styles from '../styles/components/services.module.css'
+
+const VolunteerCard = ({picture, name, bio }) => {
   return (
-    <>
-      <div className={styles.volunteer}>
-        <Link href={link} className={styles.link}>
-        <div>
-          <img src={picture} alt="volunteer_image not found" />
-          </div>
-          <div>
-          <h2 style={{fontSize:"25px", fontWeight:"900"}} >{name}</h2>
-          <h6>{email}</h6>
-          <h6>{bio}</h6>
-          </div>
-        </Link>
-      </div>
-    </>
+    <div style={{ padding: "20px" }} className={styles.serviceCard}>
+      <span ><img src={picture} style={{width:"100px", height:"auto", borderRadius:"100%"}} /></span>
+      <h2 className={styles.title}>{name}</h2>
+      <h6 className={styles.text}>{bio.length<100?bio:bio.slice(0, 200)+"..."}</h6>
+    </div>
   );
 };
+
 
 export default VolunteerCard;

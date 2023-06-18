@@ -9,11 +9,9 @@ const ServiceCard = ({ service }) => {
       <span className={styles.icon}>{service.icon}</span>
       <h2 className={styles.title}>{service.title}</h2>
       <h6 className={styles.text}>{service.text}</h6>
-      {/* <Link href="#"> */}
         <div>
           <BsArrowRightCircle size={30} />
         </div>
-      {/* </Link> */}
     </div>
   );
 };
