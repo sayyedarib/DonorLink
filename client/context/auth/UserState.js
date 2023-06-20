@@ -1,24 +1,30 @@
 import { useState } from "react";
 import UserContext from "./userContext";
+import axios from "axios";
 
 const UserState = (props) => {
 const userData = {
+  type:"",
+  isLoggedIn:"",
   name:"",
   email:"",
-  picture:""
+  picture:"",
+  database:[]
 }
 
 const [userStateData, setUserStateData] = useState(userData); 
 const [loginPopupVisibility, setLoginPopupVisibility] = useState(false);
 
-const updateUserData=({name, email, picture})=>{
-  setUserStateData({name, email, picture});
+const updateUserData=async ({name, email, picture})=>{
+  const {data} =await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteers?particular=${email}`);
+  console.log("userDatabase ",data);
   console.log(userStateData, "  ", loginPopupVisibility);
+  setUserStateData({name, email, picture, database:data});
 }
 
 const updateLoginPopupVisibilty = ()=>{
   setLoginPopupVisibility(!loginPopupVisibility);
-  console.log(userStateData, "  ", loginPopupVisibility);
+  console.log("update loginpopupvisibilty called ",userStateData, "  ", loginPopupVisibility);
 }
 
 const signOut = () =>{

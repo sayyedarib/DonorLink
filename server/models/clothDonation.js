@@ -29,6 +29,10 @@ message:{
 coordinates:{
     type:String, 
     required:false
+},
+timing:{
+type:String,
+required:true
 }
 }, {collection:"clothDonationData"});
 

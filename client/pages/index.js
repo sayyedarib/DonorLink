@@ -38,23 +38,6 @@ export default function Home({ volunteersData }) {
     setRecordsData(fetchedRecordData);
   };
 
-    // setRecordsData(fetchedRecordData);
-
-    // if (fetchedRecordData.length > 0) {
-    //   const filterData = fetchedRecordData.filter(
-    //     (mentor) =>
-    //       mentor.verified === true && mentor.token === "mentorIsVerified"
-    //   );
-
-      // setData([...recordsData, ...filterData]);
-      // setSkipValue(skipvalue + limit);
-      // setLoading(false);
-      // console.log("recordsData here", fetchedRecordData);
-    // }else{
-      // setCompleted(true);
-      // setLoading(false);
-    // }
-  
 
   const handleInfiniteScroll = async () => {
     try {
@@ -63,7 +46,6 @@ export default function Home({ volunteersData }) {
         document.documentElement.scrollHeight
       ) {
         getRecordsData();
-        // setSkipValue(skipvalue+limit);
       }
     } catch (error) {
       console.log("Error in handleInfiniteScroll function", error);
@@ -88,7 +70,6 @@ export default function Home({ volunteersData }) {
           defer
         ></Script>
 
-        {/* <script src="https://checkout.razorpay.com/v1/checkout.js"></script> */}
         <Header />
         <Services />
         <Volunteers volunteerData={volunteersData} />
