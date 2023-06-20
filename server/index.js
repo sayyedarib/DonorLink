@@ -13,28 +13,20 @@ app.use(
 );
 
 connection();
-// const { createRazorpayInstance } = require("./services/razorpay");
-// const paymentSchema = require("./models/paymentSchema");
-// const paymentRoute = require("./router/paymentRoute");
+
 const volunteerRegistrationRoute = require("./router/volunteer/volunteerRegistration");
 const clothDonationRoute = require("./router/donation/cloth");
 const volunteerListRoute = require("./router/volunteer/volunteerList");
 const sendMailRoute = require("./utils/sendMail");
 const recordsDataRoute = require("./router/countData");
 const acceptOrderRoute = require("./router/volunteer/orders");
-// const instance = createRazorpayInstance();
 
-// app.use("/api", paymentRoute);
 app.use("/api/volunteerRegistration", volunteerRegistrationRoute);
 app.use("/api/clothDonation", clothDonationRoute);
 app.use("/api/sendMail", sendMailRoute);
 app.use("/api/volunteers", volunteerListRoute);
 app.use("/api/recordsData", recordsDataRoute);
 app.use("/api/order", acceptOrderRoute);
-
-// app.get("/api/getkey", (req, res) => {
-//   res.status(200).json({ key: process.env.RAZORPAY_ID });
-// });
 
 app.get("/", (req, res) => {
   console.log("req of root of server ", req.body);
