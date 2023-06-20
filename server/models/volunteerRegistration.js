@@ -41,6 +41,14 @@ works: [
       accepted: {
         type: Boolean,
         required: false
+      },
+      rejected:{
+        type:Boolean,
+        required:false
+      },
+      collected:{
+        type:Boolean,
+        required:false
       }
     }
   ]
