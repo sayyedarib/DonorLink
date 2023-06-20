@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const volunteerData = require("../../models/volunteerRegistration")
 router("/", (req, res) => {
-    const query = req.query.response;
+    // const query = req.query.response;
 
 });
 
