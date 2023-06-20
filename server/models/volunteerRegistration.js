@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 
 const volunteerFormSchema = mongoose.Schema({
 picture:{
-
+    type:String, 
+    required:false
 },
 
 name:{
@@ -17,7 +18,7 @@ email:{
 },
 phone:{
     type:Number,
-required:true
+    required:true
 },
 bio:{
     type:String,
@@ -25,12 +26,24 @@ bio:{
 },
 address:{
     type:String,
-    required:false
+    required:true
 },
 coordinates:{
     type: String,
     required:false
-}
+},
+works: [
+    {
+      workDetails: {
+        type: Object,
+        required: false
+      },
+      accepted: {
+        type: Boolean,
+        required: false
+      }
+    }
+  ]
 }, {collection:"volunteersData"});
 
 

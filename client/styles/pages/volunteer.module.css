@@ -1,0 +1,52 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f5f7fa;
+  font-weight: bold;
+}
+
+.table td {
+  border-top: none;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.table td:first-child {
+  border-left: none;
+}
+
+.table td:last-child {
+  border-right: none;
+}
+
+.button {
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.acceptButton {
+  background-color: #38a169;
+  color: white;
+  border: none;
+}
+
+.rejectButton {
+  background-color: #e53e3e;
+  color: white;
+  border: none;
+}
+
+.collectButton {
+  background-color: #4299e1;
+  color: white;
+  border: none;
+}

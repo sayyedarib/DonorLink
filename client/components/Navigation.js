@@ -5,10 +5,15 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import userContext from "@/context/auth/userContext";
 import LoginPopup from "./LoginPopup";
+import router from "next/router";
 
 const Navbar = () => {
   const userContextDetail = useContext(userContext);
 
+  const handleProfile = ()=>{
+    console.log("userContextDetail in handle profile " ,userContextDetail);
+      router.push(`/${userContextDetail.userStateData.name}`);
+  }
   return (
     <>
 
@@ -52,8 +57,7 @@ const Navbar = () => {
               className={styles.btn}
               style={{ border: "none", overflow: "hidden", borderRadius: "100%", margin:"0", padding:"0", display:"flex", justifyContent:"center", alignItems:"center"}}
                 onClick={() => {
-                  userContextDetail?.updateLoginPopupVisibilty();
-                  userContextDetail?.signOut();
+                  handleProfile();
                 }}
               >
                 <img src={userContextDetail?.userStateData.picture} style={{width:"2rem", height:"auto"}}/>

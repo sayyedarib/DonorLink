@@ -3,6 +3,8 @@ import UserContext from "./userContext";
 
 const UserState = (props) => {
 const userData = {
+  type:"",
+  isLoggedIn:"",
   name:"",
   email:"",
   picture:""
@@ -18,7 +20,7 @@ const updateUserData=({name, email, picture})=>{
 
 const updateLoginPopupVisibilty = ()=>{
   setLoginPopupVisibility(!loginPopupVisibility);
-  console.log(userStateData, "  ", loginPopupVisibility);
+  console.log("update loginpopupvisibilty called ",userStateData, "  ", loginPopupVisibility);
 }
 
 const signOut = () =>{

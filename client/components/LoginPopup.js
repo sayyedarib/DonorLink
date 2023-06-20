@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import styles from "../styles/components/loginPopup.module.css";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import userContext from "@/context/auth/userContext";
 
 const LoginPopup = () => {
   const userContextDetail = useContext(userContext)

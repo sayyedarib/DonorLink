@@ -45,15 +45,15 @@ const ClothDonationForm = () => {
       );
 
       // request to mail the form data
-      console.log("sending mail");
-      const emailResponse = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/sendMail`,
-        detail,
-        {
-          withCredentials: true,
-        }
-      );
-      console.log("email response", emailResponse);
+      // console.log("sending mail");
+      // const emailResponse = await axios.post(
+      //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/sendMail`,
+      //   detail,
+      //   {
+      //     withCredentials: true,
+      //   }
+      // );
+      // console.log("email response", emailResponse);
 
       console.log(response);
       setDetail({
