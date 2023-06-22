@@ -71,9 +71,9 @@ export default function Home({ volunteersData }) {
         ></Script>
 
         <Header />
-        <Services />
-        <Volunteers volunteerData={volunteersData} />
-        {<Records data={recordsData}/>}
+        {/* <Services /> */}
+        {/* <Volunteers volunteerData={volunteersData} /> */}
+        {/* {<Records data={recordsData}/>} */}
         {/* <Organizations /> */}
         {/* <Footer /> */}
     </>
