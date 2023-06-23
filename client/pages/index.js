@@ -8,11 +8,12 @@ import Header from "@/components/Header";
 import Volunteers from "@/components/Volunteers";
 import Organizations from "@/components/Organizations";
 import Footer from "@/components/Footer";
-import Navbar from "@/components/Navigation";
+// import Navbar from "@/components/Navigation";
 import Script from "next/script";
 import dynamic from "next/dynamic";
 import UserState from "@/context/auth/UserState";
 import Records from "@/components/Records";
+import AuthPopup from "@/components/AuthPopup";
 
 const Services = dynamic(() => import("@/components/Services"));
 
@@ -69,8 +70,8 @@ export default function Home({ volunteersData }) {
           async
           defer
         ></Script>
-
-        <Header />
+<AuthPopup/>
+        {/* <Header /> */}
         {/* <Services /> */}
         {/* <Volunteers volunteerData={volunteersData} /> */}
         {/* {<Records data={recordsData}/>} */}
