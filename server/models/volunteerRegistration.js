@@ -16,6 +16,14 @@ email:{
     type: String,
     required:true
 },
+password: {
+  type: String,
+  required: false,
+},
+cpassword: {
+  type: String,
+  required: false
+},
 phone:{
     type:Number,
     required:true
@@ -24,9 +32,10 @@ bio:{
     type:String,
     required:false
 },
-address:{
-    type:String,
-    required:true
+address: {
+  custom:{type:String,required:false},
+  city:{type:String, required:false},
+  zip:{type:String, required:false}
 },
 coordinates:{
     type: String,

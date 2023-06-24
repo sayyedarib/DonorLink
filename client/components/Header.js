@@ -21,7 +21,7 @@ const Header = () => {
           </h2>
           <div className="flex gap-4 flex-wrap">
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Support</button>
-            <Link href="/forms/volunteerRegistration">
+            <Link href="/auth?register=true">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Join Us</button>
             </Link>
           </div>

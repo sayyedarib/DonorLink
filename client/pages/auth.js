@@ -1,14 +1,14 @@
 import AuthPopup from '@/components/AuthPopup'
 import React from 'react'
 import { useRouter } from 'next/router'
-const signUpAndLogin = () => {
+const Auth = () => {
  const router = useRouter();
- const signUp = router.signUp.auth;
+ const {register} = router.query;
   return (
     <>
-      <AuthPopup auth={signUp}/>
+      <AuthPopup auth={register}/>
     </>
   )
 }
 
-export default signUpAndLogin
+export default Auth
