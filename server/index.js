@@ -20,13 +20,18 @@ const volunteerListRoute = require("./router/volunteer/volunteerList");
 const sendMailRoute = require("./utils/sendMail");
 const recordsDataRoute = require("./router/countData");
 const acceptOrderRoute = require("./router/volunteer/orders");
+const signUpRoute = require("./router/auth/user");
+
+const loginRoute = require("./router/auth/login");
 
 app.use("/api/volunteerRegistration", volunteerRegistrationRoute);
 app.use("/api/clothDonation", clothDonationRoute);
 app.use("/api/sendMail", sendMailRoute);
-app.use("/api/volunteers", volunteerListRoute);
+app.use("/api/volunteerList", volunteerListRoute);
 app.use("/api/recordsData", recordsDataRoute);
 app.use("/api/order", acceptOrderRoute);
+app.use("/api/signUp", signUpRoute);
+app.use("/api/login", loginRoute);
 
 app.get("/", (req, res) => {
   console.log("req of root of server ", req.body);

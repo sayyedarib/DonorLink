@@ -13,7 +13,7 @@ import Script from "next/script";
 import dynamic from "next/dynamic";
 import UserState from "@/context/auth/UserState";
 import Records from "@/components/Records";
-import AuthPopup from "@/components/AuthPopup";
+
 
 const Services = dynamic(() => import("@/components/Services"));
 
@@ -70,8 +70,7 @@ export default function Home({ volunteersData }) {
           async
           defer
         ></Script>
-<AuthPopup/>
-        {/* <Header /> */}
+        <Header />
         {/* <Services /> */}
         {/* <Volunteers volunteerData={volunteersData} /> */}
         {/* {<Records data={recordsData}/>} */}
@@ -82,7 +81,7 @@ export default function Home({ volunteersData }) {
 };
 
 export const getServerSideProps = async (context) => {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteers`);
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList`);
   
   return {
     props: {

@@ -33,7 +33,7 @@ const Volunteer = () => {
         </tr>
       </thead>
       <tbody>
-        {works.works.map((data) => {
+        {works?.works?.map((data) => {
           return (
             <tr>
               <td>{data.workDetails.address}</td>
