@@ -64,7 +64,7 @@ const Navigation = () => {
           </div>
           <div
             className={`${navIsVisible ? "right-0" : "-right-full"
-              }  transition-all duration-300 mt-[90px] bg-blue-600 lg:mt-0 bg-dark-hard lg:bg-transparent z-[49] flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-9 items-center`}
+              }  transition-all duration-300 mt-[70px] bg-blue-600 lg:mt-0 bg-dark-hard lg:bg-transparent z-[49] flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-9 items-center`}
           >
             <ul className="items-center text-white gap-5 lg:text-blue-500 lg:text-dark-soft flex flex-col lg:flex-row gap-x-2 font-semibold">
               {navItemsInfo.map((item) => (

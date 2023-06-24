@@ -33,6 +33,10 @@ coordinates:{
 timing:{
 type:String,
 required:true
+},
+assignedVolunteers:{
+    type:String, 
+    required:false
 }
 }, {collection:"clothDonationData"});
 

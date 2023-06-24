@@ -16,7 +16,7 @@ const [userStateData, setUserStateData] = useState(userData);
 const [loginPopupVisibility, setLoginPopupVisibility] = useState(false);
 
 const updateUserData=async ({name, email, picture})=>{
-  const {data} =await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteers?particular=${email}`);
+  const {data} =await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList?particular=${email}`);
   console.log("userDatabase ",data);
   await setUserStateData({name, email, picture, database:data});
 
