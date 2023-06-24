@@ -28,6 +28,9 @@ const OrdersCard = ({ data, handleDecision }) => {
                         <span className="font-bold">Donated by: </span>    {data.workDetails.name}
                     </h5>
                     <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
+                        <span className="font-bold">Phone: </span>   {data.workDetails.phone}
+                    </span>
+                    <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
                         <span className="font-bold">Address: </span>   {data.workDetails.address}
                     </span>
                     <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">

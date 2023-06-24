@@ -4,10 +4,11 @@ import jwt_decode from "jwt-decode";
 import userContext from "@/context/auth/userContext";
 import useGeoLocation from "hooks/useGeoLocation";
 import { ToastContainer, toast } from 'react-toastify';
-import router from "next/router";
+import {useRouter} from "next/router";
 import "react-toastify/dist/ReactToastify.css";
 
 const AuthPopup = ({ auth }) => {
+    const router = useRouter();
     const location = useGeoLocation();
     const userContextDetail = useContext(userContext);
     const [step, setStep] = useState(1);
@@ -57,7 +58,8 @@ const AuthPopup = ({ auth }) => {
             email: userObject.email,
             picture: userObject.picture,
         }));
-        // router.push("/");
+        const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+        router.replace(prevPath.url);
     };
 
     //google sign in
@@ -165,8 +167,8 @@ const AuthPopup = ({ auth }) => {
                     password: "",
                 });
                 userContextDetail.updateUserData(loginUser);
-            router.push("/");
-        } catch (error) {
+                const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+                router.replace(prevPath.url);        } catch (error) {
             console.log("CL: error while login data ", error);
             if (
                 error.response &&
@@ -196,7 +198,7 @@ const AuthPopup = ({ auth }) => {
                 }
             );
                 toast.success("registration successfull");
-                router.push("/auth")
+                router.replace("/auth")
             // request to mail the form data
             setRegisterUser({
                 type: "",
@@ -214,6 +216,7 @@ const AuthPopup = ({ auth }) => {
                     zip: "",
                 },
             });
+            router.replace("/auth")
         } catch (error) {
             console.log("CL: error while login data ", error);
             if (

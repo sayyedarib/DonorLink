@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "../../styles/components/Forms/commonStyle.module.css";
 import axios from "axios";
 import useGeoLocation from "hooks/useGeoLocation";
+import userContext from "@/context/auth/userContext";
 
 const ClothDonationForm = () => {
+  const userContextDetail = useContext(userContext);
+console.log(userContextDetail);
   const location = useGeoLocation();
   const [volunteers, setVolunteers] = useState([]);
   const [detail, setDetail] = useState({
@@ -16,6 +19,8 @@ const ClothDonationForm = () => {
     coordinates: "",
   });
 
+
+
   let name, value;
   const handleInput = (e) => {
     name = e.target.name;
@@ -23,15 +28,14 @@ const ClothDonationForm = () => {
     setDetail({
       ...detail,
       [name]: value,
-      coordinates: `${
-        location.loaded
-          ? JSON.stringify(location.coordinates)
-          : "Could not access the location"
-      }`,
+      coordinates: `${location.loaded
+        ? JSON.stringify(location.coordinates)
+        : "Could not access the location"
+        }`,
     });
   };
 
-  const handleClick = async (e) => {
+  const handleDonate = async (e) => {
     e.preventDefault();
 
     try {
@@ -65,6 +69,7 @@ const ClothDonationForm = () => {
         message: "",
         coordinates: "",
       });
+      router.push(localStorage.getItem("prevItem").url)
     } catch (err) {
       console.log("error while submitting cloth donation data", err);
     }
@@ -72,7 +77,7 @@ const ClothDonationForm = () => {
 
   return (
     <>
-      <div className={styles.body}>
+      {/* <div className={styles.body}>
         <div className={styles.left}></div>
         <div className={styles.right}>
           <h3>Donate Cloth</h3>
@@ -132,7 +137,7 @@ const ClothDonationForm = () => {
               id="message"
               placeholder="any message that you wanna give"
             />
-            <input type="submit" value="Donate" onClick={handleClick} />
+            <input type="submit" value="Donate" onClick={handleDonate} />
             <h6>
               {" "}
               your location is `$
@@ -143,6 +148,41 @@ const ClothDonationForm = () => {
             </h6>
           </form>
         </div>
+      </div> */}
+      <div className="max-w-md mx-auto p-8 my-10 bg-white span-8 rounded-xl shadow shadow-slate-300">
+        <h1 className="text-center text-blue-800 font-bold text-2xl">Cloth Donation Form</h1>
+        <form action="" className="mt-10">
+          <div className="flex flex-col space-y-5">
+            <label htmlFor="quantity">
+              <span className="font-medium text-slate-700 pb-2">Pairs of cloth</span>
+              <input
+                onChange={handleInput}
+                value={detail.quantity}
+                id="quantity"
+                name="quantity"
+                type="number"
+                className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                placeholder="Enter number of pairs of cloth here"
+              />
+            </label>
+            <label htmlFor="message">
+              <span className="font-medium text-slate-700 pb-2">Message</span>
+              <textarea
+                onChange={handleInput}
+                value={detail.message}
+                id="message"
+                name="message"
+                className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                placeholder="e.g. pickup/contact on weekend after 3pm"
+              />
+
+            </label>
+
+          </div>
+        </form>
+        <button type="button" className="w-full py-3 mt-5 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
+          <span onClick={handleDonate}>Donate Now</span>
+        </button>
       </div>
     </>
   );
