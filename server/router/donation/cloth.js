@@ -8,7 +8,7 @@ const time = require("../../utils/time");
 router.post("/", async (req, res) => {
   console.log("I'm on server side now");
   // Create a new Date object
-const timing = time;
+const timing = time();
 
   try {
     const { name, email, phone, quantity, address, message, coordinates } =
@@ -22,6 +22,7 @@ const timing = time;
       message,
       coordinates,
       timing,
+      assignedVolunteers:nearestVolunteer,
     });
 
 console.log("coordinates on cloth ", coordinates);

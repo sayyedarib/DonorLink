@@ -19,7 +19,7 @@ const provideHelpService = [
     id: 2,
     icon: <GiClothes />,
     title: "Donate Cloths",
-    text: "Donating clothes is not just about giving away what you don't need. It's about giving someone else the chance to feel loved, cared for, and dignified",
+    text: "Donating clothes is not just about giving away what you don't need. It's about giving someone else the chance to feel",
     link: "/forms/clothDonation",
   }
 ];

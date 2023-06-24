@@ -17,5 +17,5 @@ module.exports = async function findNearest(coordinates) {
 
   volunteerWithDistance.sort((a, b) => a.distance - b.distance);
 
-  return volunteerWithDistance[0].volunteer;
+  return volunteerWithDistance;
 };

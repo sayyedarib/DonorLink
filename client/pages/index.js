@@ -71,7 +71,7 @@ export default function Home({ volunteersData }) {
           defer
         ></Script>
         <Header />
-        {/* <Services /> */}
+        <Services />
         {/* <Volunteers volunteerData={volunteersData} /> */}
         {/* {<Records data={recordsData}/>} */}
         {/* <Organizations /> */}
