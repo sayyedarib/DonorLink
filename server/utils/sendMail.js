@@ -27,7 +27,7 @@ module.exports = async function sendMail({
     subject: "Cloth Donation",
     html: `
         <h6>Dear ${nearestVolunteer.name},</h6>
-          <h6>${name} has donated ${quantity} cloth(s). If you free enough please login to the <a href="${process.env.FRONTEND_URL}/auth"></a> accept the oreder request from your dashboard.</h6>
+          <h6>${name} has donated ${quantity} cloth(s). If you free enough please login to accept the oreder request from your dashboard.</h6>
           <h6>you can use following details to reach out the donor</h6>
           <h6>${email}</h6>
           <h6>+91${phone}</h6>
