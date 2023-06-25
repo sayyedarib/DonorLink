@@ -13,24 +13,6 @@ const AuthPopup = ({ auth }) => {
     const userContextDetail = useContext(userContext);
     const [step, setStep] = useState(1);
     const [register, setRegister] = useState(auth);
-    const [userContextUpdated, setUserContextUpdated] = useState(false);
-
-    useEffect(() => {
-      if (userContextDetail.userStateData.name === "") {
-        router.replace("/auth");
-      } else {
-        setUserContextUpdated(true);
-      }
-    }, [userContextDetail.userStateData.name]);
-  
-    useEffect(() => {
-      if (userContextUpdated) {
-        // Perform any additional operations after the user context has been updated
-        // Redirect or do other tasks here
-        const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
-        router.replace(prevPath.url);
-      }
-    }, [userContextUpdated]);
 
     const [loginUser, setLoginUser] = useState({
         email: "",
@@ -52,14 +34,6 @@ const AuthPopup = ({ auth }) => {
             zip: "",
         },
     });
-
-    useEffect(() => {
-        setRegister(auth);
-    }, []);
-
-
-
-
 
     const handleCallBackResponse = (response) => {
         const userObject = jwt_decode(response.credential);

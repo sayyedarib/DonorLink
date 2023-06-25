@@ -31,6 +31,7 @@ const NavItem = ({ item }) => {
 };
 
 const Navigation = () => {
+
   const userContextDetail = useContext(userContext);
   const [navIsVisible, setNavIsVisible] = useState(false);
 
@@ -103,19 +104,19 @@ const Navigation = () => {
               ))}
             </ul>
             {
-              (userContextDetail?.userStateData.name != "" ? (
+              (userContextDetail?.userStateData?.name ? (
                 <span
                   className="rounded-full relative flex flex-col group"
                   onClick={() => {
                     handleProfile();
                   }}
                 >
-                  <img src={userContextDetail.userStateData.picture?userContextDetail.userStateData.picture:"/assets/images/fill-gap/boy.svg"} style={{ width: "2rem", height: "auto", borderRadius: "100%" }} />
+                  <img src={userContextDetail?.userStateData?.picture?userContextDetail.userStateData.picture:"/assets/images/fill-gap/boy.svg"} style={{ width: "2rem", height: "auto", borderRadius: "100%" }} />
                   <div className="hidden transition-all duration-500 pt-4 absolute bottom-0 right-0 transform translate-y-full group-hover:block w-max">
                     <ul className="flex flex-col shadow-lg rounded-lg overflow-hidden ">
               
                         <Link
-                          href="/volunteer"
+                          href={`/${userContextDetail.userStateData.name}`}
                           className="hover:bg-dark-hard bg-blue-50 hover:text-white hover:bg-blue-700 px-4 py-2 text-black lg:text-dark-soft"
                         >
                           Dashboard
