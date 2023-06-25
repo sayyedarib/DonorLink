@@ -1,28 +1,31 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styles from "../../styles/components/Forms/commonStyle.module.css";
 import axios from "axios";
 import useGeoLocation from "hooks/useGeoLocation";
 import userContext from "@/context/auth/userContext";
-
+import { useRouter } from "next/router";
 const ClothDonationForm = () => {
+  const router = useRouter();
   const userContextDetail = useContext(userContext);
-console.log(userContextDetail);
+  console.log("userContextDetail.userStateData.name ", userContextDetail.userStateData);
+  if (userContextDetail.userStateData.name === "") {
+    router.replace("/auth");
+  }
   const location = useGeoLocation();
   const [volunteers, setVolunteers] = useState([]);
   const [detail, setDetail] = useState({
-    name: "",
-    email: "",
-    phone: "",
+    name: userContextDetail.userStateData.name,
+    email: userContextDetail.userStateData.email,
+    phone: userContextDetail.userStateData?.phone ? userContextDetail.userStateData?.phone : "",
     quantity: "",
-    address: "",
+    address: userContextDetail.userStateData?.address ? userContextDetail.userStateData?.address : "",
     message: "",
     coordinates: "",
   });
 
-
-
   let name, value;
   const handleInput = (e) => {
+    console.log("userContextDetail.userStateData.name 2", userContextDetail.userStateData);
     name = e.target.name;
     value = e.target.value;
     setDetail({
@@ -69,7 +72,8 @@ console.log(userContextDetail);
         message: "",
         coordinates: "",
       });
-      router.push(localStorage.getItem("prevItem").url)
+      const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+      router.replace(prevPath.url);
     } catch (err) {
       console.log("error while submitting cloth donation data", err);
     }

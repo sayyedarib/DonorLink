@@ -6,7 +6,7 @@ module.exports = async function findNearest(coordinates) {
   const volunteerWithDistance = volunteers.map((data) => {
     const volunteerCoordinate = JSON.parse(data.coordinates);
     const donorCoordinate = JSON.parse(coordinates)
-    console.log("v coord ", volunteerCoordinate, "d coord ", donorCoordinate)
+    console.log("v coord ", volunteerCoordinate, "d coord ", donorCoordinate, "name ", data.name)
     const distance = geolib.getDistance(donorCoordinate, volunteerCoordinate, accuracy=0.01);
     console.log("distance", distance);
     return {
@@ -15,7 +15,8 @@ module.exports = async function findNearest(coordinates) {
     };
   });
 
-  volunteerWithDistance.sort((a, b) => a.distance - b.distance);
+ await volunteerWithDistance.sort((a, b) => Number(a.distance) - Number(b.distance));
+
 
   return volunteerWithDistance;
 };

@@ -6,7 +6,7 @@ import userContext from "@/context/auth/userContext";
 const OrdersCard = ({ data, handleDecision }) => {
     const router = useRouter();
     const userContextDetail = useContext(userContext);
-    const works = userContextDetail.userStateData.database;
+    const works = userContextDetail.userStateData;
 
     //   const handleDecision = async (id, answer) => {
     //     console.log("works ", works);
@@ -31,7 +31,7 @@ const OrdersCard = ({ data, handleDecision }) => {
                         <span className="font-bold">Phone: </span>   {data.workDetails.phone}
                     </span>
                     <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                        <span className="font-bold">Address: </span>   {data.workDetails.address}
+                        <span className="font-bold">Address: </span>   {data.workDetails.address.custom}
                     </span>
                     <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
                         <span className="font-bold">Message: </span>   {data.workDetails.message}

@@ -8,11 +8,12 @@ const time = require("../../utils/time");
 router.post("/", async (req, res) => {
   console.log("I'm on server side now");
   // Create a new Date object
+  const { name, email, phone, quantity, address, message, coordinates } =
+    req.body;
 const timing = time();
+const nearestVolunteer =await findNearest(coordinates);
 
   try {
-    const { name, email, phone, quantity, address, message, coordinates } =
-      req.body;
     const data = new clothDonation({
       name,
       email,
@@ -24,16 +25,15 @@ const timing = time();
       timing,
       assignedVolunteers:nearestVolunteer,
     });
-
-console.log("coordinates on cloth ", coordinates);
-  const nearestVolunteer =await findNearest(coordinates);
-  console.log("nearest volunteer is: ", nearestVolunteer.name);
+console.log("address",address);
+  console.log("nearest volunteer is: ", nearestVolunteer[0].volunteer.name);
   await registeredVolunteer.findOneAndUpdate(
-    { _id: nearestVolunteer._id },
+    { _id: nearestVolunteer[0].volunteer._id },
     { $push: { works:{workDetails:data, accepted:false} } }
   );
+  console.log("phone ", phone );
   console.log("SR-router-cloth: sending mail ");
-  await sendMail({name, email, phone, quantity, address, message, coordinates}, nearestVolunteer);
+  await sendMail({name, email, phone, quantity, address, message, coordinates}, nearestVolunteer[0].volunteer);
 
     await data.save();
     res.status(200).json("done");

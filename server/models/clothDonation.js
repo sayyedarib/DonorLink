@@ -19,8 +19,9 @@ quantity:{
 required:true
 },
 address:{
-    type:String,
-    required:false
+    custom:{type:String},
+    city:{type:String},
+    zip:{type:Number}
 },
 message:{
     type:String,
@@ -35,7 +36,7 @@ type:String,
 required:true
 },
 assignedVolunteers:{
-    type:String, 
+    type:Array, 
     required:false
 }
 }, {collection:"clothDonationData"});

@@ -13,6 +13,24 @@ const AuthPopup = ({ auth }) => {
     const userContextDetail = useContext(userContext);
     const [step, setStep] = useState(1);
     const [register, setRegister] = useState(auth);
+    const [userContextUpdated, setUserContextUpdated] = useState(false);
+
+    useEffect(() => {
+      if (userContextDetail.userStateData.name === "") {
+        router.replace("/auth");
+      } else {
+        setUserContextUpdated(true);
+      }
+    }, [userContextDetail.userStateData.name]);
+  
+    useEffect(() => {
+      if (userContextUpdated) {
+        // Perform any additional operations after the user context has been updated
+        // Redirect or do other tasks here
+        const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+        router.replace(prevPath.url);
+      }
+    }, [userContextUpdated]);
 
     const [loginUser, setLoginUser] = useState({
         email: "",
@@ -59,7 +77,6 @@ const AuthPopup = ({ auth }) => {
             picture: userObject.picture,
         }));
         const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
-        router.replace(prevPath.url);
     };
 
     //google sign in
@@ -166,9 +183,12 @@ const AuthPopup = ({ auth }) => {
                     email: "",
                     password: "",
                 });
-                userContextDetail.updateUserData(loginUser);
-                const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
-                router.replace(prevPath.url);        } catch (error) {
+
+                userContextDetail.updateUserData(response.data.userData);
+                // const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+                // router.replace(prevPath.url);
+            }
+                 catch (error) {
             console.log("CL: error while login data ", error);
             if (
                 error.response &&
@@ -198,7 +218,6 @@ const AuthPopup = ({ auth }) => {
                 }
             );
                 toast.success("registration successfull");
-                router.replace("/auth")
             // request to mail the form data
             setRegisterUser({
                 type: "",
@@ -216,6 +235,8 @@ const AuthPopup = ({ auth }) => {
                     zip: "",
                 },
             });
+            setRegister(false);
+            setStep(1);
             router.replace("/auth")
         } catch (error) {
             console.log("CL: error while login data ", error);
@@ -349,9 +370,9 @@ const AuthPopup = ({ auth }) => {
                                         <span onClick={(e) => { if (register&&step == 2) { handleRegistration();console.log("1"); } else if (register&&step == 1) { setStep(2);console.log("1"); } else { handleLogin(e);console.log("1"); } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
                                     </button>
                                     <div
-                                        class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+                                        className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
                                         <span
-                                            class="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
+                                            className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
                                             OR
                                         </span>
                                     </div>

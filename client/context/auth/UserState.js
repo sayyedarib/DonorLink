@@ -3,22 +3,15 @@ import UserContext from "./userContext";
 import axios from "axios";
 
 const UserState = (props) => {
-const userData = {
-  type:"",
-  isLoggedIn:"",
-  name:"",
-  email:"",
-  picture:"",
-  database:[]
-}
 
-const [userStateData, setUserStateData] = useState(userData); 
+
+const [userStateData, setUserStateData] = useState({}); 
 const [loginPopupVisibility, setLoginPopupVisibility] = useState(false);
 
-const updateUserData=async ({name, email, picture})=>{
-  const {data} =await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList?particular=${email}`);
-  console.log("userDatabase ",data);
-  await setUserStateData({name, email, picture, database:data});
+const updateUserData=async (loginUser)=>{
+  // const {data} =await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList?particular=${email}`);
+  // console.log("userDatabase ",data);
+  await setUserStateData(loginUser);
 
   console.log("userState data ", userStateData);
 }
