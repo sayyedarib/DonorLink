@@ -70,12 +70,14 @@ export default function Home({ volunteersData }) {
           async
           defer
         ></Script>
+        <div className="flex flex-col gap-14 bg-blue-50">
         <Header />
         <Services />
-        {/* <Volunteers volunteerData={volunteersData} /> */}
-        {/* {<Records data={recordsData}/>} */}
+        <Volunteers volunteerData={volunteersData} />
+        {<Records data={recordsData}/>}
         {/* <Organizations /> */}
         {/* <Footer /> */}
+        </div>
     </>
   );
 };

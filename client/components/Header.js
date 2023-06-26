@@ -11,7 +11,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-blue-50 flex flex-wrap-reverse sm:flex-nowrap px-20 text-left justify-center items-center h-[90vh] content-center">
+      <header className="bg-blue-50 flex flex-wrap-reverse sm:flex-nowrap px-10 lg:px-20 text-left justify-center items-center h-[85vh] content-center">
         <div className="w-auto sm:w-1/2 flex flex-col gap-2 sm:gap-6 md:gap-8">
           <h1 className="text-4xl sm:text-5xl font-bold text-blue-700">Who we are?</h1>
           <h2 className="">

@@ -7,7 +7,7 @@ import ServiceCard from "./ServiceCard";
 const Services = () => {
   return (
     <>
-      <section className="bg-blue-50 flex flex-col tex-white items-cneter px-5 py-3 gap-20">
+      <section className="bg-blue-50 flex flex-col text-white px-5 py-3 gap-20">
         <h1 className="text-center text-4xl sm:text-5xl font-bold text-blue-600">Provide Help</h1>
         <div className="flex flex-wrap gap-8 justify-center">
           {data?.provideHelpService?.map((data1) => {

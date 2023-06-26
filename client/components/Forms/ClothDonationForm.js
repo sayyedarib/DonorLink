@@ -51,16 +51,6 @@ const ClothDonationForm = () => {
         }
       );
 
-      // request to mail the form data
-      // console.log("sending mail");
-      // const emailResponse = await axios.post(
-      //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/sendMail`,
-      //   detail,
-      //   {
-      //     withCredentials: true,
-      //   }
-      // );
-      // console.log("email response", emailResponse);
 
       console.log(response);
       setDetail({
@@ -81,78 +71,6 @@ const ClothDonationForm = () => {
 
   return (
     <>
-      {/* <div className={styles.body}>
-        <div className={styles.left}></div>
-        <div className={styles.right}>
-          <h3>Donate Cloth</h3>
-          <form method="post" className={styles.form}>
-            <input
-              value={detail.name}
-              onChange={handleInput}
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Name"
-              required
-            />
-            <input
-              value={detail.email}
-              onChange={handleInput}
-              type="email"
-              name="email"
-              id="email"
-              placeholder="email"
-              required
-            />
-            <input
-              value={detail.phone}
-              onChange={handleInput}
-              type="number"
-              name="phone"
-              id="phone"
-              placeholder="phone number"
-              required
-            />
-            <input
-              value={detail.quantity}
-              onChange={handleInput}
-              type="number"
-              name="quantity"
-              id="quantity"
-              placeholder="pairs of cloth"
-              required
-            />
-
-            <textarea
-              rows="5"
-              value={detail.address}
-              onChange={handleInput}
-              type="text"
-              name="address"
-              id="address"
-              placeholder="address"
-            />
-            <textarea
-              rows="5"
-              value={detail.message}
-              onChange={handleInput}
-              type="text"
-              name="message"
-              id="message"
-              placeholder="any message that you wanna give"
-            />
-            <input type="submit" value="Donate" onClick={handleDonate} />
-            <h6>
-              {" "}
-              your location is `$
-              {location.loaded
-                ? JSON.stringify(location)
-                : "Please give locaion access"}
-              `
-            </h6>
-          </form>
-        </div>
-      </div> */}
       <div className="max-w-md mx-auto p-8 my-10 bg-white span-8 rounded-xl shadow shadow-slate-300">
         <h1 className="text-center text-blue-800 font-bold text-2xl">Cloth Donation Form</h1>
         <form action="" className="mt-10">
