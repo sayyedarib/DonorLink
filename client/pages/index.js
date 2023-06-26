@@ -82,13 +82,13 @@ export default function Home({ volunteersData }) {
   );
 };
 
-export const getServerSideProps = async (context) => {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList`);
+// export const getServerSideProps = async (context) => {
+//   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList`);
   
-  return {
-    props: {
-      volunteersData: data,
-    },
-  };
-}
+//   return {
+//     props: {
+//       volunteersData: data,
+//     },
+//   };
+// }
 ;

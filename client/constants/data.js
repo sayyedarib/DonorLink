@@ -10,17 +10,17 @@ const gradient = "url(#blue-gradient)";
 const provideHelpService = [
   {
     id: 1,
-    icon: <MdFastfood />,
-    title: "Donate food",
-    text: "When we donate food, we give people more than just sustenance. We give them hope and a reminder that they are not alone",
-    link: "/forms/foodDonation",
-  },
-  {
-    id: 2,
     icon: <GiClothes />,
     title: "Donate Cloths",
     text: "Donating clothes is not just about giving away what you don't need. It's about giving someone else the chance to feel",
     link: "/forms/clothDonation",
+  },
+  {
+    id: 2,
+    icon: <BiDonateBlood />,
+    title: "Donate Blood",
+    text: "When we donate food, we give people more than just sustenance. We give them hope and a reminder that they are not alone",
+    link: "/forms/bloodDonation",
   }
 ];
 
@@ -41,8 +41,8 @@ const getHelpService = [
   },
   {
     id: 6,
-    icon: <GiHeartOrgan />,
-    title: "Get Organ",
+    icon: <GiClothes />,
+    title: "Get Cloth",
     text: "Lorem ipsum dolor sit mattis amet consectetur adipiscing",
     link: "/donation/NeedMoney",
   },

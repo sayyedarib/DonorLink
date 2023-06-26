@@ -44,7 +44,7 @@ const Navigation = () => {
 
   const handleProfile = () => {
     console.log("userContextDetail in handle profile ", userContextDetail);
-    router.push(`/${userContextDetail.userStateData.name}`);
+    router.replace(`/${userContextDetail.userStateData.name}`);
   }
 
   useEffect(() => {
@@ -121,7 +121,7 @@ const Navigation = () => {
                         >
                           Dashboard
                         </Link>
-                        <span onClick={()=>{userContextDetail.signOut();router.push("/")}} className="hover:bg-dark-hard bg-blue-50 hover:text-white hover:bg-blue-700 px-4 py-2 text-black lg:text-dark-soft hover:cursor-pointer">
+                        <span onClick={()=>{userContextDetail.signOut();router.replace("/")}} className="hover:bg-dark-hard bg-blue-50 hover:text-white hover:bg-blue-700 px-4 py-2 text-black lg:text-dark-soft hover:cursor-pointer">
                           Logout
                         </span>
                     

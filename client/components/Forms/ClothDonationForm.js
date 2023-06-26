@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import styles from "../../styles/components/Forms/commonStyle.module.css";
 import axios from "axios";
 import useGeoLocation from "hooks/useGeoLocation";
 import userContext from "@/context/auth/userContext";
@@ -8,7 +7,7 @@ const ClothDonationForm = () => {
   const router = useRouter();
   const userContextDetail = useContext(userContext);
   console.log("userContextDetail.userStateData.name ", userContextDetail.userStateData);
-  if (userContextDetail.userStateData.name === "") {
+  if (!userContextDetail.userStateData.name) {
     router.replace("/auth");
   }
   const location = useGeoLocation();
@@ -71,8 +70,8 @@ const ClothDonationForm = () => {
 
   return (
     <>
-      <div className="max-w-md mx-auto p-8 my-10 bg-white span-8 rounded-xl shadow shadow-slate-300">
-        <h1 className="text-center text-blue-800 font-bold text-2xl">Cloth Donation Form</h1>
+      <div className="lg:w-[28rem] p-8 my-10 bg-white rounded-xl shadow-xl shadow-blue-900">
+        <h1 className="text-center text-blue-800 font-bold text-2xl">Cloth Donation</h1>
         <form action="" className="mt-10">
           <div className="flex flex-col space-y-5">
             <label htmlFor="quantity">
