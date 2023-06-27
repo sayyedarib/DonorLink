@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
   const { name, email, phone, quantity, address, message, coordinates } =
     req.body;
 const timing = time();
-const nearestVolunteer =await findNearest(coordinates);
+const nearestVolunteer =await findNearest(coordinates, "volunteer");
 
   try {
     const data = new clothDonation({

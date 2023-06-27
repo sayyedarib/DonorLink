@@ -23,12 +23,14 @@ const recordsDataRoute = require("./router/countData");
 const clothDonationRoute = require("./router/donation/cloth");
 const bloodDonationRoute = require('./router/donation/blood');
 const acceptOrderRoute = require("./router/volunteer/orders");
+const bloodDonorListRoute = require("./router/donation/bloodDonorsList")
 
 app.use("/api/volunteerRegistration", volunteerRegistrationRoute);
 app.use("/api/signUp", signUpRoute);
 app.use("/api/login", loginRoute);
 app.use("/api/sendMail", sendMailRoute);
 app.use("/api/volunteerList", volunteerListRoute);
+app.use("/api/bloodDonorsList", bloodDonorListRoute);
 app.use("/api/recordsData", recordsDataRoute);
 app.use("/api/clothDonation", clothDonationRoute);
 app.use("/api/bloodDonation", bloodDonationRoute);

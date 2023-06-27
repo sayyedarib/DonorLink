@@ -30,7 +30,7 @@ const getHelpService = [
     icon: <BiDonateBlood />,
     title: "Get Blood",
     text: "Lorem ipsum dolor sit mattis amet consectetur adipiscing",
-    link: "/donation/GetBlood",
+    link: "/GetBlood",
   },
   {
     id: 5,
