@@ -9,6 +9,7 @@ const GetBlood = () => {
   const userContextDetail = useContext(userContext);
 
   if (!userContextDetail.userStateData.name) {
+    localStorage.setItem("prevItem", "/GetBlood")
     router.replace("/auth");
   }
 

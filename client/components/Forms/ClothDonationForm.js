@@ -1,17 +1,19 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext} from "react";
 import axios from "axios";
 import useGeoLocation from "hooks/useGeoLocation";
 import userContext from "@/context/auth/userContext";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+
 const ClothDonationForm = () => {
   const router = useRouter();
   const userContextDetail = useContext(userContext);
   console.log("userContextDetail.userStateData.name ", userContextDetail.userStateData);
   if (!userContextDetail.userStateData.name) {
     router.replace("/auth");
-  }
+  };
+  
   const location = useGeoLocation();
-  const [volunteers, setVolunteers] = useState([]);
   const [detail, setDetail] = useState({
     name: userContextDetail.userStateData.name,
     email: userContextDetail.userStateData.email,
@@ -50,7 +52,8 @@ const ClothDonationForm = () => {
         }
       );
 
-
+      toast.success("Thank you for donation");
+      toast.success("Nearby volunteer has been notified");
       console.log(response);
       setDetail({
         name: "",
@@ -61,8 +64,8 @@ const ClothDonationForm = () => {
         message: "",
         coordinates: "",
       });
-      const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
-      router.replace(prevPath.url);
+
+      router.replace("/");
     } catch (err) {
       console.log("error while submitting cloth donation data", err);
     }

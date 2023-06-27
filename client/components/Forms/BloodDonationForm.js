@@ -9,10 +9,10 @@ const BloodDonationForm = () => {
   const userContextDetail = useContext(userContext);
   console.log("userContextDetail.userStateData.name ", userContextDetail.userStateData);
   if (!userContextDetail.userStateData.name) {
+    localStorage.setItem("prevPath", "/")
     router.replace("/auth");
   }
   const location = useGeoLocation();
-  const [volunteers, setVolunteers] = useState([]);
   const [detail, setDetail] = useState({
     name: userContextDetail.userStateData.name,
     email: userContextDetail.userStateData.email,
