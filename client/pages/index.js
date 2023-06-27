@@ -71,7 +71,7 @@ else{
         <Volunteers volunteerData={volunteersData} />
         <Records data={recordsData} />
         {/* <Organizations /> */}
-        {/* <Footer /> */}
+
       </div>
     </>
   );
