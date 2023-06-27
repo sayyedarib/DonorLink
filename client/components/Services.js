@@ -28,7 +28,9 @@ const Services = () => {
             return (
               <>
                 <div key={data2.id}>
+                <Link href={data2.link}>
                   <ServiceCard service={data2} />
+                </Link>
                 </div>
               </>
             );

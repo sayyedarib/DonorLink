@@ -159,8 +159,8 @@ const AuthPopup = ({ auth }) => {
                 });
 
                 userContextDetail.updateUserData(response.data.userData);
-                // const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
-                // router.replace(prevPath.url);
+                const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+                router.replace(prevPath.url);
             }
                  catch (error) {
             console.log("CL: error while login data ", error);
@@ -192,7 +192,7 @@ const AuthPopup = ({ auth }) => {
                 }
             );
                 toast.success("registration successfull");
-            // request to mail the form data
+                
             setRegisterUser({
                 type: "",
                 name: "",
