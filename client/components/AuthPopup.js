@@ -6,6 +6,7 @@ import useGeoLocation from "hooks/useGeoLocation";
 import { ToastContainer, toast } from 'react-toastify';
 import { useRouter } from "next/router";
 import "react-toastify/dist/ReactToastify.css";
+import { BiArrowBack } from "react-icons/bi"
 
 const AuthPopup = ({ auth }) => {
     const router = useRouter();
@@ -13,6 +14,7 @@ const AuthPopup = ({ auth }) => {
     const userContextDetail = useContext(userContext);
     const [step, setStep] = useState(1);
     const [register, setRegister] = useState(auth);
+
 
     const [loginUser, setLoginUser] = useState({
         email: "",
@@ -215,6 +217,7 @@ const AuthPopup = ({ auth }) => {
                     withCredentials: true,
                 }
             );
+
             toast.success("registration successfull");
 
             setRegisterUser({
@@ -256,14 +259,16 @@ const AuthPopup = ({ auth }) => {
                     {/* <div className="flex justify-center items-center text-blue-700 font-bold text-3xl">
                             {register?:"Login"}
                     </div> */}
-
+                    <div className="cursor-pointer" onClick={() => setStep(prevStep => prevStep - 1)}>
+                        {step > 1 && <BiArrowBack className="text-3xl bg-blue-900 text-white rounded-full p-2" />}
+                    </div>
                     <form action="" className="my-10">
                         <div className="flex flex-col space-y-5">
                             {step === 1 && (
                                 <>
                                     {register && (<>
-                                        <ul className="items-center w-full text-sm font-medium text-blue-900 bg-white border border-blue-200 rounded-lg sm:flex dark:bg-blue-700 dark:border-blue-600">
-                                            <li className="w-full border-b border-blue-200 sm:border-b-0 sm:border-r dark:border-blue-600">
+                                        <ul className="text-sm flex justify-evenly font-medium text-blue-900 bg-white border border-blue-200 rounded-lg">
+                                            <li className=" border-b border-blue-200 sm:border-b-0">
                                                 <div className="flex items-center pl-3">
                                                     <input
                                                         onChange={handleRegisterInput}
@@ -273,13 +278,13 @@ const AuthPopup = ({ auth }) => {
                                                         name="type"
                                                         className="w-4 h-4"
                                                     />
-                                                    <label htmlFor="donor-radio-id" className="w-full py-3 ml-2 text-sm font-medium text-blue-900 dark:text-white">
+                                                    <label htmlFor="donor-radio-id" className="w-full py-3 ml-2 text-sm font-medium text-blue-900">
                                                         Donor
                                                     </label>
                                                 </div>
                                             </li>
-                                            <li className="w-full border-b border-blue-200 sm:border-b-0 sm:border-r dark:border-blue-600">
-                                                <div className="flex items-center pl-3">
+                                            <li className="border-b border-blue-200 sm:border-b-0">
+                                                <div className="flex items-center">
                                                     <input
                                                         onChange={handleRegisterInput}
                                                         id="volunteer-radio-id"
@@ -288,8 +293,23 @@ const AuthPopup = ({ auth }) => {
                                                         name="type"
                                                         className="w-4 h-4"
                                                     />
-                                                    <label htmlFor="volunteer-radio-id" className="w-full py-3 ml-2 text-sm font-medium text-blue-900 dark:text-white">
+                                                    <label htmlFor="volunteer-radio-id" className="w-full py-3 ml-2 text-sm font-medium text-blue-900">
                                                         Volunteer
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li className=" border-b border-blue-200 sm:border-b-0">
+                                                <div className="flex items-center pl-3">
+                                                    <input
+                                                        onChange={handleRegisterInput}
+                                                        id="needy-radio-id"
+                                                        type="radio"
+                                                        value="needy"
+                                                        name="type"
+                                                        className="w-4 h-4"
+                                                    />
+                                                    <label htmlFor="needy-radio-id" className="w-full py-3 ml-2 text-sm font-medium text-blue-900">
+                                                        Needy
                                                     </label>
                                                 </div>
                                             </li>
@@ -365,7 +385,7 @@ const AuthPopup = ({ auth }) => {
                                         </div>
                                     </div>}
                                     <button type="button" className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-                                        <span onClick={(e) => { if (register && step == 2) { handleRegistration(); console.log("1"); } else if (register && step == 1) { setStep(2); console.log("1"); } else { handleLogin(e); console.log("1"); } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
+                                        <span onClick={() => { if (register && step == 2) { handleRegistration(); console.log("1nm"); } else if (register && step == 1) { if (registerUser.type == "") { toast.error("please select user type: Donor, voulunteer, Needy"); console.log("next clicked ", registerUser.type) } else { setStep(2) }; console.log("next clicked 2", registerUser.type) } else { handleLogin(); console.log("next clicked 3", registerUser.type) } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
                                     </button>
                                     <div
                                         className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
@@ -434,7 +454,7 @@ const AuthPopup = ({ auth }) => {
                                         </label>
                                     </div>
                                     <button type="button" className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-                                        <span onClick={() => { if (register && step == 2) { handleRegistration(); console.log("1"); } else if (register && step == 1) { setStep(2); console.log("1"); } else { handleLogin(); console.log("1"); } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
+                                        <span onClick={() => { if (register && step == 2) { handleRegistration(); console.log("1nm"); } else if (register && step == 1) { if (registerUser.type == "") { toast.error("please select user type: Donor, voulunteer, Needy"); console.log("next clicked ", registerUser.type) } else { setStep(2) }; console.log("next clicked 2", registerUser.type) } else { handleLogin(); console.log("next clicked 3", registerUser.type) } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
                                     </button>
 
                                 </>
