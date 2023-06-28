@@ -8,7 +8,7 @@ module.exports = async function sendMail({email, name,subject, message}) {
     secure: true,
     auth: {
       user: "sayyedaribhussain4321@gmail.com",
-      pass: "mhzfludsaqzeedej",
+      pass: `${process.env.EMAIL_PASSWORD}`,
     },
   });
   console.log("I've crossed transporter");
