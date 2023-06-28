@@ -1,24 +1,41 @@
 const router = require("express").Router();
 const volunteerModel = require("../../models/volunteerSchema");
 
-router.get("/:email", async(req, res)=>{
-    const volunteerEmail = req.params.email;
-    try{
-        const volunteerData =await volunteerModel.findOne({email:volunteerEmail});
-        if(!volunteerData){
-            res.status(500).send({message:"volunteer email doesn't exist"})
-        }
-        if(volunteerData.verified){
-            res.status(400).send({message:"volunteer is already verified"});
-        }
-        else{
-            volunteerData.updateOne({email:volunteerEmail}, {verified:true});
-            res.status(200).send({message:"verification successfull! Hurrah"})
-        }
-    }catch(error){
-            res.status(500).send("SR: error while verifying volunteer");
-    }
+router.get("/:verifyToken", async (req, res) => {
+  const verifyToken = req.params.verifyToken;
+  try {
+    const volunteerData = await volunteerModel.findOne({ verifyToken: verifyToken });
+    if (!volunteerData) {
+      res.status(500).send({ message: "Volunteer email doesn't exist" });
+    } else if (volunteerData.verified) {
+      res.status(400).send({ message: "Volunteer is already verified" });
+    } else {
+      console.log("Before update: ", volunteerData);
 
-})
+      await volunteerModel.updateOne({ verifyToken: verifyToken }, { $set: { verified: true } });
+      const updatedVolunteerData = await volunteerModel.findOne({ verifyToken: verifyToken });
+
+      console.log("After update: ", updatedVolunteerData);
+
+      res.send(`
+        <html>
+          <body>
+            <h1>Verification successful! Hurrah!</h1>
+            <p>Please wait while you're being redirected...</p>
+            <script>
+              setTimeout(function() {
+                window.location.href = ''${process.env.FRONTEND_URL}/auth'; // Replace '/success' with the desired URL
+              }, 3000); // Redirect after 3 seconds (adjust as needed)
+            </script>
+          </body>
+        </html>
+      `);
+    }
+  } catch (error) {
+    res.status(500).send("SR: Error while verifying volunteer");
+  }
+});
 
 module.exports = router;
+
+

@@ -42,6 +42,10 @@ verified:{
   type:Boolean,
   default:false 
 },
+verifyToken:{
+  type:String,
+}
+,
 works: [
     {
       workDetails: {
