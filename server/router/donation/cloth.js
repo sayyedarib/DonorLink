@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
     const messageVolunteer = `
     <p><strong>Dear ${nearestVolunteer[0].volunteer.name},</strong></p>
     
-    <p>We wanted to inform you that ${name} has made a generous donation of ${quantity} cloth(s) through DonorLink. Your assistance as a registered volunteer is highly valued, and we kindly request your support in facilitating the donation process.</p>
+    <p>We wanted to inform you that <strong>${name}</strong> has made a generous donation of <strong>${quantity}</strong> cloth(s) through DonorLink. Your assistance as a registered volunteer is highly valued, and we kindly request your support in facilitating the donation process.</p>
     
     <p><strong>Donor Details:</strong></p>
     <ul>
@@ -75,10 +75,8 @@ router.post("/", async (req, res) => {
       <p>Dear <strong>${name}</strong>,</p>
       <p>Thank you for donating ${quantity} cloth(s) through DonorLink. Your contribution will make a difference in someone's life.</p>
       <p>We appreciate your generosity and willingness to help those in need.</p>
-      <p>Here are the details of your donation:</p>
-      <p><strong>Address:</strong> ${address.custom}</p>
-      <p><strong>Message:</strong> ${message}</p>
-      <p><strong>Coordinates:</strong> ${coordinates}</p>
+      <p>Our volunteer will be soon at your door step : ${address.custom}</p>
+
       <p>If you have any further questions or would like to contribute more, please don't hesitate to reach out to us.</p>
       <p>Thank you once again for your support.</p>
 
