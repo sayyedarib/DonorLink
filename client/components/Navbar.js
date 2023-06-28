@@ -81,8 +81,8 @@ const Navigation = () => {
     <>
       <section>
         <header className="container min-w-full bg-blue-50 px-5 flex justify-between py-4 items-center">
-          <div>
-            <img className="w-10" src="/assets/images/icon/logo.svg" alt="logo" />
+          <div className="flex">
+            <img className="w-10" src="/assets/images/icon/logo.svg" alt="logo" /><span className='font-bold text-4xl mx-4 text-blue-950'>DonorLink</span>  
           </div>
           <div className="z-50 lg:hidden">
             {navIsVisible ? (

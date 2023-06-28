@@ -10,7 +10,7 @@ const Footer = () => {
       <hr className="border-blue-gray-50" />
   <div className="flex flex-row flex-wrap items-center justify-center my-3 gap-y-6 gap-x-12 bg-blue-50 text-center md:justify-between">
     <div className='flex gap-3 items-center'>
-    <img src="/assets/images/icon/logo.svg" alt="logo" className="w-10" /><span className='font-bold text-4xl mx-4'>DonorLink</span>   
+    <img src="/assets/images/icon/logo.svg" alt="logo" className="w-10" /><span className='font-bold text-4xl mx-4 text-blue-950'>DonorLink</span>   
     </div>
     
     <div className='flex gap-5'>
