@@ -15,9 +15,8 @@ const Header = () => {
         <div className="w-auto sm:w-1/2 flex flex-col gap-2 sm:gap-6 md:gap-8">
           <h1 className="text-4xl sm:text-5xl font-bold text-blue-700">Who we are?</h1>
           <h2 className="">
-            We are a unified platform of donation where volunteer can join us
-            and help to collect cloths and food from donors. And donate it to
-            needy people
+            We are a platform of donation that bridge the gap between willing donors and needy people maintining the trust with 100% transparency. Join us as volunteer, donor
+            or peoole of need.
           </h2>
           <div className="flex gap-4 flex-wrap">
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Support</button>
