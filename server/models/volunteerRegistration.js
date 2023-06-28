@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
+const clothDonationData = require('../models/donation/clothDonation');
 
 
 const volunteerFormSchema = mongoose.Schema({
@@ -44,20 +46,20 @@ coordinates:{
 works: [
     {
       workDetails: {
-        type: Object,
-        required: false
+        type: Schema.Types.ObjectId,
+        ref: 'clothDonationData' // Reference the clothDonationData model
       },
       accepted: {
         type: Boolean,
-        required: false
+        default:false
       },
       rejected:{
         type:Boolean,
-        required:false
+        default:false
       },
       collected:{
         type:Boolean,
-        required:false
+        default:false
       }
     }
   ]
