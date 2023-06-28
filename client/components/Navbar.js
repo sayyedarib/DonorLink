@@ -7,10 +7,10 @@ import router from "next/router";
 
 
 const navItemsInfo = [
-  { name: "HOME" },
-  { name: "ABOUT" },
-  { name: "CONTACT US" },
-  { name: "FAQ" },
+  { name: "HOME",link:"/" },
+  { name: "ABOUT", link:"AboutUs" },
+  { name: "CONTACT US", link:"ContactUs" },
+  { name: "FAQ", link:"/faq" },
 ];
 
 const NavItem = ({ item }) => {
@@ -18,7 +18,7 @@ const NavItem = ({ item }) => {
     <li className="relative group">
 
       <>
-        <Link href="/" className="px-4 py-2 lg:group-hover:text-blue-700 group-hover:text-blue-950">
+        <Link href={item.link} className="px-4 py-2 lg:group-hover:text-blue-700 group-hover:text-blue-950">
           {item.name}
         </Link>
         <span className="text-blue-500 absolute transition-all duration-500 font-bold right-0 top-0 group-hover:right-[90%] opacity-0 group-hover:opacity-100">
