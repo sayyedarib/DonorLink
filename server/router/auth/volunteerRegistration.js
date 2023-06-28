@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
       <p><strong>Dear ${name},</strong></p>
       
       <p>Thank you for joining DonorLink as a volunteer! We are thrilled to have you on board and appreciate your commitment to making a positive impact in our community.
-      To ensure the security and authenticity of your account, we kindly request you to verify your email address. Please click on the following link to complete the verification process: <a href="${process.env.BACKEND_URL}/verify/${email}">${verificationLink}</a>.</p>
+      To ensure the security and authenticity of your account, we kindly request you to verify your email address. Please click on the following link to complete the verification process: <a href="${process.env.BACKEND_URL}/api/verifyVolunteer/${email}">verify account</a>.</p>
       
       <p>Your dedication and support as a volunteer will play a crucial role in helping us fulfill our mission and assist those in need. Together, we can make a difference.
       If you have any questions, need assistance, or would like to explore volunteer opportunities, please don't hesitate to reach out to us. We are here to support you every step of the way.</p>
@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
       <p>The DonorLink Team</p>
       `;
       
-      await sendMail({email,name, subject:"Thank you for joining DonorLink", html:messageVolunteer});
+      await sendMail({email,name, subject:"Thank you for joining DonorLink", message:messageVolunteer});
       await data.save();
 
       res.status(200).json({message: "volunteer data saved successfully."});
