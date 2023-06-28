@@ -7,8 +7,8 @@ const Footer = () => {
   return (
     <>
       <footer className="w-full bg-blue-50 span-8 px-9">
-      <hr className="my-4 border-blue-gray-50" />
-  <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-blue-50 text-center md:justify-between">
+      <hr className="border-blue-gray-50" />
+  <div className="flex flex-row flex-wrap items-center justify-center my-3 gap-y-6 gap-x-12 bg-blue-50 text-center md:justify-between">
     <div className='flex gap-3 items-center'>
     <img src="/assets/images/icon/logo.svg" alt="logo" className="w-10" /><span className='font-bold text-4xl mx-4'>DonorLink</span>   
     </div>

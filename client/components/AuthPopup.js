@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import userContext from "@/context/auth/userContext";
 import useGeoLocation from "hooks/useGeoLocation";
 import { ToastContainer, toast } from 'react-toastify';
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import "react-toastify/dist/ReactToastify.css";
 
 const AuthPopup = ({ auth }) => {
@@ -35,22 +35,45 @@ const AuthPopup = ({ auth }) => {
         },
     });
 
-    const handleCallBackResponse = (response) => {
-        const userObject = jwt_decode(response.credential);
-        setRegisterUser({ ...registerUser, name: userObject.name, email: userObject.email, picture: userObject.picture });
+    const handleCallBackResponse = async (res) => {
+        try {
 
-        // handleLoginInput({name: userObject.name, email: userObject.email, picture: userObject.picture})
-        userContextDetail.updateUserData(userObject);
-        setLoginUser({
-            email: userObject.email,
-            picture: userObject.picture,
-        })
-        localStorage.setItem("userData", JSON.stringify({
-            name: userObject.name,
-            email: userObject.email,
-            picture: userObject.picture,
-        }));
-        const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+            const userObject = jwt_decode(res.credential);
+            if (!register) {
+                const response = await axios.post(
+                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login?loginType=google`,
+                    userObject,
+                    {
+                        withCredentials: true,
+                    }
+                );
+                console.log("CL: response authpopup check if email is signed up ", response);
+                userContextDetail.updateUserData(userObject);
+                setLoginUser({
+                    email: userObject.email,
+                    picture: userObject.picture,
+                })
+                localStorage.setItem("userData", JSON.stringify({
+                    name: userObject.name,
+                    email: userObject.email,
+                    picture: userObject.picture,
+                }));
+                const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+                router.replace(prevPath.url)
+            }
+
+            setRegisterUser({ ...registerUser, name: userObject.name, email: userObject.email, picture: userObject.picture });
+
+        } catch (error) {
+            if (
+                error.response &&
+                error.response.status >= 400 &&
+                error.response.status <= 500
+            ) {
+                toast.error(error.response.data.message);
+                setRegister(true);
+            }
+        }
     };
 
     //google sign in
@@ -103,7 +126,8 @@ const AuthPopup = ({ auth }) => {
         console.log("CL: login user ", loginUser, "register ", register);
         name = e.target.name;
         value = e.target.value;
-        setLoginUser({...loginUser,
+        setLoginUser({
+            ...loginUser,
             [name]: value,
         });
     };
@@ -145,40 +169,40 @@ const AuthPopup = ({ auth }) => {
             console.log("start response");
             console.log("CL: loginUser ", loginUser);
             const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`,
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login?loginType=manual`,
                 loginUser,
                 {
                     withCredentials: true,
                 }
-                );
-                console.log("login response",response);
-                // request to mail the form data
-                setLoginUser({
-                    email: "",
-                    password: "",
-                });
+            );
+            console.log("login response", response);
+            // request to mail the form data
+            setLoginUser({
+                email: "",
+                password: "",
+            });
 
-                userContextDetail.updateUserData(response.data.userData);
-                const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
-                router.replace(prevPath.url);
-            }
-                 catch (error) {
+            userContextDetail.updateUserData(response.data.userData);
+            const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+            router.replace(prevPath.url);
+        }
+        catch (error) {
             console.log("CL: error while login data ", error);
             if (
                 error.response &&
                 error.response.status >= 400 &&
                 error.response.status <= 500
-              ) {
+            ) {
                 toast.error(error.response.data.message);
-        }
+            }
         }
     };
 
     const handleRegistration = async () => {
-                if(registerUser.password!=registerUser.cpassword){
-                    toast.error("password and confirm password mismatched");
-                    return;
-                }
+        if (registerUser.password != registerUser.cpassword) {
+            toast.error("password and confirm password mismatched");
+            return;
+        }
         try {
             console.log("CL: pages-authPop-handleRegistration-register type ", registerUser.type);
             const url = registerUser.type === "Donor" ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp` : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerRegistration`;
@@ -191,8 +215,8 @@ const AuthPopup = ({ auth }) => {
                     withCredentials: true,
                 }
             );
-                toast.success("registration successfull");
-                
+            toast.success("registration successfull");
+
             setRegisterUser({
                 type: "",
                 name: "",
@@ -218,10 +242,10 @@ const AuthPopup = ({ auth }) => {
                 error.response &&
                 error.response.status >= 400 &&
                 error.response.status <= 500
-              ) {
+            ) {
                 toast.error(error.response.data.message);
+            }
         }
-    }
     };
 
 
@@ -341,7 +365,7 @@ const AuthPopup = ({ auth }) => {
                                         </div>
                                     </div>}
                                     <button type="button" className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-                                        <span onClick={(e) => { if (register&&step == 2) { handleRegistration();console.log("1"); } else if (register&&step == 1) { setStep(2);console.log("1"); } else { handleLogin(e);console.log("1"); } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
+                                        <span onClick={(e) => { if (register && step == 2) { handleRegistration(); console.log("1"); } else if (register && step == 1) { setStep(2); console.log("1"); } else { handleLogin(e); console.log("1"); } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
                                     </button>
                                     <div
                                         className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
@@ -355,7 +379,7 @@ const AuthPopup = ({ auth }) => {
                                     </div>
                                     <span className="text-center">{register ? "already a user !" : "Not registered yet !"} <span className="text-indigo-600 font-medium inline-flex space-x-1 items-center hover:cursor-pointer" onClick={() => setRegister(!register)}>{register ? "Login" : "SignUp"}</span></span>
                                 </>)}
-                            {step === 2 && register &&(
+                            {step === 2 && register && (
                                 <>
                                     <label htmlFor="phone">
                                         <span className="font-medium text-slate-700 pb-2">Phone number</span>
@@ -410,7 +434,7 @@ const AuthPopup = ({ auth }) => {
                                         </label>
                                     </div>
                                     <button type="button" className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-                                        <span onClick={() => { if (register&&step == 2) { handleRegistration();console.log("1"); } else if (register&&step == 1) { setStep(2);console.log("1"); } else { handleLogin();console.log("1"); } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
+                                        <span onClick={() => { if (register && step == 2) { handleRegistration(); console.log("1"); } else if (register && step == 1) { setStep(2); console.log("1"); } else { handleLogin(); console.log("1"); } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
                                     </button>
 
                                 </>
@@ -420,7 +444,7 @@ const AuthPopup = ({ auth }) => {
                         </div>
                     </form>
                 </div>
-                <ToastContainer position="top-left"/>
+                <ToastContainer position="top-left" />
             </div>
         </>
     );

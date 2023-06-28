@@ -66,8 +66,15 @@ const ClothDonationForm = () => {
       });
 
       router.replace("/");
-    } catch (err) {
-      console.log("error while submitting cloth donation data", err);
+    } catch (error) {
+      console.log("error while submitting cloth donation data", error);
+              if (
+            error.response &&
+            error.response.status >= 400 &&
+            error.response.status <= 500
+            ) {  
+            toast.error(error.response.data.message);
+    }
     }
   };
 
