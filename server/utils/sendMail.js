@@ -12,7 +12,7 @@ module.exports = async function sendMail({email, name,subject, message}) {
     },
   });
   console.log("I've crossed transporter");
-  console.log("email ", email, "name ", name)
+  console.log("email ", email, "name ", name);
   await transporter.sendMail({
     from: `DonorLink`,
     to: email,

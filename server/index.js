@@ -14,7 +14,7 @@ app.use(
 
 connection();
 
-const volunteerRegistrationRoute = require("./router/volunteer/volunteerRegistration");
+const volunteerRegistrationRoute = require("./router/auth/volunteerRegistration");
 const signUpRoute = require("./router/auth/user");
 const loginRoute = require("./router/auth/login");
 const sendMailRoute = require("./utils/sendMail");

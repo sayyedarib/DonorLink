@@ -1,4 +1,4 @@
-const volunteerData = require("../models/volunteerRegistration");
+const volunteerData = require("../models/volunteerSchema");
 const bloodDonationData = require("../models/donation/bloodDonation")
 const geolib = require("geolib");
 

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const sendMail = require("../../utils/sendMail");
 const clothDonation = require("../../models/donation/clothDonation");
-const registeredVolunteer = require("../../models/volunteerRegistration");
+const registeredVolunteer = require("../../models/volunteerSchema");
 const findNearest = require("../../utils/findNearest");
 const time = require("../../utils/time");
 

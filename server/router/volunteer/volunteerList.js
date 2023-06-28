@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const volunteerData = require("../../models/volunteerRegistration");
+const volunteerData = require("../../models/volunteerSchema");
 
 router.get("/", async (req, res) => {
   const email = req.query.particular;

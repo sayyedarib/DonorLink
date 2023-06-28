@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const volunteerData = require("../models/volunteerRegistration");
+const volunteerData = require("../models/volunteerSchema");
 const clothDonation = require("../models/donation/clothDonation");
 
 router.get("/",async (req, res)=>{

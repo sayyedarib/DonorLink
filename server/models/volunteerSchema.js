@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const clothDonationData = require('../models/donation/clothDonation');
+const clothDonationData = require('./donation/clothDonation');
 
 
 const volunteerFormSchema = mongoose.Schema({
 picture:{
     type:String, 
-    required:false
 },
 
 name:{
@@ -20,11 +19,9 @@ email:{
 },
 password: {
   type: String,
-  required: false,
 },
 cpassword: {
   type: String,
-  required: false
 },
 phone:{
     type:Number,
@@ -32,16 +29,18 @@ phone:{
 },
 bio:{
     type:String,
-    required:false
 },
 address: {
-  custom:{type:String,required:false},
-  city:{type:String, required:false},
-  zip:{type:String, required:false}
+  custom:{type:String},
+  city:{type:String},
+  zip:{type:String}
 },
 coordinates:{
     type: String,
-    required:false
+},
+verified:{
+  type:Boolean,
+  default:false 
 },
 works: [
     {

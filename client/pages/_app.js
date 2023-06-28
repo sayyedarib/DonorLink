@@ -12,7 +12,6 @@ export default function App({ Component, pageProps }) {
   return (
 
     <UserState>
-      {/* <Navbar/> */}
       <Navigation/>
       <Component {...pageProps} />
       <Footer />

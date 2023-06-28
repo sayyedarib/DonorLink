@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const volunteerData = require("../../models/volunteerRegistration");
+const volunteerData = require("../../models/volunteerSchema");
 
 router.post("/", async (req, res) => {
   console.log("SR:router_volunteer_orders");
