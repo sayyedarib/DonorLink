@@ -23,7 +23,7 @@ const AboutUs = () => {
                                 </p>
                                 <div className="flex flex-wrap items-center">
                                     <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
-                                        <div className="p-6 bg-white">
+                                        <div className="p-6 bg-white shadow-lg shadow-blue-300">
                                             <span className="text-blue-500 dark:text-blue-400">
                                                 <BiDonateHeart className='text-4xl' />
                                             </span>
@@ -33,7 +33,7 @@ const AboutUs = () => {
                                         </div>
                                     </div>
                                     <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
-                                        <div className="p-6 bg-white">
+                                        <div className="p-6 bg-white shadow-lg shadow-blue-300">
                                             <span className="text-blue-500 dark:text-blue-400">
                                                 <FcCollect  className='text-4xl'/>
                                             </span>
@@ -42,8 +42,8 @@ const AboutUs = () => {
                                             <h2 className="text-sm text-gray-700 dark:text-gray-400">Distributions</h2>
                                         </div>
                                     </div>
-                                    <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
-                                        <div className="p-6 bg-white">
+                                    <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6 ">
+                                        <div className="p-6 bg-white shadow-lg shadow-blue-300">
                                             <span className="text-blue-500 dark:text-blue-400">
                                                 <BsFillPersonCheckFill className='text-4xl' />
                                             </span>
@@ -53,7 +53,7 @@ const AboutUs = () => {
                                         </div>
                                     </div>
                                     <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
-                                        <div className="p-6 bg-white">
+                                        <div className="p-6 bg-white shadow-lg shadow-blue-300">
                                             <span className="text-blue-500 dark:text-blue-400">
                                                 <TbBuildingEstate className='text-4xl' />
                                             </span>

@@ -255,7 +255,7 @@ const AuthPopup = ({ auth }) => {
     return (
         <>
             <div className="">
-                <div className="max-w-md mx-auto px-8 py-3 my-10 bg-white span-8 rounded-xl shadow shadow-slate-300">
+                <div className="max-w-md mx-auto px-8 py-3 my-10 bg-white span-8 rounded-xl shadow-lg shadow-blue-300">
                     {/* <div className="flex justify-center items-center text-blue-700 font-bold text-3xl">
                             {register?:"Login"}
                     </div> */}
