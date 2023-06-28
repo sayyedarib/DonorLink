@@ -385,7 +385,7 @@ const AuthPopup = ({ auth }) => {
                                         </div>
                                     </div>}
                                     <button type="button" className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-                                        <span onClick={() => { if (register && step == 2) { handleRegistration(); console.log("1nm"); } else if (register && step == 1) { if (registerUser.type == "") { toast.error("please select user type: Donor, voulunteer, Needy"); console.log("next clicked ", registerUser.type) } else { setStep(2) }; console.log("next clicked 2", registerUser.type) } else { handleLogin(); console.log("next clicked 3", registerUser.type) } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
+                                        <span onClick={(e) => { if (register && step == 2) { handleRegistration(); console.log("1nm"); } else if (register && step == 1) { if (registerUser.type == "") { toast.error("please select user type: Donor, voulunteer, Needy"); console.log("next clicked ", registerUser.type) } else { setStep(2) }; console.log("next clicked 2", registerUser.type) } else { handleLogin(e); console.log("next clicked 3", registerUser.type) } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
                                     </button>
                                     <div
                                         className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
@@ -454,7 +454,7 @@ const AuthPopup = ({ auth }) => {
                                         </label>
                                     </div>
                                     <button type="button" className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-                                        <span onClick={() => { if (register && step == 2) { handleRegistration(); console.log("1nm"); } else if (register && step == 1) { if (registerUser.type == "") { toast.error("please select user type: Donor, voulunteer, Needy"); console.log("next clicked ", registerUser.type) } else { setStep(2) }; console.log("next clicked 2", registerUser.type) } else { handleLogin(); console.log("next clicked 3", registerUser.type) } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
+                                        <span onClick={(e) => { if (register && step == 2) { handleRegistration(); console.log("1nm"); } else if (register && step == 1) { if (registerUser.type == "") { toast.error("please select user type: Donor, voulunteer, Needy"); console.log("next clicked ", registerUser.type) } else { setStep(2) }; console.log("next clicked 2", registerUser.type) } else { handleLogin(e); console.log("next clicked 3", registerUser.type) } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
                                     </button>
 
                                 </>
