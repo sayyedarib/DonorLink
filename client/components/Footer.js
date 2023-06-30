@@ -6,7 +6,7 @@ import { BiLogoGmail } from 'react-icons/bi';
 const Footer = () => {
   return (
     <>
-      <footer className=" w-full bg-blue-50 span-8 px-9 mb-0 pb-0">
+      <footer className="static bottom-0 w-full bg-blue-50 span-8 px-9 mb-0 pb-0">
         <hr className="border-blue-gray-50" />
         <div className="flex flex-row flex-wrap items-center justify-center my-3 gap-y-6 gap-x-12 bg-blue-50 text-center md:justify-between">
           <div className='flex gap-3 items-center'>
@@ -17,7 +17,7 @@ const Footer = () => {
             <Link href="https://www.github.com/sayyedarib/donorlink">
               <AiFillGithub className='text-3xl text-blue-900' />
             </Link>
-            <Link href="https://www.github.com/sayyedarib/donorlink">
+            <Link href="malilto:sayyedaribhussain4321@gmail.com">
               <BiLogoGmail className='text-3xl text-blue-900' />
             </Link>
           </div>

@@ -32,7 +32,7 @@ const GetBlood = () => {
 
 
   return (
-    <div className='flex flex-col justify-center items-center mx-auto my-12 gap-20'>
+    <div className='flex flex-col h-[74vh] justify-center items-center mx-auto lg:my-12 my-24 gap-20'>
       <form>
         <label htmlFor="bloodType" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
         <div className="relative">
@@ -57,7 +57,7 @@ const GetBlood = () => {
           </button>
         </div>
       </form>
-      <div className='flex flex-wrap gap-3'>
+      <div className='flex flex-wrap gap-3 items-center justify-center'>
         {
           nearbyDonor?.filter((data) => data.donor.bloodGroup === blood)
             .map(filteredData => {
