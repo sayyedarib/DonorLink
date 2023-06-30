@@ -61,8 +61,9 @@ const AuthPopup = ({ auth }) => {
                     email: userObject.email,
                     picture: userObject.picture,
                 }));
+                toast.success("logged in successfully")
                 const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
-                router.replace(prevPath.url)
+                router.replace(prevPath.url);
             }
 
             setRegisterUser({ ...registerUser, name: userObject.name, email: userObject.email, picture: userObject.picture });
@@ -186,6 +187,7 @@ const AuthPopup = ({ auth }) => {
             });
 
             userContextDetail.updateUserData(response.data.userData);
+            toast.success("Logged in successfully");
             const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
             router.replace(prevPath.url);
         }
@@ -220,7 +222,7 @@ const AuthPopup = ({ auth }) => {
             );
 
             toast.success("registration successfull");
-
+{registerUser.type=="Volunteer"&&toast.success("verification link sent to your email")}
             setRegisterUser({
                 type: "",
                 name: "",
