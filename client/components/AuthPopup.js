@@ -30,6 +30,7 @@ const AuthPopup = ({ auth }) => {
         phone: "",
         picture: "",
         coordinates: "",
+        bio:"",
         address: {
             custom: "",
             city: "",
@@ -147,7 +148,7 @@ const AuthPopup = ({ auth }) => {
                     }`
             });
         } else if (step === 2) {
-            if (name == "phone") {
+            if (name == "phone"||name=="bio") {
                 setRegisterUser({ ...registerUser, [name]: value });
             }
             else {
@@ -414,6 +415,17 @@ const AuthPopup = ({ auth }) => {
                                             placeholder="Enter phone number here"
                                         />
                                     </label>
+{registerUser?.type=="Volunteer" && <label htmlFor="bio">
+                                        <span className="font-medium text-slate-700 pb-2">Bio</span>
+                                        <textarea
+                                            onChange={handleRegisterInput}
+                                            value={registerUser.bio}
+                                            id="bio"
+                                            name="bio"
+                                            className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                                            placeholder="Write something about yourself"
+                                        />
+                                    </label>}
                                     <label htmlFor="address">
                                         <span className="font-medium text-slate-700 pb-2">Address</span>
                                         <textarea
