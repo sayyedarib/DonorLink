@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 
 
 const userFormSchema = mongoose.Schema({
+    type:{
+type:String
+    },
     name: {
         type: String,
         required: true

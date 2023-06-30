@@ -4,6 +4,7 @@ const clothDonationData = require('./donation/clothDonation');
 
 
 const volunteerFormSchema = mongoose.Schema({
+  type:{type:String,default:"Volunteer"},
 picture:{
     type:String, 
 },

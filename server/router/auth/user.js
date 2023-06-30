@@ -17,6 +17,7 @@ router.post("/", async (req, res) => {
           salt
         );
         const data = new userData({
+            type,
             name,
             email,
             password: hashPassword,

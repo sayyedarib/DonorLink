@@ -13,7 +13,7 @@ const AuthPopup = ({ auth }) => {
     const location = useGeoLocation();
     const userContextDetail = useContext(userContext);
     const [step, setStep] = useState(1);
-    const [register, setRegister] = useState(auth);
+    const [register, setRegister] = useState(false);
 
 
     const [loginUser, setLoginUser] = useState({
@@ -30,7 +30,7 @@ const AuthPopup = ({ auth }) => {
         phone: "",
         picture: "",
         coordinates: "",
-        bio:"",
+        bio: "",
         address: {
             custom: "",
             city: "",
@@ -38,47 +38,57 @@ const AuthPopup = ({ auth }) => {
         },
     });
 
+    useEffect(() => {
+        console.log("register signUp ", register);
+    }, [register]);
+
     const handleCallBackResponse = async (res) => {
         try {
-
+            console.log("register", register)
             const userObject = jwt_decode(res.credential);
-            if (!register) {
-                const response = await axios.post(
-                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login?loginType=google`,
-                    userObject,
-                    {
-                        withCredentials: true,
-                    }
-                );
-                console.log("CL: response authpopup check if email is signed up ", response);
-                userContextDetail.updateUserData(userObject);
-                setLoginUser({
-                    email: userObject.email,
-                    picture: userObject.picture,
-                })
-                localStorage.setItem("userData", JSON.stringify({
-                    name: userObject.name,
-                    email: userObject.email,
-                    picture: userObject.picture,
-                }));
-                toast.success("logged in successfully")
-                const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
-                router.replace(prevPath.url);
-            }
-
             setRegisterUser({ ...registerUser, name: userObject.name, email: userObject.email, picture: userObject.picture });
-
-        } catch (error) {
-            if (
-                error.response &&
-                error.response.status >= 400 &&
-                error.response.status <= 500
-            ) {
-                toast.error(error.response.data.message);
-                setRegister(true);
+            if (!register) {
+                try {
+                    const response = await axios.post(
+                        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login?loginType=google`,
+                        userObject,
+                        {
+                            withCredentials: true,
+                        }
+                    );
+                    console.log("CL: response authpopup check if email is signed up ", response);
+                    userContextDetail.updateUserData(response.data.userData);
+                    setLoginUser({
+                        email: userObject.email,
+                        picture: userObject.picture,
+                    })
+                    localStorage.setItem("userData", JSON.stringify({
+                        name: userObject.name,
+                        email: userObject.email,
+                        picture: userObject.picture,
+                    }));
+                    toast.success("logged in successfully")
+                    const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+                    router.replace(prevPath.url);
+                } catch (error) {
+                    if (
+                        error.response &&
+                        error.response.status >= 400 &&
+                        error.response.status <= 500
+                    ) {
+                        toast.error(error.response.data.message);
+                        setRegister(true);
+                    }
+                }
             }
+            else {
+                return;
+            }
+        } catch (error) {
+            console.log("CL: error in if statemenet ", error);
         }
     };
+    
 
     //google sign in
     useEffect(() => {
@@ -99,7 +109,7 @@ const AuthPopup = ({ auth }) => {
         });
 
         google.accounts.id.prompt();
-    }, []);
+    }, [register]);
 
     //handle image
     const handleFileUpload = async (e) => {
@@ -149,7 +159,7 @@ const AuthPopup = ({ auth }) => {
                     }`
             });
         } else if (step === 2) {
-            if (name == "phone"||name=="bio") {
+            if (name == "phone" || name == "bio") {
                 setRegisterUser({ ...registerUser, [name]: value });
             }
             else {
@@ -222,7 +232,7 @@ const AuthPopup = ({ auth }) => {
             );
 
             toast.success("registration successfull");
-{registerUser.type=="Volunteer"&&toast.success("verification link sent to your email")}
+            { registerUser.type == "Volunteer" && toast.success("verification link sent to your email") }
             setRegisterUser({
                 type: "",
                 name: "",
@@ -400,7 +410,8 @@ const AuthPopup = ({ auth }) => {
                                     <div className="my-5 flex items-center justify-center">
                                         <div id="signInDiv"></div>
                                     </div>
-                                    <span className="text-center">{register ? "already a user !" : "Not registered yet !"} <span className="text-indigo-600 font-medium inline-flex space-x-1 items-center hover:cursor-pointer" onClick={() => setRegister(!register)}>{register ? "Login" : "SignUp"}</span></span>
+{register?                                    <span className="text-center"> Already a user ! <span className="text-indigo-600 font-medium inline-flex space-x-1 items-center hover:cursor-pointer" onClick={() => { setRegister(false)}}>Login</span></span>:
+                                    <span className="text-center"> Don't have an account ! <span className="text-indigo-600 font-medium inline-flex space-x-1 items-center hover:cursor-pointer" onClick={() => { setRegister(true)}}>SignUp</span></span>}
                                 </>)}
                             {step === 2 && register && (
                                 <>
@@ -417,7 +428,7 @@ const AuthPopup = ({ auth }) => {
                                             placeholder="Enter phone number here"
                                         />
                                     </label>
-{registerUser?.type=="Volunteer" && <label htmlFor="bio">
+                                    {registerUser?.type == "Volunteer" && <label htmlFor="bio">
                                         <span className="font-medium text-slate-700 pb-2">Bio</span>
                                         <textarea
                                             onChange={handleRegisterInput}
