@@ -19,7 +19,8 @@
     "mongoose": "^7.0.1",
     "next": "^13.2.4",
     "nodemailer": "^6.9.1",
-    "razorpay": "^2.8.6"
+    "razorpay": "^2.8.6",
+    "wbm": "^1.1.16"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
