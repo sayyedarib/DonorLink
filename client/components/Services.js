@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/components/services.module.css";
 import Link from "next/link";
 import data from "../constants/data";
-import ServiceCard from "./ServiceCard";
+import ServiceCard from "./cards/ServiceCard";
 
 const Services = () => {
   return (

@@ -2,10 +2,10 @@ import Head from "next/head";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-import Header from "@/components/Header";
+import Header from "@/components/layout/Header";
 import Volunteers from "@/components/Volunteers";
 import Organizations from "@/components/Organizations";
-import Footer from "@/components/Footer";
+import Footer from "@/components/layout/Footer";
 import Script from "next/script";
 import dynamic from "next/dynamic";
 import UserState from "@/context/auth/UserState";

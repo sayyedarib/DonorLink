@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import userContext from "@/context/auth/userContext";
-import OrdersCard from "@/components/OrdersCard";
+import OrdersCard from "@/components/cards/OrdersCard";
 import Link from "next/link";
 import DashboardProfile from "@/components/DashboardProfile";
 

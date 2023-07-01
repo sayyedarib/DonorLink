@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import BloodDonorsCard from '@/components/BloodDonorsCard';
+import BloodDonorsCard from '@/components/cards/BloodDonorsCard';
 import userContext from '@/context/auth/userContext';
 import { useRouter } from 'next/router';
 import axios from 'axios';
