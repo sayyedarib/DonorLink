@@ -47,33 +47,6 @@ const Navigation = () => {
     router.replace(`/${userContextDetail.userStateData.name}`);
   }
 
-  useEffect(() => {
-    const countPath = parseInt(localStorage.getItem('countPath')) || 0;
-
-    const handleRouteChange = (url) => {
-      const currPath = { url, count: countPath };
-      let prevPath = JSON.parse(localStorage.getItem('currPath'));
-
-      if (countPath === 0) {
-        prevPath = { url: '/' };
-        localStorage.setItem('prevPath', JSON.stringify(prevPath));
-      } else {
-        localStorage.setItem('prevPath', JSON.stringify(prevPath));
-      }
-
-      localStorage.setItem('currPath', JSON.stringify(currPath));
-      localStorage.setItem('countPath', countPath + 1);
-    };
-
-    router.events.on('routeChangeComplete', handleRouteChange);
-
-    // Trigger the effect manually on initial render
-    handleRouteChange(router.asPath);
-
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, []);
 
 
 

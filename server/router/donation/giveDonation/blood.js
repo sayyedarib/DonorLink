@@ -2,7 +2,6 @@ const router = require("express").Router();
 const sendMail = require("../../../utils/sendMail");
 const bloodDonation = require("../../../models/donation/bloodDonation");
 const time = require("../../../utils/time");
-const wbm = require("wbm")
 
 router.post("/", async (req, res) => {
   console.log("I'm on server side now");
@@ -41,13 +40,6 @@ router.post("/", async (req, res) => {
       <p><strong>Best regards,</strong></p>
       <p><strong>The DonorLink Team</strong></p>
     `;
-
-    wbm.start().then(async () => {
-      const phones = ['8604078497'];
-      const message = 'Good Morning.';
-      await wbm.send(phones, message);
-      await wbm.end();
-  }).catch(err => console.log(err));
 
     console.log("SR-router-blood: sending mail ");
     await sendMail({email,name, subject:"Register as Blood Donor", message:messageDonor});

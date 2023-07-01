@@ -1,39 +1,42 @@
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import useGeoLocation from "hooks/useGeoLocation";
 import userContext from "@/context/auth/userContext";
 import { useRouter } from "next/router";
 import { BsCheckCircle } from "react-icons/bs"
 import { ToastContainer, toast } from 'react-toastify';
-import ClothDonorsCard from "@/components/cards/CLothDonorsCard";
+import ClothDonorsCard from "@/components/cards/ClothDonorsCard";
 
 const GetCloth = () => {
     const router = useRouter();
     const userContextDetail = useContext(userContext);
-  
-    if (!userContextDetail.userStateData.name) {
-      localStorage.setItem("prevItem", "/GetBlood")
-      router.replace("/auth");
-    }
-  
+
+    useEffect(()=>{
+        if (!userContextDetail.userStateData.name) {
+              localStorage.setItem("prevPath", "/GetBlood")
+            router.replace("/auth");
+        }
+
+    }, [])
+
     const [quantity, setQuantity] = useState("");
     const [nearbyDonor, setNearbyDonor] = useState([]);
-  
-    useEffect(() => { console.log("nearby cloth donor  ",nearbyDonor?.filter((data) => data)), [nearbyDonor] });
+
+    useEffect(() => { console.log("nearby cloth donor  ", nearbyDonor?.filter((data) => data)), [nearbyDonor] });
     const handleClick = async (e) => {
-      e.preventDefault();
-  
-      try {
-        const { data } = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/clothDonorsList?coordinates=${userContextDetail.userStateData.coordinates}`);
-        console.log("CL:getblood data.data ", data.data);
-        setNearbyDonor(data.data.filter(data=>data.distance/1000000<1));
-        toast.success("we have recieved your request")
-      } catch (error) {
-        console.log("Error while finding nearest donor:", error);
-      }
+        e.preventDefault();
+
+        try {
+            const { data } = await axios.get(
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/clothDonorsList?coordinates=${userContextDetail.userStateData.coordinates}`);
+            console.log("CL:getblood data.data ", data.data);
+            setNearbyDonor(data.data.filter(data => data.distance / 1000000 < 1));
+            toast.success("we have recieved your request")
+        } catch (error) {
+            console.log("Error while finding nearest donor:", error);
+        }
     };
-  
+
     return (
         <div>
             <div className="flex flex-wrap justify-center items-center gap-14 mt-48">
@@ -45,7 +48,7 @@ const GetCloth = () => {
                             <label htmlFor="quantity">
                                 <span className="font-medium text-slate-700 pb-2">Pairs of cloth needed</span>
                                 <input
-                                    onChange={(e)=>setQuantity(e.target.value)}
+                                    onChange={(e) => setQuantity(e.target.value)}
                                     value={quantity}
                                     id="quantity"
                                     name="quantity"
@@ -56,9 +59,9 @@ const GetCloth = () => {
                             </label>
 
                         </div>
-                    <button type="submit" className="w-full py-3 mt-5 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-                        <span onClick={handleClick}>Get Cloth</span>
-                    </button>
+                        <button type="submit" className="w-full py-3 mt-5 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
+                            <span onClick={handleClick}>Get Cloth</span>
+                        </button>
                     </form>
                 </div>
                 <div className="flex flex-col gap-5 justify-center  text-blue-950 mb-10 mx-10">
@@ -70,10 +73,10 @@ const GetCloth = () => {
                 </div>
                 <ToastContainer position="top-left" />
             </div>
-<div className="flex gap-5 flex-wrap justify-center items-center mt-10">
+            <div className="flex gap-5 flex-wrap justify-center items-center mt-10">
 
-            {nearbyDonor.map(data=><ClothDonorsCard data={data}/>)}
-</div>
+                {nearbyDonor.map(data => <ClothDonorsCard key={data._id} data={data} />)}
+            </div>
         </div>
     )
 }

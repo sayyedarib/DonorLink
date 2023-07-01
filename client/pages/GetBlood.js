@@ -8,10 +8,12 @@ const GetBlood = () => {
   const router = useRouter();
   const userContextDetail = useContext(userContext);
 
-  if (!userContextDetail.userStateData.name) {
-    localStorage.setItem("prevItem", "/GetBlood")
-    router.replace("/auth");
-  }
+  useEffect(()=>{
+    if (!userContextDetail.userStateData.name) {
+      localStorage.setItem("prevPath", "/GetBlood")
+      router.replace("/auth");
+    }
+  } ,[])
 
   const [blood, setBlood] = useState("");
   const [nearbyDonor, setNearbyDonor] = useState([]);

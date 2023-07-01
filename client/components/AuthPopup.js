@@ -62,11 +62,6 @@ const AuthPopup = ({ auth }) => {
                         email: userObject.email,
                         picture: userObject.picture,
                     })
-                    localStorage.setItem("userData", JSON.stringify({
-                        name: userObject.name,
-                        email: userObject.email,
-                        picture: userObject.picture,
-                    }));
                     toast.success("logged in successfully")
                     const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
                     router.replace(prevPath.url);
@@ -198,8 +193,8 @@ const AuthPopup = ({ auth }) => {
 
             userContextDetail.updateUserData(response.data.userData);
             toast.success("Logged in successfully");
-            const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
-            router.replace(prevPath.url);
+            // const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+            // router.replace(prevPath.url);
         }
         catch (error) {
             console.log("CL: error while login data ", error);
