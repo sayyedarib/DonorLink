@@ -1,5 +1,6 @@
 const volunteerData = require("../models/volunteerSchema");
-const bloodDonationData = require("../models/donation/bloodDonation")
+const bloodDonationData = require("../models/donation/bloodDonation");
+const clothDonationData = require("../models/donation/clothDonation");
 const geolib = require("geolib");
 
 module.exports = async function findNearest(coordinates, who) {
@@ -36,10 +37,31 @@ module.exports = async function findNearest(coordinates, who) {
         distance: distance,
       };
     });
-
+    
+    
     await donorsWithDistance.sort((a, b) => Number(a.distance) - Number(b.distance));
 
+    
+    return donorsWithDistance;
+  }
+  else if(who == "clothDonor"){
+    const donors = await clothDonationData.find();
+    const donorsWithDistance = donors.map((data) => {
+      const donorsCoordinate = JSON.parse(data.coordinates);
+      const receiversCoordinate = JSON.parse(coordinates)
+      console.log("v coord ", donorsCoordinate, "d coord ", receiversCoordinate, "name ", data.name)
+      const distance = geolib.getDistance(receiversCoordinate, donorsCoordinate, accuracy = 0.01);
+      console.log("distance", distance);
+      return {
+        donor: data,
+        distance: distance,
+      };
+    });
+    
+    
+    await donorsWithDistance.sort((a, b) => Number(a.distance) - Number(b.distance));
 
+    
     return donorsWithDistance;
   }
 };

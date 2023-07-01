@@ -44,7 +44,7 @@ const getHelpService = [
     icon: <GiClothes />,
     title: "Get Cloth",
     text: "Whether it's for personal use, community support, or charitable cause, simply submit your request. Compassionate network of donors is ready to lend helping hand.",
-    link: "/donation/NeedCloth",
+    link: "/GetCloth",
   },
 ];
 

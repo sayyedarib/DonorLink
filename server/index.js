@@ -15,27 +15,29 @@ app.use(
 connection();
 
 const volunteerRegistrationRoute = require("./router/auth/volunteerRegistration");
+const verifyVolunteerRoute = require("./router/auth/verifyVolunteer");
 const signUpRoute = require("./router/auth/user");
 const loginRoute = require("./router/auth/login");
 const sendMailRoute = require("./utils/sendMail");
-const volunteerListRoute = require("./router/volunteer/volunteerList");
 const recordsDataRoute = require("./router/countData");
-const clothDonationRoute = require("./router/donation/cloth");
-const bloodDonationRoute = require('./router/donation/blood');
+const clothDonationRoute = require("./router/donation/giveDonation/cloth");
+const bloodDonationRoute = require('./router/donation/giveDonation/blood');
 const acceptOrderRoute = require("./router/volunteer/orders");
-const bloodDonorListRoute = require("./router/donation/bloodDonorsList");
-const verifyVolunteerRoute = require("./router/auth/verifyVolunteer");
+const volunteerListRoute = require("./router/volunteer/volunteerList");
+const bloodDonorListRoute = require("./router/donation/getDonation/bloodDonorsList");
+const clothDonorsListRoute = require("./router/donation/getDonation/clothDonorsList")
 
 app.use("/api/volunteerRegistration", volunteerRegistrationRoute);
 app.use("/api/signUp", signUpRoute);
 app.use("/api/login", loginRoute);
 app.use("/api/verifyVolunteer", verifyVolunteerRoute);
 app.use("/api/sendMail", sendMailRoute);
-app.use("/api/volunteerList", volunteerListRoute);
-app.use("/api/bloodDonorsList", bloodDonorListRoute);
 app.use("/api/recordsData", recordsDataRoute);
 app.use("/api/clothDonation", clothDonationRoute);
 app.use("/api/bloodDonation", bloodDonationRoute);
+app.use("/api/volunteerList", volunteerListRoute);
+app.use("/api/bloodDonorsList", bloodDonorListRoute);
+app.use("/api/clothDonorsList", clothDonorsListRoute)
 app.use("/api/order", acceptOrderRoute);
 
 app.get("/", (req, res) => {

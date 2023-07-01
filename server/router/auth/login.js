@@ -8,11 +8,11 @@ router.post("/", async (req, res) => {
         const { email, password } = req.body;
         const { loginType } = req.query;
         const responseVolunteer = await volunteerData.findOne({ email: email });
-        const responseDonor = await userData.findOne({ email: email });
+        const responseUser = await userData.findOne({ email: email });
         console.log("SR:auth-login", responseVolunteer);
 
-        if(loginType=="google"&&responseVolunteer||responseDonor){
-            return res.status(200).send({ userData: responseVolunteer?responseVolunteer:responseDonor, message: "loggedIn successfully" })
+        if(loginType=="google"&&responseVolunteer||responseUser){
+            return res.status(200).send({ userData: responseVolunteer?responseVolunteer:responseUser, message: "loggedIn successfully" })
         }
 
         if (responseVolunteer) {
@@ -26,15 +26,15 @@ router.post("/", async (req, res) => {
             return res.status(200).send({ userData: responseVolunteer, message: "loggedIn successfully" })
         }
 
-        else if (responseDonor) {
+        else if (responseUser) {
             const validPassword = await bcrypt.compare(
                 password,
-                responseDonor.password
+                responseUser.password
             );
             if (!validPassword) {
                 return res.status(409).send({ message: "Invalid Email or Password" });
             }
-            return res.status(200).send({ userData: responseDonor, message: "loggedIn successfully" })
+            return res.status(200).send({ userData: responseUser, message: "loggedIn successfully" })
         }
 
         else {
