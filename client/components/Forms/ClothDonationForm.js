@@ -12,7 +12,7 @@ const ClothDonationForm = () => {
   console.log("userContextDetail.userStateData.name ", userContextDetail.userStateData);
   if (!userContextDetail.userStateData.name) {
     router.replace("/auth");
-  };
+  }
 
   const location = useGeoLocation();
   const [detail, setDetail] = useState({

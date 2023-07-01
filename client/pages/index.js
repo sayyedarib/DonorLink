@@ -75,7 +75,7 @@ else{
       </div>
     </>
   );
-};
+}
 
 export const getServerSideProps = async (context) => {
   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList`);
