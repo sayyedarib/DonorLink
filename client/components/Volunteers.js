@@ -18,6 +18,7 @@ const Volunteers = ({ volunteerData }) => {
                   name={data?.name}
                   email={data?.email}
                   bio={data?.bio}
+                  phone={data?.phone}
                   picture={
                     data.picture == ""
                       ? "/assets/images/fill-gap/boy.svg"

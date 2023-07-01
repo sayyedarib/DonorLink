@@ -17,7 +17,7 @@ const Footer = () => {
             <Link href="https://www.github.com/sayyedarib/donorlink">
               <AiFillGithub className='text-3xl text-blue-900' />
             </Link>
-            <Link href="malilto:sayyedaribhussain4321@gmail.com">
+            <Link href="mailto:sayyedaribhussain4321@gmail.com">
               <BiLogoGmail className='text-3xl text-blue-900' />
             </Link>
           </div>

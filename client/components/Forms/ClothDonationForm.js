@@ -3,8 +3,8 @@ import axios from "axios";
 import useGeoLocation from "hooks/useGeoLocation";
 import userContext from "@/context/auth/userContext";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
 import { BsCheckCircle } from "react-icons/bs"
+import { ToastContainer, toast } from 'react-toastify';
 
 const ClothDonationForm = () => {
   const router = useRouter();
@@ -126,6 +126,7 @@ const ClothDonationForm = () => {
           <span className="flex items-center gap-3"><BsCheckCircle /> volunteer will contact you at address provided or through phone number</span>
 
         </div>
+        <ToastContainer position="top-left" />
       </div>
     </>
   );

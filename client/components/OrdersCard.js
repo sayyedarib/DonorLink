@@ -7,7 +7,7 @@ const OrdersCard = ({ data, handleDecision }) => {
     const router = useRouter();
     const userContextDetail = useContext(userContext);
     const works = userContextDetail.userStateData;
-    
+    console.log("data ", data);
     //   const handleDecision = async (id, answer) => {
     //     console.log("works ", works);
 
@@ -25,16 +25,16 @@ const OrdersCard = ({ data, handleDecision }) => {
             <div className="relative flex w-96 h-auto flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
                 <div className="p-6">
                     <h5 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                        <span className="font-bold">Donated by: </span>    {data.workDetails.name}
+                        <span className="font-bold">Donated by: </span>    {data?.workDetails?.name}
                     </h5>
                     <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                        <span className="font-bold">Phone: </span>   {data.workDetails.phone}
+                        <span className="font-bold">Phone: </span>   {data?.workDetails?.phone}
                     </span>
                     <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                        <span className="font-bold">Address: </span>   {data.workDetails.address.custom}
+                        <span className="font-bold">Address: </span>   {data.workDetails?.address?.custom}
                     </span>
                     <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                        <span className="font-bold">Message: </span>   {data.workDetails.message}
+                        <span className="font-bold">Message: </span>   {data?.workDetails?.message}
                     </span>
                     <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
                         <span className="font-bold">Distance: </span>   distance

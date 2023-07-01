@@ -4,6 +4,7 @@ import useGeoLocation from "hooks/useGeoLocation";
 import userContext from "@/context/auth/userContext";
 import { useRouter } from "next/router";
 import { BsCheckCircle } from "react-icons/bs";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const BloodDonationForm = () => {
@@ -65,8 +66,10 @@ const BloodDonationForm = () => {
         coordinates: "",
       });
       const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+      toast.success("successfully registered as blood donor")
       router.replace(prevPath.url);
     } catch (err) {
+      toast.error("you are already a blood donor.")
       console.log("error while submitting cloth donation data", err);
     }
   };
@@ -116,8 +119,8 @@ const BloodDonationForm = () => {
           <span className="flex items-center gap-3"><BsCheckCircle /> Fill the required details</span>
           <span className="flex items-center gap-3"><BsCheckCircle /> Nearby patient in need can conatact you any time.</span>
           <span className="flex items-center gap-3"><BsCheckCircle /> Visit the mentioned hospital mentioned by patient or his acquintances to save life</span>
-
         </div>
+        <ToastContainer position="top-left" />
       </div>
     </>
   );
