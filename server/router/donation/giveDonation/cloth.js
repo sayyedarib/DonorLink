@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const sendMail = require("../../utils/sendMail");
-const clothDonation = require("../../models/donation/clothDonation");
-const registeredVolunteer = require("../../models/volunteerSchema");
-const findNearest = require("../../utils/findNearest");
-const time = require("../../utils/time");
+const sendMail = require("../../../utils/sendMail");
+const clothDonation = require("../../../models/donation/clothDonation");
+const registeredVolunteer = require("../../../models/volunteerSchema");
+const findNearest = require("../../../utils/findNearest");
+const time = require("../../../utils/time");
 
 router.post("/", async (req, res) => {
   console.log("SR: cloth donation route");

@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const sendMail = require("../../utils/sendMail");
-const bloodDonation = require("../../models/donation/bloodDonation");
-const time = require("../../utils/time");
+const sendMail = require("../../../utils/sendMail");
+const bloodDonation = require("../../../models/donation/bloodDonation");
+const time = require("../../../utils/time");
 const wbm = require("wbm")
 
 router.post("/", async (req, res) => {
