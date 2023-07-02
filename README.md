@@ -1,27 +1,26 @@
-(only client side has been deployed on vercel but server side still remains to be deployed that's why that deployed version doesn't works porperly)
 
 # DonorLink
-DonorLink is a web application that connects donors with people in need. Built using Next.js, Express, and MongoDB Atlas, it enables donors to fill out a form and share their location, and uses geolocation to match them with nearby volunteers. The application also includes a payment gateway using Razorpay for secure online donations(payment gateway under working).
+DonorLink is a web application that connects donors with people in need. Built using Next.js, Express, and MongoDB Atlas, it enables donors to fill out a form and share their location, and uses geolocation to match them with nearby volunteers. The application also includes a payment gateway using Razorpay for secure online donations(payment gateway KYC is under test mode so for now UPI QR is shown).
 
-![11zon_created-GIF (1)](https://user-images.githubusercontent.com/90370535/224618269-0fa8efbf-7911-4410-a96c-25c261c99a8d.gif)
 
-![1](https://user-images.githubusercontent.com/90370535/224812928-4db3d30e-9ac5-4c81-9099-6e25576d47f4.png)
-![2](https://user-images.githubusercontent.com/90370535/224813118-b27f6af1-ba0c-4b82-ad7d-3165be9d91bb.png)
+![Uploading Home.png…]()
 
 # Features
 
-Join Us as Volunteer.
-
-![volunteer (1)](https://user-images.githubusercontent.com/90370535/224564599-18ec391f-e46d-43d2-9547-02ba345fd613.png)
+Join Us as Volunteer, Donor, or needy.
+![signUp](https://github.com/sayyedarib/DonorLink/assets/90370535/afd75e80-feda-4bfb-890c-d27ab8dcabd8)
 
 Easy-to-use form for donors to fill out
-![3](https://user-images.githubusercontent.com/90370535/224813098-713c3de0-d863-42d3-a5f1-542ec54cfbc2.png)
+![Uploading providehelp.png…]()
+![donate cloth](https://github.com/sayyedarib/DonorLink/assets/90370535/ff01981d-b51f-464b-9054-b153e6fe58d3)
+
 
 
 Geolocation to match donors with nearby volunteers
 <br/>
 Nodemailer to send email notifications with donor locations to volunteers
-![WhatsApp Image 2023-03-13 at 01 09 02](https://user-images.githubusercontent.com/90370535/224569159-a6569fbd-f89a-486e-b995-1192548dcbfe.png)
+![email](https://github.com/sayyedarib/DonorLink/assets/90370535/c73057eb-2286-4ee5-b698-08fe93e00f9e)
+
 
 # Getting started
 Clone the repository to your local machine
@@ -47,7 +46,7 @@ yarn start
 If you would like to contribute to the development of DonorLink, please follow these steps:
 <div><ul>
 <li>Fork the repository to your own GitHub account</li>
-  <li>clone the repo</li>
+<li>clone the repo</li>
 <li>Create a new branch with your changes: git checkout -b my-feature</li>
 <li>Commit your changes: git commit -m "Add new feature"</li>
 <li>Push your changes to your fork: git push origin my-feature</li>
@@ -59,13 +58,11 @@ If you would like to contribute to the development of DonorLink, please follow t
 We are continuously working to add new feature and make the website more user friendly:
 <div><ul>
 <li>Integrating payment gateway</li>
-  <li>Make authentication system</li>
-  <li>Incorporating login/signup feature</li>
-<li>Provide dashboard to volunteers</li>
+<li>Provide dashboard to donors</li>
 <li>Open the registration for NGOs</li>
 <li>Reseaching more to build trust</li>
 </ul>
   </div>
   
 # Credits
-DonorLink was developed by Aarib and Aasif as part of DonorLink in Vercera Hackathon.
+DonorLink was developed by Aarib, Rafey, and Areeb in Vercera Hackathon February 2023.
