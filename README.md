@@ -2,8 +2,7 @@
 # DonorLink
 DonorLink is a web application that connects donors with people in need. Built using Next.js, Express, and MongoDB Atlas, it enables donors to fill out a form and share their location, and uses geolocation to match them with nearby volunteers. The application also includes a payment gateway using Razorpay for secure online donations(payment gateway KYC is under test mode so for now UPI QR is shown).
 
-
-![Uploading Home.png…]()
+![Home](https://github.com/sayyedarib/DonorLink/assets/90370535/2ac06b21-a10b-4b62-b0db-3e020a996f1c)
 
 # Features
 
