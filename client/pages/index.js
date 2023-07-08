@@ -62,9 +62,7 @@ else{
   return (
     <>
       <Head>
-        <script src="https://accounts.google.com/gsi/client" async defer></script>
       </Head>
-      <Script src="https://accounts.google.com/gsi/client" async defer></Script>
       <div className="flex flex-col gap-14 bg-blue-50">
         <Header />
         <Services />
