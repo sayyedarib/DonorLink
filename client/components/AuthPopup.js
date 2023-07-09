@@ -3,10 +3,10 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import userContext from "@/context/auth/userContext";
 import useGeoLocation from "hooks/useGeoLocation";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/router";
 import "react-toastify/dist/ReactToastify.css";
-import { BiArrowBack } from "react-icons/bi"
+import { BiArrowBack } from "react-icons/bi";
 
 const AuthPopup = ({ auth }) => {
     const router = useRouter();
@@ -14,7 +14,7 @@ const AuthPopup = ({ auth }) => {
     const userContextDetail = useContext(userContext);
     const [step, setStep] = useState(1);
     const [register, setRegister] = useState(false);
-
+    const [loader, setLoader] = useState(false);
 
     const [loginUser, setLoginUser] = useState({
         email: "",
@@ -44,9 +44,14 @@ const AuthPopup = ({ auth }) => {
 
     const handleCallBackResponse = async (res) => {
         try {
-            console.log("register", register)
+            console.log("register", register);
             const userObject = jwt_decode(res.credential);
-            setRegisterUser({ ...registerUser, name: userObject.name, email: userObject.email, picture: userObject.picture });
+            setRegisterUser({
+                ...registerUser,
+                name: userObject.name,
+                email: userObject.email,
+                picture: userObject.picture,
+            });
             if (!register) {
                 try {
                     const response = await axios.post(
@@ -56,14 +61,19 @@ const AuthPopup = ({ auth }) => {
                             withCredentials: true,
                         }
                     );
-                    console.log("CL: response authpopup check if email is signed up ", response);
+                    console.log(
+                        "CL: response authpopup check if email is signed up ",
+                        response
+                    );
                     userContextDetail.updateUserData(response.data.userData);
                     setLoginUser({
                         email: userObject.email,
                         picture: userObject.picture,
-                    })
-                    toast.success("logged in successfully")
-                    const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
+                    });
+                    toast.success("logged in successfully");
+                    const prevPath = JSON.parse(localStorage.getItem("prevPath")) || {
+                        url: "/",
+                    };
                     router.replace(prevPath.url);
                 } catch (error) {
                     if (
@@ -75,15 +85,13 @@ const AuthPopup = ({ auth }) => {
                         setRegister(true);
                     }
                 }
-            }
-            else {
+            } else {
                 return;
             }
         } catch (error) {
             console.log("CL: error in if statemenet ", error);
         }
     };
-    
 
     //google sign in
     useEffect(() => {
@@ -100,7 +108,7 @@ const AuthPopup = ({ auth }) => {
             shape: "rectangular",
             text: "Sign in with Google",
             maxWidth: 380,
-            width: "auto"
+            width: "auto",
         });
 
         google.accounts.id.prompt();
@@ -127,8 +135,6 @@ const AuthPopup = ({ auth }) => {
         });
     };
 
-
-
     //handle input fields
     let name, value;
     const handleLoginInput = (e) => {
@@ -148,16 +154,17 @@ const AuthPopup = ({ auth }) => {
 
         if (step === 1) {
             setRegisterUser({
-                ...registerUser, [name]: value, coordinates: `${location.loaded
-                    ? JSON.stringify(location.coordinates)
-                    : "Could not access the location"
-                    }`
+                ...registerUser,
+                [name]: value,
+                coordinates: `${location.loaded
+                        ? JSON.stringify(location.coordinates)
+                        : "Could not access the location"
+                    }`,
             });
         } else if (step === 2) {
             if (name == "phone" || name == "bio") {
                 setRegisterUser({ ...registerUser, [name]: value });
-            }
-            else {
+            } else {
                 setRegisterUser((prevUser) => ({
                     ...prevUser,
                     address: {
@@ -169,7 +176,6 @@ const AuthPopup = ({ auth }) => {
         }
     };
 
-
     const handleLogin = async (e) => {
         console.log("handleLogin");
         e.preventDefault();
@@ -177,6 +183,7 @@ const AuthPopup = ({ auth }) => {
         try {
             console.log("start response");
             console.log("CL: loginUser ", loginUser);
+            setLoader(true);
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login?loginType=manual`,
                 loginUser,
@@ -190,13 +197,12 @@ const AuthPopup = ({ auth }) => {
                 email: "",
                 password: "",
             });
-
+            setLoader(false);
             userContextDetail.updateUserData(response.data.userData);
             toast.success("Logged in successfully");
             // const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
-            // router.replace(prevPath.url);
-        }
-        catch (error) {
+            router.replace("/");
+        } catch (error) {
             console.log("CL: error while login data ", error);
             if (
                 error.response &&
@@ -214,20 +220,26 @@ const AuthPopup = ({ auth }) => {
             return;
         }
         try {
-            console.log("CL: pages-authPop-handleRegistration-register type ", registerUser.type);
-            const url = registerUser.type === "Donor" ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp` : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerRegistration`;
+            setLoader(true);
+            console.log(
+                "CL: pages-authPop-handleRegistration-register type ",
+                registerUser.type
+            );
+            const url =
+                registerUser.type === "Donor"
+                    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp`
+                    : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerRegistration`;
             console.log("CL:component-Athpopup-url", url);
             console.log("CL: register user data ", registerUser);
-            const response = await axios.post(
-                url,
-                registerUser,
-                {
-                    withCredentials: true,
-                }
-            );
+            const response = await axios.post(url, registerUser, {
+                withCredentials: true,
+            });
 
             toast.success("registration successfull");
-            { registerUser.type == "Volunteer" && toast.success("verification link sent to your email") }
+            {
+                registerUser.type == "Volunteer" &&
+                    toast.success("verification link sent to your email");
+            }
             setRegisterUser({
                 type: "",
                 name: "",
@@ -244,9 +256,10 @@ const AuthPopup = ({ auth }) => {
                     zip: "",
                 },
             });
+            setLoader(false);
             setRegister(false);
             setStep(1);
-            router.replace("/auth")
+            router.replace("/auth");
         } catch (error) {
             console.log("CL: error while login data ", error);
             if (
@@ -259,7 +272,6 @@ const AuthPopup = ({ auth }) => {
         }
     };
 
-
     return (
         <>
             <div className="">
@@ -267,82 +279,106 @@ const AuthPopup = ({ auth }) => {
                     {/* <div className="flex justify-center items-center text-blue-700 font-bold text-3xl">
                             {register?:"Login"}
                     </div> */}
-                    <div className="cursor-pointer" onClick={() => setStep(prevStep => prevStep - 1)}>
-                        {step > 1 && <BiArrowBack className="text-3xl bg-blue-900 text-white rounded-full p-2" />}
+                    <div
+                        className="cursor-pointer"
+                        onClick={() => setStep((prevStep) => prevStep - 1)}
+                    >
+                        {step > 1 && (
+                            <BiArrowBack className="text-3xl bg-blue-900 text-white rounded-full p-2" />
+                        )}
                     </div>
                     <form action="" className="my-10">
                         <div className="flex flex-col space-y-5">
                             {step === 1 && (
                                 <>
-                                    {register && (<>
-                                        <ul className="text-sm flex justify-evenly font-medium text-blue-900 bg-white border border-blue-200 rounded-lg">
-                                            <li className=" border-b border-blue-200 sm:border-b-0">
-                                                <div className="flex items-center pl-3">
-                                                    <input
-                                                        onChange={handleRegisterInput}
-                                                        id="donor-radio-id"
-                                                        type="radio"
-                                                        value="Donor"
-                                                        name="type"
-                                                        className="w-4 h-4"
-                                                    />
-                                                    <label htmlFor="donor-radio-id" className="w-full py-3 ml-2 text-sm font-medium text-blue-900">
-                                                        Donor
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li className="border-b border-blue-200 sm:border-b-0">
-                                                <div className="flex items-center">
-                                                    <input
-                                                        onChange={handleRegisterInput}
-                                                        id="volunteer-radio-id"
-                                                        type="radio"
-                                                        value="Volunteer"
-                                                        name="type"
-                                                        className="w-4 h-4"
-                                                    />
-                                                    <label htmlFor="volunteer-radio-id" className="w-full py-3 ml-2 text-sm font-medium text-blue-900">
-                                                        Volunteer
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li className=" border-b border-blue-200 sm:border-b-0">
-                                                <div className="flex items-center pl-3">
-                                                    <input
-                                                        onChange={handleRegisterInput}
-                                                        id="needy-radio-id"
-                                                        type="radio"
-                                                        value="needy"
-                                                        name="type"
-                                                        className="w-4 h-4"
-                                                    />
-                                                    <label htmlFor="needy-radio-id" className="w-full py-3 ml-2 text-sm font-medium text-blue-900">
-                                                        Needy
-                                                    </label>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                    {register && (
+                                        <>
+                                            <ul className="text-sm flex justify-evenly font-medium text-blue-900 bg-white border border-blue-200 rounded-lg">
+                                                <li className=" border-b border-blue-200 sm:border-b-0">
+                                                    <div className="flex items-center pl-3">
+                                                        <input
+                                                            onChange={handleRegisterInput}
+                                                            id="donor-radio-id"
+                                                            type="radio"
+                                                            value="Donor"
+                                                            name="type"
+                                                            className="w-4 h-4"
+                                                        />
+                                                        <label
+                                                            htmlFor="donor-radio-id"
+                                                            className="w-full py-3 ml-2 text-sm font-medium text-blue-900"
+                                                        >
+                                                            Donor
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li className="border-b border-blue-200 sm:border-b-0">
+                                                    <div className="flex items-center">
+                                                        <input
+                                                            onChange={handleRegisterInput}
+                                                            id="volunteer-radio-id"
+                                                            type="radio"
+                                                            value="Volunteer"
+                                                            name="type"
+                                                            className="w-4 h-4"
+                                                        />
+                                                        <label
+                                                            htmlFor="volunteer-radio-id"
+                                                            className="w-full py-3 ml-2 text-sm font-medium text-blue-900"
+                                                        >
+                                                            Volunteer
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li className=" border-b border-blue-200 sm:border-b-0">
+                                                    <div className="flex items-center pl-3">
+                                                        <input
+                                                            onChange={handleRegisterInput}
+                                                            id="needy-radio-id"
+                                                            type="radio"
+                                                            value="needy"
+                                                            name="type"
+                                                            className="w-4 h-4"
+                                                        />
+                                                        <label
+                                                            htmlFor="needy-radio-id"
+                                                            className="w-full py-3 ml-2 text-sm font-medium text-blue-900"
+                                                        >
+                                                            Needy
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ul>
 
-
-                                        <label htmlFor="name">
-                                            <span className="font-medium text-slate-700 pb-2">Name</span>
-                                            <input
-                                                onChange={handleRegisterInput}
-                                                value={registerUser.name}
-                                                id="name"
-                                                name="name"
-                                                type="text"
-                                                className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
-                                                placeholder="Enter name here"
-                                            />
-                                        </label>
-                                    </>
+                                            <label htmlFor="name">
+                                                <span className="font-medium text-slate-700 pb-2">
+                                                    Name
+                                                </span>
+                                                <input
+                                                    onChange={handleRegisterInput}
+                                                    value={registerUser.name}
+                                                    id="name"
+                                                    name="name"
+                                                    type="text"
+                                                    className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                                                    placeholder="Enter name here"
+                                                />
+                                            </label>
+                                        </>
                                     )}
 
                                     <label htmlFor="email">
-                                        <span className="font-medium text-slate-700 pb-2">Email address</span>
+                                        <span className="font-medium text-slate-700 pb-2">
+                                            Email address
+                                        </span>
                                         <input
-                                            onChange={(e) => { if (register) { handleRegisterInput(e) } else { handleLoginInput(e) } }}
+                                            onChange={(e) => {
+                                                if (register) {
+                                                    handleRegisterInput(e);
+                                                } else {
+                                                    handleLoginInput(e);
+                                                }
+                                            }}
                                             value={register ? registerUser.email : loginUser.email}
                                             id="email"
                                             name="email"
@@ -353,10 +389,20 @@ const AuthPopup = ({ auth }) => {
                                     </label>
 
                                     <label htmlFor="password">
-                                        <span className="font-medium text-slate-700 pb-2">Password</span>
+                                        <span className="font-medium text-slate-700 pb-2">
+                                            Password
+                                        </span>
                                         <input
-                                            onChange={(e) => { if (register) { handleRegisterInput(e) } else { handleLoginInput(e) } }}
-                                            value={register ? registerUser.password : loginUser.password}
+                                            onChange={(e) => {
+                                                if (register) {
+                                                    handleRegisterInput(e);
+                                                } else {
+                                                    handleLoginInput(e);
+                                                }
+                                            }}
+                                            value={
+                                                register ? registerUser.password : loginUser.password
+                                            }
                                             id="password"
                                             name="password"
                                             type="password"
@@ -367,7 +413,9 @@ const AuthPopup = ({ auth }) => {
 
                                     {register && (
                                         <label htmlFor="cpassword">
-                                            <span className="font-medium text-slate-700 pb-2">Confirm Password</span>
+                                            <span className="font-medium text-slate-700 pb-2">
+                                                Confirm Password
+                                            </span>
                                             <input
                                                 onChange={handleRegisterInput}
                                                 value={registerUser.cpassword}
@@ -380,62 +428,128 @@ const AuthPopup = ({ auth }) => {
                                         </label>
                                     )}
 
-
-                                    {!register && <div className="flex flex-row justify-between">
-                                        <div>
-                                            {/* <label for="remember" className="">
+                                    {!register && (
+                                        <div className="flex flex-row justify-between">
+                                            <div>
+                                                {/* <label for="remember" className="">
                                         <input onChange={handleLoginInput} value={loginUser.email} type="checkbox" id="remember" className="w-4 h-4 border-slate-200 focus:bg-indigo-600" />
                                         Remember me
                                     </label> */}
+                                            </div>
+                                            <div>
+                                                <a href="#" className="font-semibold text-indigo-600">
+                                                    Forgot Password?
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <a href="#" className="font-semibold text-indigo-600">Forgot Password?</a>
-                                        </div>
-                                    </div>}
-                                    <button type="button" className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-                                        <span onClick={(e) => { if (register && step == 2) { handleRegistration(); console.log("1nm"); } else if (register && step == 1) { if (registerUser.type == "") { toast.error("please select user type: Donor, voulunteer, Needy"); console.log("next clicked ", registerUser.type) } else { setStep(2) } console.log("next clicked 2", registerUser.type) } else { handleLogin(e); console.log("next clicked 3", registerUser.type) } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
-                                    </button>
-                                    <div
-                                        className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+                                    )}
+                                    <button
+                                        type="button"
+                                        className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center"
+                                    >
                                         <span
-                                            className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
+                                            onClick={(e) => {
+                                                if (register && step == 2) {
+                                                    handleRegistration();
+                                                    console.log("1nm");
+                                                } else if (register && step == 1) {
+                                                    if (registerUser.type == "") {
+                                                        toast.error(
+                                                            "please select user type: Donor, voulunteer, Needy"
+                                                        );
+                                                        console.log("next clicked ", registerUser.type);
+                                                    } else {
+                                                        setStep(2);
+                                                    }
+                                                    console.log("next clicked 2", registerUser.type);
+                                                } else {
+                                                    handleLogin(e);
+                                                    console.log("next clicked 3", registerUser.type);
+                                                }
+                                            }}
+                                        >
+                                            {register ? (step === 2 ? "Register" : "Next") : loader ? (
+                                                <img 
+                                                    src="/assets/images/fill-gap/loader.gif"
+                                                    alt="loader_img"
+                                                />
+                                            ) : (
+                                                "Login"
+                                            )}
+                                        </span>
+                                    </button>
+                                    <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+                                        <span className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
                                             OR
                                         </span>
                                     </div>
                                     <div className="my-5 flex items-center justify-center">
                                         <div id="signInDiv"></div>
                                     </div>
-{register?                                    <span className="text-center"> Already a user ! <span className="text-indigo-600 font-medium inline-flex space-x-1 items-center hover:cursor-pointer" onClick={() => { setRegister(false)}}>Login</span></span>:
-                                    <span className="text-center"> Don't have an account ! <span className="text-indigo-600 font-medium inline-flex space-x-1 items-center hover:cursor-pointer" onClick={() => { setRegister(true)}}>SignUp</span></span>}
-                                </>)}
+                                    {register ? (
+                                        <span className="text-center">
+                                            {" "}
+                                            Already a user !{" "}
+                                            <span
+                                                className="text-indigo-600 font-medium inline-flex space-x-1 items-center hover:cursor-pointer"
+                                                onClick={() => {
+                                                    setRegister(false);
+                                                }}
+                                            >
+                                                Login
+                                            </span>
+                                        </span>
+                                    ) : (
+                                        <span className="text-center">
+                                            {" "}
+                                            Don't have an account !{" "}
+                                            <span
+                                                className="text-indigo-600 font-medium inline-flex space-x-1 items-center hover:cursor-pointer"
+                                                onClick={() => {
+                                                    setRegister(true);
+                                                }}
+                                            >
+                                                SignUp
+                                            </span>
+                                        </span>
+                                    )}
+                                </>
+                            )}
                             {step === 2 && register && (
                                 <>
                                     <label htmlFor="phone">
-                                        <span className="font-medium text-slate-700 pb-2">Phone number</span>
+                                        <span className="font-medium text-slate-700 pb-2">
+                                            Phone number
+                                        </span>
                                         <input
                                             onChange={handleRegisterInput}
                                             value={registerUser.phone}
                                             id="phone"
                                             name="phone"
                                             type="number"
-
                                             className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
                                             placeholder="Enter phone number here"
                                         />
                                     </label>
-                                    {registerUser?.type == "Volunteer" && <label htmlFor="bio">
-                                        <span className="font-medium text-slate-700 pb-2">Bio</span>
-                                        <textarea
-                                            onChange={handleRegisterInput}
-                                            value={registerUser.bio}
-                                            id="bio"
-                                            name="bio"
-                                            className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
-                                            placeholder="Write something about yourself"
-                                        />
-                                    </label>}
+                                    {registerUser?.type == "Volunteer" && (
+                                        <label htmlFor="bio">
+                                            <span className="font-medium text-slate-700 pb-2">
+                                                Bio
+                                            </span>
+                                            <textarea
+                                                onChange={handleRegisterInput}
+                                                value={registerUser.bio}
+                                                id="bio"
+                                                name="bio"
+                                                className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                                                placeholder="Write something about yourself"
+                                            />
+                                        </label>
+                                    )}
                                     <label htmlFor="address">
-                                        <span className="font-medium text-slate-700 pb-2">Address</span>
+                                        <span className="font-medium text-slate-700 pb-2">
+                                            Address
+                                        </span>
                                         <textarea
                                             onChange={handleRegisterInput}
                                             value={registerUser.address.custom}
@@ -444,12 +558,13 @@ const AuthPopup = ({ auth }) => {
                                             className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
                                             placeholder="Enter your address here"
                                         />
-
                                     </label>
 
                                     <div className="flex gap-4">
                                         <label htmlFor="city">
-                                            <span className="font-medium text-slate-700 pb-2">City</span>
+                                            <span className="font-medium text-slate-700 pb-2">
+                                                City
+                                            </span>
                                             <input
                                                 onChange={handleRegisterInput}
                                                 value={registerUser.address.city}
@@ -461,7 +576,9 @@ const AuthPopup = ({ auth }) => {
                                             />
                                         </label>
                                         <label htmlFor="zip">
-                                            <span className="font-medium text-slate-700 pb-2">Pin Code</span>
+                                            <span className="font-medium text-slate-700 pb-2">
+                                                Pin Code
+                                            </span>
                                             <input
                                                 onChange={handleRegisterInput}
                                                 value={registerUser.address.zip}
@@ -473,14 +590,49 @@ const AuthPopup = ({ auth }) => {
                                             />
                                         </label>
                                     </div>
-                                    <button type="button" className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-                                        <span onClick={(e) => { if (register && step == 2) { handleRegistration(); console.log("1nm"); } else if (register && step == 1) { if (registerUser.type == "") { toast.error("please select user type: Donor, voulunteer, Needy"); console.log("next clicked ", registerUser.type) } else { setStep(2) } console.log("next clicked 2", registerUser.type) } else { handleLogin(e); console.log("next clicked 3", registerUser.type) } }}>{register ? (step === 2 ? "Register" : "Next") : "Login"}</span>
+                                    <button
+                                        type="button"
+                                        className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center"
+                                    >
+                                        <span
+                                            onClick={(e) => {
+                                                if (register && step === 2) {
+                                                    handleRegistration();
+                                                    console.log("1nm");
+                                                } else if (register && step === 1) {
+                                                    if (registerUser.type === "") {
+                                                        toast.error(
+                                                            "Please select user type: Donor, Volunteer, Needy"
+                                                        );
+                                                        console.log("next clicked", registerUser.type);
+                                                    } else {
+                                                        setStep(2);
+                                                    }
+                                                    console.log("next clicked 2", registerUser.type);
+                                                } else {
+                                                    handleLogin(e);
+                                                    console.log("next clicked 3", registerUser.type);
+                                                }
+                                            }}
+                                        >
+                                            {register ? (
+                                                step === 2 ? (
+                                                    "Register"
+                                                ) : (
+                                                    "Next"
+                                                )
+                                            ) : loader ? (
+                                                <img
+                                                    src="/assets/images/fill-gap/loader.svg"
+                                                    alt="loader_img"
+                                                />
+                                            ) : (
+                                                "Login"
+                                            )}
+                                        </span>
                                     </button>
-
                                 </>
-                            )
-                            }
-
+                            )}
                         </div>
                     </form>
                 </div>
@@ -488,6 +640,6 @@ const AuthPopup = ({ auth }) => {
             </div>
         </>
     );
-}
+};
 
-export default AuthPopup
+export default AuthPopup;

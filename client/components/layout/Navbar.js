@@ -14,7 +14,6 @@ const navItemsInfo = [
 ];
 
 const NavItem = ({ item }) => {
-  const router = useRouter();
   return (
     <li className="relative group">
 
@@ -32,6 +31,7 @@ const NavItem = ({ item }) => {
 };
 
 const Navigation = () => {
+  const router = useRouter();
 
   const userContextDetail = useContext(userContext);
   const [navIsVisible, setNavIsVisible] = useState(false);
@@ -45,7 +45,7 @@ const Navigation = () => {
 
   const handleProfile = () => {
     console.log("userContextDetail in handle profile ", userContextDetail);
-    router.replace(`/${userContextDetail.userStateData.name}`);
+    router.replace(`/${userContextDetail?.userStateData?.name}`);
   }
 
 
