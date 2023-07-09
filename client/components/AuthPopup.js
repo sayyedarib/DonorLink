@@ -104,7 +104,7 @@ const AuthPopup = ({ auth }) => {
         });
 
         google.accounts.id.prompt();
-    }, [register]);
+    }, []);
 
     //handle image
     const handleFileUpload = async (e) => {
