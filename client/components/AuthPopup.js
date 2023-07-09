@@ -90,7 +90,7 @@ const AuthPopup = ({ auth }) => {
         // global google
         google.accounts.id.initialize({
             client_id:
-                "587921623953-23fr6m7muhh45pf3j36rvi0lvmfse4aj.apps.googleusercontent.com",
+                "515977534331-f3oimqtepkerndbdqel0hqg0tjskimft.apps.googleusercontent.com",
             callback: handleCallBackResponse,
         });
 
