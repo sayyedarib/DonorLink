@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import userContext from "@/context/auth/userContext";
-import router from "next/router";
+import {useRouter} from "next/router";
 
 
 
@@ -14,13 +14,14 @@ const navItemsInfo = [
 ];
 
 const NavItem = ({ item }) => {
+  const router = useRouter();
   return (
     <li className="relative group">
 
       <>
-        <Link href={item.link} className="px-4 py-2 lg:group-hover:text-blue-700 group-hover:text-blue-950">
+        <div onClick={()=>router.replace(item.link)} className="px-4 py-2 lg:group-hover:text-blue-700 group-hover:text-blue-950 cursor-pointer">
           {item.name}
-        </Link>
+        </div>
         <span className="text-blue-500 absolute transition-all duration-500 font-bold right-0 top-0 group-hover:right-[90%] opacity-0 group-hover:opacity-100">
           /
         </span>
