@@ -106,12 +106,6 @@ const AuthPopup = ({ auth }) => {
 
 
     //handle image
-    const handleFileUpload = async (e) => {
-        const file = e.target.files[0];
-        const base64 = await convertToBase64(file);
-        console.log(base64);
-        setDetail({ ...detail, picture: base64 });
-    };
 
     const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -126,6 +120,12 @@ const AuthPopup = ({ auth }) => {
         });
     };
 
+    const handleFileUpload = async (e) => {
+        const file = e.target.files[0];
+        const base64 = await convertToBase64(file);
+        console.log(base64);
+        setRegisterUser({ ...registerUser, picture: base64 });
+    };
 
     //handle input fields
     let name, value;
@@ -141,7 +141,7 @@ const AuthPopup = ({ auth }) => {
     //handle registratin input
     const handleRegisterInput = (e) => {
         const { name, value } = e.target;
-
+        console.log(registerUser);
         if (step === 1) {
             setRegisterUser({
                 ...registerUser,
@@ -262,6 +262,33 @@ const AuthPopup = ({ auth }) => {
                                 <>
                                     {register && (
                                         <>
+                                            <div className="flex gap-3 justify-center items-center">
+                                                <img src={registerUser.picture.length === 0 ? "/assets/images/fill-gap/boy.svg"
+                                                            : registerUser.picture
+                                                    }
+                                                    className="w-24 rounded-full"
+                                                />
+                                                <div>
+                                                    <label
+                                                        htmlFor="picture"
+                                                        className="p-2 bg-blue-700 rounded-md text-white cursor-pointer"
+                                                    >
+                                                        {registerUser.picture.length > 0
+                                                            ? "Change Image"
+                                                            : "Upload Image"}
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        id="picture"
+                                                        name="picture"
+                                                        className="p-4 bg-blue-700"
+                                                        onChange={(e) => handleFileUpload(e)}
+                                                        hidden
+                                                        required
+                                                    />
+                                                </div>
+                                            </div>
                                             <ul className="text-sm flex justify-evenly font-medium text-blue-900 bg-white border border-blue-200 rounded-lg">
                                                 <li className=" border-b border-blue-200 sm:border-b-0">
                                                     <div className="flex items-center pl-3">
@@ -454,7 +481,7 @@ const AuthPopup = ({ auth }) => {
                                                     setRegister(false);
                                                 }}
                                             >
-                                                {loader?<img src="/assets/images/fill-gap/loader.gif" alt="loader_img"/>:"Login"}
+                                                {loader ? <img src="/assets/images/fill-gap/loader.gif" alt="loader_img" /> : "Login"}
                                             </span>
                                         </span>
                                     ) : (
