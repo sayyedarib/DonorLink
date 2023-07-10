@@ -32,7 +32,7 @@ const NavItem = ({ item }) => {
 };
 
 const Navigation = () => {
-  
+  const router = useRouter();
   const userContextDetail = useContext(userContext);
   const [navIsVisible, setNavIsVisible] = useState(false);
 
