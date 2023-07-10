@@ -449,13 +449,12 @@ const AuthPopup = ({ auth }) => {
                                         <span className="text-center">
                                             {" "}
                                             Already a user !{" "}
-                                            <span
-                                                className="text-indigo-600 font-medium inline-flex space-x-1 items-center hover:cursor-pointer"
+                                            <span className="text-indigo-600 font-medium inline-flex space-x-1 items-center hover:cursor-pointer"
                                                 onClick={() => {
                                                     setRegister(false);
                                                 }}
                                             >
-                                                Login
+                                                {loader?<img src="/assets/images/fill-gap/loader.gif" alt="loader_img"/>:"Login"}
                                             </span>
                                         </span>
                                     ) : (
@@ -578,7 +577,7 @@ const AuthPopup = ({ auth }) => {
                                                 )
                                             ) : loader ? (
                                                 <img
-                                                    src="/assets/images/fill-gap/loader.svg"
+                                                    src="/assets/images/fill-gap/loader.gif"
                                                     alt="loader_img"
                                                 />
                                             ) : (
