@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import VolunteerCard from "./cards/VolunteerCard";
-import styles from "../styles/components/volunteers.module.css";
-import ServiceCard from "./cards/ServiceCard";
 
 const Volunteers = ({ volunteerData }) => {
   return (

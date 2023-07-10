@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 const ContactUs = () => {
     const [query, setQuery] = useState({ topic: "", name: "", email: "", message: "" });
 
-
     const handleInput = (e) => {
         const { name, value } = e.target;
         setQuery({ ...query, [name]: value })

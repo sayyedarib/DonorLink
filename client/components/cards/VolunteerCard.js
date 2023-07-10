@@ -1,6 +1,4 @@
-import Link from "next/link";
 import React from "react";
-
 import styles from '../../styles/components/services.module.css'
 
 const VolunteerCard = ({picture, name,email, phone, bio }) => {

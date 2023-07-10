@@ -24,12 +24,6 @@ const Form = () => {
           </div>
 
         }
-        {form == "foodDonation" &&
-          <div>
-            <FoodDonation />
-          </div>
-
-        }
         {form == "bloodDonation" &&
           <div>
             <BloodDonation />

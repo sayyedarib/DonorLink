@@ -25,7 +25,7 @@ const Footer = () => {
           <ul className="flex flex-wrap items-center gap-y-2 gap-x-8 text-blue-500">
             <li>
               <Link
-                href="/about"
+                href="/AboutUs"
                 className="block font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased transition-colors hover:text-blue-800"
               >
                 About Us
@@ -49,7 +49,7 @@ const Footer = () => {
             </li>
             <li>
               <Link
-                href="/contact"
+                href="/ContactUs"
                 className="block font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased transition-colors hover:text-blue-800"
               >
                 Contact Us

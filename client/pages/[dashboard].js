@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import userContext from "@/context/auth/userContext";
 import OrdersCard from "@/components/cards/OrdersCard";
-import Link from "next/link";
 import DashboardProfile from "@/components/DashboardProfile";
 
 const Volunteer = () => {
@@ -67,7 +66,7 @@ const Volunteer = () => {
   return (
     <>
       <div>
-<DashboardProfile userData={userData}/>
+        <DashboardProfile userData={userData} />
       </div>
       {userContextDetail.userStateData.type == "Volunteer" && (
         <div>
@@ -117,7 +116,7 @@ const Volunteer = () => {
             {/* </div> */}
           </div>
         </div>
-        )}
+      )}
 
     </>
   );

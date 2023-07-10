@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 import { BsArrowRightCircle } from "react-icons/bs";
 import styles from '../../styles/components/services.module.css'

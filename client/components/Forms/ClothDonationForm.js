@@ -58,7 +58,6 @@ const ClothDonationForm = () => {
 
       toast.success("Thank you for donation");
       toast.success("Nearby volunteer has been notified");
-      console.log(response);
       setLoader(false);
       setDetail({
         name: "",
@@ -72,7 +71,6 @@ const ClothDonationForm = () => {
 
       router.replace("/");
     } catch (error) {
-      console.log("error while submitting cloth donation data", error);
       setLoader(false);
       if (
         error.response &&

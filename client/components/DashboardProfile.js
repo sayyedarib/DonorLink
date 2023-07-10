@@ -1,8 +1,10 @@
 import React from 'react'
 
 const DashboardProfile = ({userData}) => {
+
     console.log("userData dashboard profile component ", userData);
-  return (
+  
+    return (
     <div className="w-full px-4 mx-auto mt-60">
     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
       <div className="px-6">
