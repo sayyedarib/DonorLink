@@ -16,8 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies
+      - name: Install client dependencies
         run: npm install
+        working-directory: ./client
 
       - name: Build Next.js app
         run: npm run build
+        working-directory: ./client

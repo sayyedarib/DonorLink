@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 const BloodDonationForm = () => {
   const router = useRouter();
   const userContextDetail = useContext(userContext);
+  const [loader, setLoader] = useState(false);
   console.log("userContextDetail.userStateData.name ", userContextDetail.userStateData);
 
   useEffect(()=>{
@@ -50,6 +51,7 @@ const BloodDonationForm = () => {
 
     try {
       console.log("start responsing");
+      setLoader(true);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bloodDonation`,
         detail,
@@ -60,6 +62,7 @@ const BloodDonationForm = () => {
 
 
       console.log(response);
+      setLoader(false);
       setDetail({
         name: "",
         email: "",
@@ -73,6 +76,7 @@ const BloodDonationForm = () => {
       toast.success("successfully registered as blood donor")
       router.replace(prevPath.url);
     } catch (err) {
+      setLoader(false);
       toast.error("you are already a blood donor.")
       console.log("error while submitting cloth donation data", err);
     }
@@ -114,7 +118,7 @@ const BloodDonationForm = () => {
             </div>
           </form>
           <button type="button" className="w-full py-3 mt-5 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-            <span onClick={handleDonate}>Donate Now</span>
+            <span onClick={handleDonate}>{loader?<img src="/assets/images/fill-gap/loader.gif" alt="loader_img"/>:"Register as Blood donor"}</span>
           </button>
         </div>
         <div className="flex flex-col gap-5 justify-center  text-blue-950 mb-10 mx-10">
@@ -122,7 +126,7 @@ const BloodDonationForm = () => {
           <span className="flex items-center gap-3"><BsCheckCircle /> Go to donate blood section</span>
           <span className="flex items-center gap-3"><BsCheckCircle /> Fill the required details</span>
           <span className="flex items-center gap-3"><BsCheckCircle /> Nearby patient in need can conatact you any time.</span>
-          <span className="flex items-center gap-3"><BsCheckCircle /> Visit the mentioned hospital mentioned by patient or his acquintances to save life</span>
+          <span className="flex items-center gap-3"><BsCheckCircle /> Visit the hospital mentioned by patient or his acquintances to save life</span>
         </div>
         <ToastContainer position="top-left" />
       </div>

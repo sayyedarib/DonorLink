@@ -9,12 +9,15 @@ import { ToastContainer, toast } from 'react-toastify';
 const ClothDonationForm = () => {
   const router = useRouter();
   const userContextDetail = useContext(userContext);
-  console.log("userContextDetail.userStateData.name ", userContextDetail.userStateData);
+
+  
   if (!userContextDetail.userStateData.name) {
     router.replace("/auth");
   }
-
   const location = useGeoLocation();
+  
+  //states
+  const [loader, setLoader]=useState(false);
   const [detail, setDetail] = useState({
     name: userContextDetail.userStateData.name,
     email: userContextDetail.userStateData.email,
@@ -42,9 +45,9 @@ const ClothDonationForm = () => {
 
   const handleDonate = async (e) => {
     e.preventDefault();
-
     try {
       console.log("start responsing");
+      setLoader(true);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/clothDonation`,
         detail,
@@ -56,6 +59,7 @@ const ClothDonationForm = () => {
       toast.success("Thank you for donation");
       toast.success("Nearby volunteer has been notified");
       console.log(response);
+      setLoader(false);
       setDetail({
         name: "",
         email: "",
@@ -69,6 +73,7 @@ const ClothDonationForm = () => {
       router.replace("/");
     } catch (error) {
       console.log("error while submitting cloth donation data", error);
+      setLoader(false);
       if (
         error.response &&
         error.response.status >= 400 &&
@@ -115,7 +120,7 @@ const ClothDonationForm = () => {
             </div>
           </form>
           <button type="button" className="w-full py-3 mt-5 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-            <span onClick={handleDonate}>Donate Now</span>
+            <span onClick={handleDonate}>{loader?<img src="/assets/images/fill-gap/loader.gif" alt="loader_img"/>:"Donate Now"}</span>
           </button>
         </div>
         <div className="flex flex-col gap-5 justify-center  text-blue-950 mb-10 mx-10">
