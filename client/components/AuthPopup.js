@@ -71,10 +71,10 @@ const AuthPopup = ({ auth }) => {
                         picture: userObject.picture,
                     });
                     toast.success("logged in successfully");
-                    const prevPath = JSON.parse(localStorage.getItem("prevPath")) || {
-                        url: "/",
-                    };
-                    router.replace(prevPath.url);
+                    // const prevPath = JSON.parse(localStorage.getItem("prevPath")) || {
+                    //     url: "/",
+                    // };
+                    router.replace("/");
                 } catch (error) {
                     if (
                         error.response &&
