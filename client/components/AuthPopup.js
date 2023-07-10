@@ -12,15 +12,15 @@ const AuthPopup = ({ auth }) => {
     const router = useRouter();
     const location = useGeoLocation();
     const userContextDetail = useContext(userContext);
+
+    //states
     const [step, setStep] = useState(1);
     const [register, setRegister] = useState(false);
     const [loader, setLoader] = useState(false);
-
     const [loginUser, setLoginUser] = useState({
         email: "",
         password: "",
     });
-
     const [registerUser, setRegisterUser] = useState({
         type: "",
         name: "",
@@ -38,13 +38,10 @@ const AuthPopup = ({ auth }) => {
         },
     });
 
-    useEffect(() => {
-        console.log("register signUp ", register);
-    }, [register]);
 
+    //google sigin callback function
     const handleCallBackResponse = async (res) => {
         try {
-            console.log("register", register);
             const userObject = jwt_decode(res.credential);
             setRegisterUser({
                 ...registerUser,
@@ -61,19 +58,12 @@ const AuthPopup = ({ auth }) => {
                             withCredentials: true,
                         }
                     );
-                    console.log(
-                        "CL: response authpopup check if email is signed up ",
-                        response
-                    );
                     userContextDetail.updateUserData(response.data.userData);
                     setLoginUser({
                         email: userObject.email,
                         picture: userObject.picture,
                     });
                     toast.success("logged in successfully");
-                    // const prevPath = JSON.parse(localStorage.getItem("prevPath")) || {
-                    //     url: "/",
-                    // };
                     router.replace("/");
                 } catch (error) {
                     if (
@@ -93,7 +83,7 @@ const AuthPopup = ({ auth }) => {
         }
     };
 
-    //google sign in
+    //google sign in propmt on page load and click on google sign in button
     useEffect(() => {
         // global google
         google.accounts.id.initialize({
@@ -113,6 +103,7 @@ const AuthPopup = ({ auth }) => {
 
         google.accounts.id.prompt();
     }, []);
+
 
     //handle image
     const handleFileUpload = async (e) => {
@@ -135,10 +126,10 @@ const AuthPopup = ({ auth }) => {
         });
     };
 
+
     //handle input fields
     let name, value;
     const handleLoginInput = (e) => {
-        console.log("CL: login user ", loginUser, "register ", register);
         name = e.target.name;
         value = e.target.value;
         setLoginUser({
@@ -147,18 +138,17 @@ const AuthPopup = ({ auth }) => {
         });
     };
 
+    //handle registratin input
     const handleRegisterInput = (e) => {
         const { name, value } = e.target;
-        console.log(name, value);
-        console.log("register user ", registerUser);
 
         if (step === 1) {
             setRegisterUser({
                 ...registerUser,
                 [name]: value,
                 coordinates: `${location.loaded
-                        ? JSON.stringify(location.coordinates)
-                        : "Could not access the location"
+                    ? JSON.stringify(location.coordinates)
+                    : "Could not access the location"
                     }`,
             });
         } else if (step === 2) {
@@ -176,13 +166,10 @@ const AuthPopup = ({ auth }) => {
         }
     };
 
+    //handle login when login button is clicked
     const handleLogin = async (e) => {
-        console.log("handleLogin");
         e.preventDefault();
-
         try {
-            console.log("start response");
-            console.log("CL: loginUser ", loginUser);
             setLoader(true);
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login?loginType=manual`,
@@ -191,19 +178,15 @@ const AuthPopup = ({ auth }) => {
                     withCredentials: true,
                 }
             );
-            console.log("login response", response);
-            // request to mail the form data
+            setLoader(false);
+            toast.success("Logged in successfully");
+            userContextDetail.updateUserData(response.data.userData);
             setLoginUser({
                 email: "",
                 password: "",
             });
-            setLoader(false);
-            userContextDetail.updateUserData(response.data.userData);
-            toast.success("Logged in successfully");
-            // const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
             router.replace("/");
         } catch (error) {
-            console.log("CL: error while login data ", error);
             if (
                 error.response &&
                 error.response.status >= 400 &&
@@ -221,24 +204,14 @@ const AuthPopup = ({ auth }) => {
         }
         try {
             setLoader(true);
-            console.log(
-                "CL: pages-authPop-handleRegistration-register type ",
-                registerUser.type
-            );
-            const url =
-                registerUser.type === "Donor"
-                    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp`
-                    : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerRegistration`;
-            console.log("CL:component-Athpopup-url", url);
-            console.log("CL: register user data ", registerUser);
+            const url = registerUser.type === "Donor" ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp` : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerRegistration`;
             const response = await axios.post(url, registerUser, {
                 withCredentials: true,
             });
 
             toast.success("registration successfull");
             {
-                registerUser.type == "Volunteer" &&
-                    toast.success("verification link sent to your email");
+                registerUser.type == "Volunteer" && toast.success("verification link sent to your email");
             }
             setRegisterUser({
                 type: "",
@@ -261,7 +234,6 @@ const AuthPopup = ({ auth }) => {
             setStep(1);
             router.replace("/auth");
         } catch (error) {
-            console.log("CL: error while login data ", error);
             if (
                 error.response &&
                 error.response.status >= 400 &&
@@ -276,9 +248,6 @@ const AuthPopup = ({ auth }) => {
         <>
             <div className="">
                 <div className="max-w-md mx-auto px-8 py-3 mt-32 mb-16 bg-white span-8 rounded-xl shadow shadow-slate-300">
-                    {/* <div className="flex justify-center items-center text-blue-700 font-bold text-3xl">
-                            {register?:"Login"}
-                    </div> */}
                     <div
                         className="cursor-pointer"
                         onClick={() => setStep((prevStep) => prevStep - 1)}
@@ -429,13 +398,7 @@ const AuthPopup = ({ auth }) => {
                                     )}
 
                                     {!register && (
-                                        <div className="flex flex-row justify-between">
-                                            <div>
-                                                {/* <label for="remember" className="">
-                                        <input onChange={handleLoginInput} value={loginUser.email} type="checkbox" id="remember" className="w-4 h-4 border-slate-200 focus:bg-indigo-600" />
-                                        Remember me
-                                    </label> */}
-                                            </div>
+                                        <div className="flex flex-row justify-end">
                                             <div>
                                                 <a href="#" className="font-semibold text-indigo-600">
                                                     Forgot Password?
@@ -451,25 +414,21 @@ const AuthPopup = ({ auth }) => {
                                             onClick={(e) => {
                                                 if (register && step == 2) {
                                                     handleRegistration();
-                                                    console.log("1nm");
                                                 } else if (register && step == 1) {
                                                     if (registerUser.type == "") {
                                                         toast.error(
                                                             "please select user type: Donor, voulunteer, Needy"
                                                         );
-                                                        console.log("next clicked ", registerUser.type);
                                                     } else {
                                                         setStep(2);
                                                     }
-                                                    console.log("next clicked 2", registerUser.type);
                                                 } else {
                                                     handleLogin(e);
-                                                    console.log("next clicked 3", registerUser.type);
                                                 }
                                             }}
                                         >
                                             {register ? (step === 2 ? "Register" : "Next") : loader ? (
-                                                <img 
+                                                <img
                                                     src="/assets/images/fill-gap/loader.gif"
                                                     alt="loader_img"
                                                 />
@@ -554,7 +513,7 @@ const AuthPopup = ({ auth }) => {
                                             onChange={handleRegisterInput}
                                             value={registerUser.address.custom}
                                             id="address"
-                                            name="custom" // Update the name attribute
+                                            name="custom"
                                             className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
                                             placeholder="Enter your address here"
                                         />
@@ -598,20 +557,16 @@ const AuthPopup = ({ auth }) => {
                                             onClick={(e) => {
                                                 if (register && step === 2) {
                                                     handleRegistration();
-                                                    console.log("1nm");
                                                 } else if (register && step === 1) {
                                                     if (registerUser.type === "") {
                                                         toast.error(
                                                             "Please select user type: Donor, Volunteer, Needy"
                                                         );
-                                                        console.log("next clicked", registerUser.type);
                                                     } else {
                                                         setStep(2);
                                                     }
-                                                    console.log("next clicked 2", registerUser.type);
                                                 } else {
                                                     handleLogin(e);
-                                                    console.log("next clicked 3", registerUser.type);
                                                 }
                                             }}
                                         >
