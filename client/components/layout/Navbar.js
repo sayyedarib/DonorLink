@@ -5,6 +5,7 @@ import userContext from "@/context/auth/userContext";
 import {useRouter} from "next/router";
 
 
+const router = useRouter();
 
 const navItemsInfo = [
   { name: "HOME", link: "/" },
@@ -14,7 +15,6 @@ const navItemsInfo = [
 ];
 
 const NavItem = ({ item }) => {
-  const router = useRouter();
   return (
     <li className="relative group">
 
