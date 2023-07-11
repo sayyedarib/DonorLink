@@ -60,13 +60,13 @@ else{
     <>
       <Head>
       </Head>
-      <div className="flex flex-col gap-14 bg-blue-50">
+      <div className="flex flex-col gap-10 bg-blue-50">
         <Header />
         <Services />
         <Volunteers volunteerData={volunteersData} />
         <Records data={recordsData} />
         {/* <Organizations /> */}
-<Footer/>
+        <Footer/>
       </div>
     </>
   );
