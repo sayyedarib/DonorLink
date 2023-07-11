@@ -11,7 +11,6 @@ const BloodDonationForm = () => {
   const router = useRouter();
   const userContextDetail = useContext(userContext);
   const [loader, setLoader] = useState(false);
-  console.log("userContextDetail.userStateData.name ", userContextDetail.userStateData);
 
   useEffect(()=>{
     if (!userContextDetail.userStateData.name) {
@@ -33,7 +32,6 @@ const BloodDonationForm = () => {
 
   let name, value;
   const handleInput = (e) => {
-    console.log("userContextDetail.userStateData.name 2", userContextDetail.userStateData);
     name = e.target.name;
     value = e.target.value;
     setDetail({
@@ -60,8 +58,6 @@ const BloodDonationForm = () => {
         }
       );
 
-
-      console.log(response);
       setLoader(false);
       setDetail({
         name: "",
@@ -78,7 +74,6 @@ const BloodDonationForm = () => {
     } catch (err) {
       setLoader(false);
       toast.error("you are already a blood donor.")
-      console.log("error while submitting cloth donation data", err);
     }
   };
 

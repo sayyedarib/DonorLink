@@ -4,11 +4,8 @@ import { useEffect, useState } from "react";
 
 import Header from "@/components/layout/Header";
 import Volunteers from "@/components/Volunteers";
-import Organizations from "@/components/Organizations";
 import Footer from "@/components/layout/Footer";
-import Script from "next/script";
 import dynamic from "next/dynamic";
-import UserState from "@/context/auth/UserState";
 import Records from "@/components/Records";
 
 const Services = dynamic(() => import("@/components/Services"));

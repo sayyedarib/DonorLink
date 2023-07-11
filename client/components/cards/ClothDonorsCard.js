@@ -1,8 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 
 const ClothDonorsCard = ({ data }) => {
-    console.log("bloodDonorsCard data ", data);
-        console.log("bloodDonorsCard data name");
 
     return (
         <>

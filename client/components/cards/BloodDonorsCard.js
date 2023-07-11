@@ -1,9 +1,7 @@
 import React, {useState} from "react";
 
 const BloodDonorsCard = ({ data }) => {
-    console.log("bloodDonorsCard data ", data);
-        console.log("bloodDonorsCard data name");
-
+    
     return (
         <>
             <div className="relative flex w-[22rem] md:w-96 p-7 h-auto flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">

@@ -1,24 +1,6 @@
-import React, { useContext } from "react";
-import { useRouter } from "next/router";
-import axios from "axios";
-import userContext from "@/context/auth/userContext";
+import React from "react";
 
 const OrdersCard = ({ data, handleDecision }) => {
-    const router = useRouter();
-    const userContextDetail = useContext(userContext);
-    const works = userContextDetail.userStateData;
-    console.log("data ", data);
-    //   const handleDecision = async (id, answer) => {
-    //     console.log("works ", works);
-
-    //     const response = await axios.post(
-    //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order?response=${answer}`,
-    //       { email: userContextDetail.userStateData.email, workId: id },
-    //       {
-    //         withCredentials: true,
-    //       }
-    //     );
-    //   };
 
     return (
         <>

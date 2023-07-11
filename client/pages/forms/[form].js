@@ -1,8 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import ClothDonationForm from '@/components/Forms/ClothDonationForm';
-import VolunteerForm from '@/components/Forms/VolunteerForm';
-import FoodDonation from '@/components/Forms/FoodDonationform';
 import BloodDonation from '@/components/Forms/BloodDonationForm';
 
 const Form = () => {
@@ -15,18 +13,6 @@ const Form = () => {
         {form == "clothDonation" &&
           <div>
             <ClothDonationForm />
-          </div>
-
-        }
-        {form == "volunteerRegistration" &&
-          <div>
-            <VolunteerForm />
-          </div>
-
-        }
-        {form == "foodDonation" &&
-          <div>
-            <FoodDonation />
           </div>
 
         }

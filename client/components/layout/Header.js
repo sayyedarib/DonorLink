@@ -1,15 +1,10 @@
-import React, { useContext } from "react";
-// import styles from "../styles/components/header.module.css";
+import React from "react";
 import Link from "next/link";
-import axios from "axios";
 import {useState} from "react";
-import jwt_decode from "jwt-decode";
-import userContext from "@/context/auth/userContext";
 import {AiFillCloseCircle} from "react-icons/ai"
 
 
 const Header = () => {
-  const userContextDetail = useContext(userContext);
   const [qrPopup, setQrpopup] = useState(false);
 
   return (
