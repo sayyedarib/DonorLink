@@ -1,17 +1,16 @@
 export const storePreviousUrl = (url) => {
-  if (typeof sessionStorage !== 'undefined') {
-    sessionStorage.setItem('previousUrl', url);
+  if (typeof localStorage !== 'undefined' && !localStorage.getItem('previousUrl')) {
+    localStorage.setItem('previousUrl', url);
   }
-  return null;
-  };
-  
-  export const getPreviousUrl = () => {
-    if (typeof sessionStorage !== 'undefined') {
-      const previousUrl = sessionStorage.getItem('previousUrl');
-      sessionStorage.removeItem('previousUrl');
+};
+
+export const getPreviousUrl = () => {
+  if (typeof localStorage !== 'undefined') {
+    const previousUrl = localStorage.getItem('previousUrl');
+    if (previousUrl) {
+      localStorage.removeItem('previousUrl');
       return previousUrl;
     }
-    return null;
-  };
-  
-  
+  }
+  return null;
+};

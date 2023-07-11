@@ -11,7 +11,7 @@ const DashboardProfile = ({userData}) => {
         <div className="flex flex-wrap justify-center">
           <div className="w-full px-4 flex justify-center">
             <div className="relative">
-              <img alt="..." src="/assets/images/fill-gap/boy.svg" className="shadow-xl rounded-full w-40 h-40" />
+              <img alt="..." src={userData.picture?userData.picture:"/assets/images/fill-gap/boy.svg"} className="shadow-xl rounded-full w-40 h-40" />
             </div>
           </div>
           <div className="w-full px-4 text-center mt-20">
@@ -30,7 +30,7 @@ const DashboardProfile = ({userData}) => {
           </div>
         </div>
         <div className="text-center mt-12">
-          <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+          <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700">
             {userData?.name}
           </h3>
           <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">

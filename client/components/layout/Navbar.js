@@ -3,7 +3,6 @@ import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import userContext from "@/context/auth/userContext";
 import {useRouter} from "next/router";
-import { storePreviousUrl } from "@/hooks/prevUrl";
 
 
 const navItemsInfo = [
@@ -41,11 +40,6 @@ const NavItem = ({ item }) => {
     </li>
   );
 };
-
-
-  useEffect(() => {
-    storePreviousUrl(router.asPath || '/');
-  }, []);
 
 
   return (

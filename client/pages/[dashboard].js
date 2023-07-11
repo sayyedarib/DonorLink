@@ -17,11 +17,10 @@ const Volunteer = () => {
       try {
         console.log("CL: dasboard userContextDetial.userStateData ", userContextDetail.userStateData)
         const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList?particular=${userContextDetail.userStateData._id}`);
-        console.log("userData ", userData)
+        console.log("userData ", userData);
         console.log("CL:data dashboard ", data);
         setWorks(data.data);
       } catch (error) {
-        // Handle any errors that occur during the API request
         console.error("CL: dashboard ", error);
       }
     };

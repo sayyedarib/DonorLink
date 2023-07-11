@@ -1,11 +1,10 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 import ClothDonationForm from '@/components/Forms/ClothDonationForm';
 import BloodDonation from '@/components/Forms/BloodDonationForm';
+import { useRouter } from "next/router";
 
 const Form = () => {
   const router = useRouter();
-  
   const { form } = router.query;
   return (
     <>
@@ -14,7 +13,6 @@ const Form = () => {
           <div>
             <ClothDonationForm />
           </div>
-
         }
         {form == "bloodDonation" &&
           <div>

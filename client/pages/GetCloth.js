@@ -5,16 +5,15 @@ import { useRouter } from "next/router";
 import { BsCheckCircle } from "react-icons/bs"
 import { ToastContainer, toast } from 'react-toastify';
 import ClothDonorsCard from "@/components/cards/ClothDonorsCard";
-import { storePreviousUrl } from "@/hooks/prevUrl";
+
 
 const GetCloth = () => {
     const router = useRouter();
     const userContextDetail = useContext(userContext);
 
     useEffect(()=>{
-        storePreviousUrl(router.asPath || '/');
         if (!userContextDetail.userStateData.name) {
-            router.replace("/auth");
+            router.replace("/auth?prevPath=/GetCloth");
         }
 
     }, []);

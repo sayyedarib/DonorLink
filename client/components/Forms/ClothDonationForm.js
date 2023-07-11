@@ -5,7 +5,6 @@ import userContext from "@/context/auth/userContext";
 import { useRouter } from "next/router";
 import { BsCheckCircle } from "react-icons/bs"
 import { ToastContainer, toast } from 'react-toastify';
-import { storePreviousUrl } from "@/hooks/prevUrl";
 
 const ClothDonationForm = () => {
   const router = useRouter();
@@ -14,12 +13,8 @@ const ClothDonationForm = () => {
 
   
   if (!userContextDetail.userStateData.name) {
-    router.replace("/auth");
+    router.replace("/auth?prevPath=/forms/clothDonation");
   }
-  
-  useEffect(() => {
-    storePreviousUrl(router.asPath || '/');
-  }, []);
 
   //states
   const [loader, setLoader]=useState(false);

@@ -3,17 +3,14 @@ import BloodDonorsCard from '@/components/cards/BloodDonorsCard';
 import userContext from '@/context/auth/userContext';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { storePreviousUrl } from "@/hooks/prevUrl";
 
 const GetBlood = () => {
   const router = useRouter();
   const userContextDetail = useContext(userContext);
 
   useEffect(()=>{
-    storePreviousUrl(router.asPath || '/');
     if (!userContextDetail.userStateData.name) {
-      localStorage.setItem("prevPath", "/GetBlood")
-      router.replace("/auth");
+      router.replace("/auth?prevPath=/GetBlood");
     }
   } ,[])
 
