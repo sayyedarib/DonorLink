@@ -7,11 +7,13 @@ import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/router";
 import "react-toastify/dist/ReactToastify.css";
 import { BiArrowBack } from "react-icons/bi";
+import { getPreviousUrl } from "@/hooks/prevUrl";
 
 const AuthPopup = ({ auth }) => {
     const router = useRouter();
     const location = useGeoLocation();
     const userContextDetail = useContext(userContext);
+    const prevUrl = getPreviousUrl();
 
     //states
     const [step, setStep] = useState(1);
@@ -64,7 +66,7 @@ const AuthPopup = ({ auth }) => {
                         picture: userObject.picture,
                     });
                     toast.success("logged in successfully");
-                    router.replace("/");
+                    router.replace(prevUrl?prevUrl:"/");
                 } catch (error) {
                     if (
                         error.response &&
@@ -185,7 +187,7 @@ const AuthPopup = ({ auth }) => {
                 email: "",
                 password: "",
             });
-            router.replace("/");
+            router.replace(prevUrl?prevUrl:"/");
         } catch (error) {
             if (
                 error.response &&

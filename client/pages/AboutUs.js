@@ -2,7 +2,7 @@ import React from 'react'
 import { TbBuildingEstate } from "react-icons/tb"
 import { BsFillPersonCheckFill } from "react-icons/bs"
 import { BiDonateHeart } from "react-icons/bi"
-import { FcCollect } from "react-icons/fc"
+import { FcCollect } from "react-icons/fc";
 
 const AboutUs = () => {
     return (
