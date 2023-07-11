@@ -1,9 +1,17 @@
 export const storePreviousUrl = (url) => {
+  if (typeof sessionStorage !== 'undefined') {
     sessionStorage.setItem('previousUrl', url);
+  }
+  return null;
   };
   
   export const getPreviousUrl = () => {
-    const previousUrl = sessionStorage.getItem('previousUrl');
-    return previousUrl;
+    if (typeof sessionStorage !== 'undefined') {
+      const previousUrl = sessionStorage.getItem('previousUrl');
+      sessionStorage.removeItem('previousUrl');
+      return previousUrl;
+    }
+    return null;
   };
+  
   
