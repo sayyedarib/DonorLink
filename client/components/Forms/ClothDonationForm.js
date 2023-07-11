@@ -1,21 +1,26 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import useGeoLocation from "hooks/useGeoLocation";
 import userContext from "@/context/auth/userContext";
 import { useRouter } from "next/router";
 import { BsCheckCircle } from "react-icons/bs"
 import { ToastContainer, toast } from 'react-toastify';
+import { storePreviousUrl } from "@/hooks/prevUrl";
 
 const ClothDonationForm = () => {
   const router = useRouter();
   const userContextDetail = useContext(userContext);
+  const location = useGeoLocation();
 
   
   if (!userContextDetail.userStateData.name) {
     router.replace("/auth");
   }
-  const location = useGeoLocation();
   
+  useEffect(() => {
+    storePreviousUrl(router.asPath || '/');
+  }, []);
+
   //states
   const [loader, setLoader]=useState(false);
   const [detail, setDetail] = useState({

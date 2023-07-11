@@ -3,7 +3,10 @@ import Link from "next/link";
 import data from "../constants/data";
 import ServiceCard from "./cards/ServiceCard";
 
+
 const Services = () => {
+
+
   return (
     <>
       <section className="bg-blue-50 flex flex-col text-white px-5 py-3 gap-20">

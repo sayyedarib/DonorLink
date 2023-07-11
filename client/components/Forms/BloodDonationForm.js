@@ -5,7 +5,7 @@ import userContext from "@/context/auth/userContext";
 import { useRouter } from "next/router";
 import { BsCheckCircle } from "react-icons/bs";
 import { ToastContainer, toast } from 'react-toastify';
-
+import { storePreviousUrl } from "@/hooks/prevUrl";
 
 const BloodDonationForm = () => {
   const router = useRouter();
@@ -13,11 +13,12 @@ const BloodDonationForm = () => {
   const [loader, setLoader] = useState(false);
 
   useEffect(()=>{
+    storePreviousUrl(router.asPath || '/');
     if (!userContextDetail.userStateData.name) {
-      localStorage.setItem("prevPath", "/")
       router.replace("/auth");
     }
   }, []);
+
 
   const location = useGeoLocation();
   const [detail, setDetail] = useState({
@@ -68,9 +69,8 @@ const BloodDonationForm = () => {
         message: "",
         coordinates: "",
       });
-      const prevPath = JSON.parse(localStorage.getItem('prevPath')) || { url: '/' };
       toast.success("successfully registered as blood donor")
-      router.replace(prevPath.url);
+      router.replace("/");
     } catch (err) {
       setLoader(false);
       toast.error("you are already a blood donor.")
