@@ -13,12 +13,11 @@ const AuthPopup = ({ auth }) => {
   const router = useRouter();
   const location = useGeoLocation();
   const userContextDetail = useContext(userContext);
-  const prevUrl = getPreviousUrl();
 
   //states
   const [step, setStep] = useState(1);
-  const [register, setRegister] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [register, setRegister] = useState(false);
   const [loginUser, setLoginUser] = useState({
     email: "",
     password: "",
@@ -86,7 +85,6 @@ const AuthPopup = ({ auth }) => {
 
   //google sign in propmt on page load and click on google sign in button
   useEffect(() => {
-    // global google
     google.accounts.id.initialize({
       client_id:
         "515977534331-f3oimqtepkerndbdqel0hqg0tjskimft.apps.googleusercontent.com",
@@ -105,29 +103,7 @@ const AuthPopup = ({ auth }) => {
     google.accounts.id.prompt();
   }, []);
 
-  //handle image
-
-  const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-
-  const handleFileUpload = async (e) => {
-    const file = e.target.files[0];
-    const base64 = await convertToBase64(file);
-    console.log(base64);
-    setRegisterUser({ ...registerUser, picture: base64 });
-  };
-
-  //handle input fields
+  //handle login input fields
   let name, value;
   const handleLoginInput = (e) => {
     name = e.target.name;
@@ -136,34 +112,6 @@ const AuthPopup = ({ auth }) => {
       ...loginUser,
       [name]: value,
     });
-  };
-
-  //handle registratin input
-  const handleRegisterInput = (e) => {
-    const { name, value } = e.target;
-    console.log(registerUser);
-    if (step === 1) {
-      setRegisterUser({
-        ...registerUser,
-        [name]: value,
-        coordinates: `${location.loaded
-            ? JSON.stringify(location.coordinates)
-            : "Could not access the location"
-          }`,
-      });
-    } else if (step === 2) {
-      if (name == "phone" || name == "bio") {
-        setRegisterUser({ ...registerUser, [name]: value });
-      } else {
-        setRegisterUser((prevUser) => ({
-          ...prevUser,
-          address: {
-            ...prevUser.address,
-            [name]: value,
-          },
-        }));
-      }
-    }
   };
 
   //handle login when login button is clicked
@@ -193,6 +141,55 @@ const AuthPopup = ({ auth }) => {
         error.response.status <= 500
       ) {
         toast.error(error.response.data.message);
+      }
+    }
+  };
+
+  //handle image
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertToBase64(file);
+    console.log(base64);
+    setRegisterUser({ ...registerUser, picture: base64 });
+  };
+
+  //handle registration
+  const handleRegisterInput = (e) => {
+    const { name, value } = e.target;
+    console.log(registerUser);
+    if (step === 1) {
+      setRegisterUser({
+        ...registerUser,
+        [name]: value,
+        coordinates: `${location.loaded
+          ? JSON.stringify(location.coordinates)
+          : "Could not access the location"
+          }`,
+      });
+    } else if (step === 2) {
+      if (name == "phone" || name == "bio") {
+        setRegisterUser({ ...registerUser, [name]: value });
+      } else {
+        setRegisterUser((prevUser) => ({
+          ...prevUser,
+          address: {
+            ...prevUser.address,
+            [name]: value,
+          },
+        }));
       }
     }
   };
