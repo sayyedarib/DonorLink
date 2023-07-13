@@ -20,13 +20,9 @@ const BloodDonationForm = () => {
 
   const location = useGeoLocation();
   const [detail, setDetail] = useState({
-    name: userContextDetail.userStateData.name,
-    email: userContextDetail.userStateData.email,
-    phone: userContextDetail.userStateData?.phone ? userContextDetail.userStateData?.phone : "",
+    id:userContextDetail?.userStateData?._id,
     bloodGroup: "",
-    address: userContextDetail.userStateData?.address ? userContextDetail.userStateData?.address : "",
     message: "",
-    coordinates: "",
   });
 
   let name, value;
@@ -57,21 +53,16 @@ const BloodDonationForm = () => {
         }
       );
 
+      toast.success("successfully registered as blood donor")
       setLoader(false);
       setDetail({
-        name: "",
-        email: "",
-        phone: "",
         bloodGroup: "",
-        address: "",
         message: "",
-        coordinates: "",
       });
-      toast.success("successfully registered as blood donor")
-      router.replace("/");
+      // router.replace("/");
     } catch (err) {
-      setLoader(false);
       toast.error("you are already a blood donor.")
+      setLoader(false);
     }
   };
 

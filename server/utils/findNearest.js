@@ -5,16 +5,16 @@ const geolib = require("geolib");
 
 module.exports = async function findNearest(coordinates, type) {
   if (type == "volunteer") {
-    const volunteers = await volunteerData.find().populate('profile').exec();
+    const volunteers = await volunteerData.find({}).populate('profile').exec();
     const volunteerWithDistance = volunteers.map((data) => {
-      const volunteerCoordinate = JSON.parse(data.coordinates);
+      const volunteerCoordinate = JSON.parse(data.profile.coordinates);
       const donorCoordinate = JSON.parse(coordinates)
-      console.log("v coord ", volunteerCoordinate, "d coord ", donorCoordinate, "name ", data.name)
+      console.log("v coord ", volunteerCoordinate, "d coord ", donorCoordinate, "name ", data.profile.name)
       const distance = geolib.getDistance(donorCoordinate, volunteerCoordinate, accuracy = 0.01);
       console.log("distance", distance);
       return {
-        volunteer: data,
-        distance: distance,
+        volunteer: data.profile,
+        distance:( distance/100000).toFixed(2),
       };
     });
 
@@ -25,14 +25,15 @@ module.exports = async function findNearest(coordinates, type) {
   }
 
   else if (type == "bloodDonor") {
-    const donors = await bloodDonationData.find().populate('profile').exec();
+    const donors = await bloodDonationData.find({}).populate('profile').exec();
+    console.log("blood donors ", donors)
     const donorsWithDistance = donors.map((data) => {
-      const donorsCoordinate = JSON.parse(data.coordinates);
+      const donorsCoordinate = JSON.parse(data?.profile?.coordinates);
       const receiversCoordinate = JSON.parse(coordinates)
       const distance = geolib.getDistance(receiversCoordinate, donorsCoordinate, accuracy = 0.01);
       return {
         donor: data,
-        distance: distance,
+        distance: ( distance/100000).toFixed(2),
       };
     });
 
@@ -43,15 +44,16 @@ module.exports = async function findNearest(coordinates, type) {
     return donorsWithDistance;
   }
   else if (type == "clothDonor") {
-    const donors = await clothDonationData.find();
+    const donors = await clothDonationData.find({}).populate('profile').exec();
+    console.log("cloth donors ", donors);
     const donorsWithDistance = donors.map((data) => {
-      const donorsCoordinate = JSON.parse(data.coordinates);
+      const donorsCoordinate = JSON.parse(data?.profile?.coordinates);
       const receiversCoordinate = JSON.parse(coordinates)
-      console.log("v coord ", donorsCoordinate, "d coord ", receiversCoordinate, "name ", data.name)
+      console.log("v coord ", donorsCoordinate, "d coord ", receiversCoordinate, "name ", data?.profile?.name)
       const distance = geolib.getDistance(receiversCoordinate, donorsCoordinate, accuracy = 0.01);
       console.log("distance", distance);
       return {
-        donor: data,
+        donor: data.profile,
         distance: distance,
       };
     });

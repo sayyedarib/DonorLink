@@ -5,22 +5,24 @@ const clothDonationSchema = mongoose.Schema({
     profile: {
         type: Schema.Types.ObjectId,
         ref: 'profileModel'
-      },
+    },
     quantity: {
         type: Number,
         required: true
     },
     message: {
         type: String,
-        required: false
     },
     timing: {
         type: String,
         required: true
     },
-    assignedVolunteers: {
+    nearestVolunteers: {
         type: Array,
-        required: false
+    },
+    assignedVolunteer: {
+        type: Number,
+        default:0
     }
 }, { collection: "clothDonationData" });
 

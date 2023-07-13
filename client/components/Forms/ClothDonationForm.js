@@ -18,7 +18,8 @@ const ClothDonationForm = () => {
 
   //states
   const [loader, setLoader]=useState(false);
-  const [detail, setDetail] = useState({
+  const [donationDetail, setDonationDetail] = useState({
+    id:userContextDetail?.userStateData?._id,
     quantity: "",
     message: "",
   });
@@ -28,13 +29,9 @@ const ClothDonationForm = () => {
     console.log("userContextDetail.userStateData.name 2", userContextDetail.userStateData);
     name = e.target.name;
     value = e.target.value;
-    setDetail({
-      ...detail,
+    setDonationDetail({
+      ...donationDetail,
       [name]: value,
-      coordinates: `${location.loaded
-        ? JSON.stringify(location.coordinates)
-        : "Could not access the location"
-        }`,
     });
   };
 
@@ -45,7 +42,7 @@ const ClothDonationForm = () => {
       setLoader(true);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/clothDonation`,
-        detail,
+        donationDetail,
         {
           withCredentials: true,
         }
@@ -54,7 +51,8 @@ const ClothDonationForm = () => {
       toast.success("Thank you for donation");
       toast.success("Nearby volunteer has been notified");
       setLoader(false);
-      setDetail({
+      setDonationDetail({
+        id:"",
         quantity: "",
         message: "",
       });
@@ -84,7 +82,7 @@ const ClothDonationForm = () => {
                 <span className="font-medium text-slate-700 pb-2">Pairs of cloth</span>
                 <input
                   onChange={handleInput}
-                  value={detail.quantity}
+                  value={donationDetail.quantity}
                   id="quantity"
                   name="quantity"
                   type="number"
@@ -96,7 +94,7 @@ const ClothDonationForm = () => {
                 <span className="font-medium text-slate-700 pb-2">Message</span>
                 <textarea
                   onChange={handleInput}
-                  value={detail.message}
+                  value={donationDetail.message}
                   id="message"
                   name="message"
                   className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"

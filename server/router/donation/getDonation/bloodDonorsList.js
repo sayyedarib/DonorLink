@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const bloodDonationData = require("../../../models/donation/bloodDonation");
 const findNearest = require("../../../utils/findNearest");
 
 router.get("/", async (req, res) => {

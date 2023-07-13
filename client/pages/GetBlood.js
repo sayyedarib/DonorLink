@@ -26,7 +26,7 @@ const GetBlood = () => {
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bloodDonorsList?coordinates=${userContextDetail.userStateData.coordinates}`);
       console.log("CL:getblood data.data ", data.data);
-      setNearbyDonor(data.data.filter(data => data.distance / 1000000 < 1));
+      setNearbyDonor(data.data);
       toast.success("we've got the donors in the range of 10km")
     } catch (error) {
       toast.warning("no donor found in the range of 10km")
@@ -63,7 +63,7 @@ const GetBlood = () => {
       </form>
       <div className='flex flex-wrap gap-3 items-center justify-center'>
         {
-          nearbyDonor?.filter((data) => data.donor.bloodGroup === blood)
+          nearbyDonor?.filter((data) => data?.donor?.bloodGroup === blood)
             .map(filteredData => {
               // console.log("filteredData ", filteredData);
               return <BloodDonorsCard key={filteredData.donor._id} data={filteredData} />;

@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const profileData = require("../../models/profileSchema");
-const volunteerData = require("../../models/volunteerSchema");
+const profileModel = require("../../models/profileSchema");
+const volunteerModel = require("../../models/volunteerSchema");
 const sendMail = require("../../utils/sendMail");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
@@ -8,7 +8,7 @@ const crypto = require("crypto");
 router.post("/", async (req, res) => {
     try {
         const { type, name, email, password, cpassword, phone, picture, bio, address, coordinates } = req.body;
-        const response = await profileData.findOne({ email: email });
+        const response = await profileModel.findOne({ email: email });
         if (response) {
             return res.status(409).send({ message: "email already exists" });
         }
@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
             cpassword,
             salt
         );
-        const newUser = new profileData({
+        const newUser = new profileModel({
             type,
             name,
             email,
@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
 
         if (type == "volunteer") {
             const verifyToken = crypto.randomBytes(64).toString("hex");
-            const newVolunteer = new volunteerData({
+            const newVolunteer = new volunteerModel({
                 profile: newUser._id,
                 verifyToken
             });

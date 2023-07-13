@@ -1,28 +1,27 @@
 const router = require("express").Router();
 const sendMail = require("../../../utils/sendMail");
 const bloodDonation = require("../../../models/donation/bloodDonation");
+const profileModel = require("../../../models/profileSchema");
 const time = require("../../../utils/time");
 
 router.post("/", async (req, res) => {
   console.log("I'm on server side now");
   // Create a new Date object
-  const { name, email, phone, bloodGroup, address, message, coordinates } =
-    req.body;
+  const { id, bloodGroup, message } = req.body;
   const timing = time();
-  const response = await bloodDonation.findOne({ email: email });
+  const {_id,name, email} = await profileModel.findById({_id:id});
+  console.log("donors email ", _id);
+  const response = await bloodDonation.findOne({ 'profile.email': email });
+  console.log("response ", response);
   if (response) {
     res.status(409).send({ message: "you arleardy registered as blood donor" })
   }
 
   try {
     const data = new bloodDonation({
-      name,
-      email,
-      phone,
+      profile:_id,
       bloodGroup,
-      address,
       message,
-      coordinates,
       timing,
     });
 

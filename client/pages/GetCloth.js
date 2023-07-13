@@ -30,7 +30,7 @@ const GetCloth = () => {
             const { data } = await axios.get(
                 `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/clothDonorsList?coordinates=${userContextDetail.userStateData.coordinates}`);
             console.log("CL:getblood data.data ", data.data);
-            setNearbyDonor(data.data.filter(data => data.distance / 1000000 < 1));
+            setNearbyDonor(data.data);
             toast.success("we have recieved your request")
         } catch (error) {
             console.log("Error while finding nearest donor:", error);

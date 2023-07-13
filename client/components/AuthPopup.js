@@ -58,7 +58,7 @@ const AuthPopup = ({ auth }) => {
               withCredentials: true,
             }
           );
-          userContextDetail.updateUserData(response.data.userData);
+          userContextDetail.updateUserData(response.data.profileData);
           setLoginUser({
             email: userObject.email,
             picture: userObject.picture,
@@ -128,12 +128,12 @@ const AuthPopup = ({ auth }) => {
       );
       setLoader(false);
       toast.success("Logged in successfully");
-      userContextDetail.updateUserData(response.data.userData);
+      userContextDetail.updateUserData(response.data.profileData);
       setLoginUser({
         email: "",
         password: "",
       });
-      router.replace(router.query.prevPath);
+      router.replace(router?.query?.prevPath?router?.query?.prevPath:"/");
     } catch (error) {
       if (
         error.response &&
@@ -208,7 +208,7 @@ const AuthPopup = ({ auth }) => {
 
       toast.success("registration successfull");
       {
-        registerUser.type == "Volunteer" &&
+        registerUser.type == "volunteer" &&
           toast.success("verification link sent to your email");
       }
       setRegisterUser({
@@ -315,7 +315,7 @@ const AuthPopup = ({ auth }) => {
                               onChange={handleRegisterInput}
                               id="volunteer-radio-id"
                               type="radio"
-                              value="Volunteer"
+                              value="volunteer"
                               name="type"
                               className="w-4 h-4"
                             />
@@ -532,7 +532,7 @@ const AuthPopup = ({ auth }) => {
                       placeholder="Enter phone number here"
                     />
                   </label>
-                  {registerUser?.type == "Volunteer" && (
+                  {registerUser?.type == "volunteer" && (
                     <label htmlFor="bio">
                       <span className="font-medium text-slate-700 pb-2">
                         Bio
