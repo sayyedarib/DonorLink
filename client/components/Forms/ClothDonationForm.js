@@ -117,8 +117,8 @@ const ClothDonationForm = () => {
 
             </div>
           </form>
-          <button type="button" className="w-full py-3 mt-5 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-            <span onClick={handleDonate}>{loader?<img src="/assets/images/fill-gap/loader.gif" alt="loader_img"/>:"Donate Now"}</span>
+          <button type="button" onClick={handleDonate} className="w-full py-3 mt-5 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
+            <span >{loader?<img src="/assets/images/fill-gap/loader.gif" alt="loader_img"/>:"Donate Now"}</span>
           </button>
         </div>
         <div className="flex flex-col gap-5 justify-center  text-blue-950 mb-10 mx-10">

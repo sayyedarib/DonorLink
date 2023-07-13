@@ -3,7 +3,7 @@ import axios from "axios";
 import userContext from "@/context/auth/userContext";
 import { useRouter } from "next/router";
 import { BsCheckCircle } from "react-icons/bs"
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import ClothDonorsCard from "@/components/cards/ClothDonorsCard";
 
 
@@ -59,8 +59,8 @@ const GetCloth = () => {
                             </label>
 
                         </div>
-                        <button type="submit" className="w-full py-3 mt-5 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
-                            <span onClick={handleClick}>Get Cloth</span>
+                        <button type="submit" onClick={handleClick} className="w-full py-3 mt-5 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center">
+                            <span >Get Cloth</span>
                         </button>
                     </form>
                 </div>
@@ -68,15 +68,15 @@ const GetCloth = () => {
                     <span className="flex items-center gap-3"><BsCheckCircle /> Signup</span>
                     <span className="flex items-center gap-3"><BsCheckCircle /> Go to get cloth section</span>
                     <span className="flex items-center gap-3"><BsCheckCircle /> Fill the required details</span>
-                    <span className="flex items-center gap-3"><BsCheckCircle /> Get in touch wiht donors in the range of 10km</span>
-                    <span className="flex items-center gap-3"><BsCheckCircle /> No donors's availabel! If available in our collection stock , we will provide you.</span>
+                    <span className="flex items-center gap-3"><BsCheckCircle /> Get in touch with donors in the range of 10km</span>
+                    <span className="flex items-center gap-3"><BsCheckCircle /> No donors's availabele, No worry! If available in our collection stock , we will provide you.</span>
                 </div>
-                <ToastContainer position="top-left" />
             </div>
             <div className="flex gap-5 flex-wrap justify-center items-center mt-10">
 
                 {nearbyDonor.map(data => <ClothDonorsCard key={data._id} data={data} />)}
             </div>
+                <ToastContainer position="top-left" />
         </div>
     )
 }

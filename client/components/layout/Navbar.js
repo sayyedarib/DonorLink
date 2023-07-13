@@ -109,11 +109,11 @@ const NavItem = ({ item }) => {
                   </div>
                 </span>
               ) : (
-                <button className="mt-5 lg:mt-0 border-2 border-blue-500 px-6 py-2 rounded-full text-blue-500 font-semibold bg-blue-50 hover:bg-blue-700 hover:text-blue-50 transition-all duration-300">
                   <Link href="/auth">
+                <button className="mt-5 lg:mt-0 border-2 border-blue-500 px-6 py-2 rounded-full text-blue-500 font-semibold bg-blue-50 hover:bg-blue-700 hover:text-blue-50 transition-all duration-300">
                     Sign In
-                  </Link>
                 </button>
+                  </Link>
               ))}
           </div>
         </header>

@@ -3,6 +3,7 @@ import BloodDonorsCard from '@/components/cards/BloodDonorsCard';
 import userContext from '@/context/auth/userContext';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
 
 const GetBlood = () => {
   const router = useRouter();
@@ -25,8 +26,10 @@ const GetBlood = () => {
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bloodDonorsList?coordinates=${userContextDetail.userStateData.coordinates}`);
       console.log("CL:getblood data.data ", data.data);
-      setNearbyDonor(data.data);
+      setNearbyDonor(data.data.filter(data => data.distance / 1000000 < 1));
+      toast.success("we've got the donors in the range of 10km")
     } catch (error) {
+      toast.warning("no donor found in the range of 10km")
       console.log("Error while finding nearest donor:", error);
     }
   };
@@ -68,6 +71,7 @@ const GetBlood = () => {
         }
 
       </div>
+      <ToastContainer position="top-left" />
     </div>
   );
 };

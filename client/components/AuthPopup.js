@@ -146,11 +146,10 @@ const AuthPopup = ({ auth }) => {
       setRegisterUser({
         ...registerUser,
         [name]: value,
-        coordinates: `${
-          location.loaded
+        coordinates: `${location.loaded
             ? JSON.stringify(location.coordinates)
             : "Could not access the location"
-        }`,
+          }`,
       });
     } else if (step === 2) {
       if (name == "phone" || name == "bio") {
@@ -251,8 +250,8 @@ const AuthPopup = ({ auth }) => {
 
   return (
     <>
-      <div className="">
-        <div className="max-w-md mx-auto px-8 py-3 mt-32 mb-16 bg-white span-8 rounded-xl shadow shadow-slate-300">
+      <div className="flex justify-center items-center mt-10">
+        <div className="max-w-md w-1/2 mx-auto px-8 py-3 mt-24 mb-16 bg-white span-8 rounded-xl shadow shadow-slate-300">
           <div
             className="cursor-pointer"
             onClick={() => setStep((prevStep) => prevStep - 1)}
@@ -261,8 +260,8 @@ const AuthPopup = ({ auth }) => {
               <BiArrowBack className="text-3xl bg-blue-900 text-white rounded-full p-2" />
             )}
           </div>
-          <form action="" className="my-10">
-            <div className="flex flex-col space-y-5">
+          <form action="" className="my-2">
+            <div className="flex flex-col space-y-3">
               {step === 1 && (
                 <>
                   {register && (
@@ -443,24 +442,25 @@ const AuthPopup = ({ auth }) => {
                   )}
                   <button
                     type="button"
+                    onClick={(e) => {
+                      if (register && step == 2) {
+                        handleRegistration();
+                      } else if (register && step == 1) {
+                        if (registerUser.type == "") {
+                          toast.error(
+                            "please select user type: Donor, voulunteer, Needy"
+                          );
+                        } else {
+                          setStep(2);
+                        }
+                      } else {
+                        handleLogin(e);
+                      }
+                    }}
                     className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center"
                   >
                     <span
-                      onClick={(e) => {
-                        if (register && step == 2) {
-                          handleRegistration();
-                        } else if (register && step == 1) {
-                          if (registerUser.type == "") {
-                            toast.error(
-                              "please select user type: Donor, voulunteer, Needy"
-                            );
-                          } else {
-                            setStep(2);
-                          }
-                        } else {
-                          handleLogin(e);
-                        }
-                      }}
+
                     >
                       {register ? (
                         step === 2 ? (
@@ -599,25 +599,24 @@ const AuthPopup = ({ auth }) => {
                   </div>
                   <button
                     type="button"
+                    onClick={(e) => {
+                      if (register && step === 2) {
+                        handleRegistration();
+                      } else if (register && step === 1) {
+                        if (registerUser.type === "") {
+                          toast.error(
+                            "Please select user type: Donor, Volunteer, Needy"
+                          );
+                        } else {
+                          setStep(2);
+                        }
+                      } else {
+                        handleLogin(e);
+                      }
+                    }}
                     className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center"
                   >
-                    <span
-                      onClick={(e) => {
-                        if (register && step === 2) {
-                          handleRegistration();
-                        } else if (register && step === 1) {
-                          if (registerUser.type === "") {
-                            toast.error(
-                              "Please select user type: Donor, Volunteer, Needy"
-                            );
-                          } else {
-                            setStep(2);
-                          }
-                        } else {
-                          handleLogin(e);
-                        }
-                      }}
-                    >
+                    <span>
                       {register ? (
                         step === 2 ? (
                           "Register"
@@ -638,6 +637,10 @@ const AuthPopup = ({ auth }) => {
               )}
             </div>
           </form>
+        </div>
+        <div className="w-1/2">
+
+          <img src="/assets/images/fill-gap/auth.webp" alt="auth_vector" />
         </div>
         <ToastContainer position="top-left" />
       </div>
