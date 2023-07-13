@@ -5,27 +5,31 @@ const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { id } = req.body;
         const { loginType } = req.query;
-        const responseVolunteer = await volunteerData.findOne({ email: email });
-        const responseUser = await userData.findOne({ email: email });
+        const responseUser = await userData.findById(id);
+        
+        if(responseUser?.type=="volunteer"){
+            const responseVolunteer = await volunteerData.findById(id).populate('profile').populate('works.workDetails').exec();
+            if (loginType == "google") {
+                return res.status(200).send({ userData: responseVolunteer, message: "loggedIn successfully" })
+            }
+            else{
+                const validPassword = await bcrypt.compare(
+                    password,
+                    responseVolunteer.password
+                );
+                if (!validPassword) {
+                    return res.status(409).send({ message: "Invalid Email or Password" });
+                }
+                return res.status(200).send({ userData: responseVolunteer, message: "loggedIn successfully" })
+            }
+        }
         console.log("SR:auth-login", responseVolunteer);
 
-        if (loginType == "google" && responseVolunteer || responseUser) {
-            return res.status(200).send({ userData: responseVolunteer ? responseVolunteer : responseUser, message: "loggedIn successfully" })
+        if (loginType == "google" && responseUser) {
+            return res.status(200).send({ userData: responseUser, message: "loggedIn successfully" })
         }
-
-        if (responseVolunteer) {
-            const validPassword = await bcrypt.compare(
-                password,
-                responseVolunteer.password
-            );
-            if (!validPassword) {
-                return res.status(409).send({ message: "Invalid Email or Password" });
-            }
-            return res.status(200).send({ userData: responseVolunteer, message: "loggedIn successfully" })
-        }
-
         else if (responseUser) {
             const validPassword = await bcrypt.compare(
                 password,
@@ -36,7 +40,6 @@ router.post("/", async (req, res) => {
             }
             return res.status(200).send({ userData: responseUser, message: "loggedIn successfully" })
         }
-
         else {
             return res.status(409).send({ message: "Email doesn't exits please signUp" });
         }

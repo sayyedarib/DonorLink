@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
   try {
     if (id) {
       const volunteer = await volunteerData
-        .findById(id)
+        .findById(id).populate('profile')
         .populate('works.workDetails')
         .exec();
       if (volunteer) {

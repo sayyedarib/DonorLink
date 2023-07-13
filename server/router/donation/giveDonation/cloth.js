@@ -17,12 +17,6 @@ router.post("/", async (req, res) => {
   if (donorIsNotVolunteer) { res.status(409).send({ message: "you are volunteer ,sumbit your donations directly" }) };
 
   try {
-
-    console.log("address", address);
-    console.log("nearest volunteer is: ", nearestVolunteer[0].volunteer.name);
-    console.log("nearest volunteer email is: ", nearestVolunteer[0].volunteer.email);
-
-
     const data = new clothDonation({
       name,
       email,

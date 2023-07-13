@@ -201,10 +201,7 @@ const AuthPopup = ({ auth }) => {
     }
     try {
       setLoader(true);
-      const url =
-        registerUser.type === "Donor"
-          ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp`
-          : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerRegistration`;
+      const url =`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp`;
       const response = await axios.post(url, registerUser, {
         withCredentials: true,
       });

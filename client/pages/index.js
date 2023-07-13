@@ -29,9 +29,9 @@ export default function Home({ volunteersData }) {
       console.log("fetchedRecordData ", fetchedRecordData);
       setRecordsData(fetchedRecordData);
     }
-    else {
-      return;
-    }
+else{
+  return;
+}
   };
 
   const handleInfiniteScroll = async () => {
@@ -66,7 +66,7 @@ export default function Home({ volunteersData }) {
         <Volunteers volunteerData={volunteersData} />
         <Records data={recordsData} />
         {/* <Organizations /> */}
-        <Footer />
+        <Footer/>
       </div>
     </>
   );
@@ -81,4 +81,4 @@ export const getServerSideProps = async (context) => {
     },
   };
 }
-  ;
+;

@@ -3,9 +3,9 @@ const bloodDonationData = require("../models/donation/bloodDonation");
 const clothDonationData = require("../models/donation/clothDonation");
 const geolib = require("geolib");
 
-module.exports = async function findNearest(coordinates, who) {
-  if (who == "volunteer") {
-    const volunteers = await volunteerData.find();
+module.exports = async function findNearest(coordinates, type) {
+  if (type == "volunteer") {
+    const volunteers = await volunteerData.find().populate('profile').exec();
     const volunteerWithDistance = volunteers.map((data) => {
       const volunteerCoordinate = JSON.parse(data.coordinates);
       const donorCoordinate = JSON.parse(coordinates)
@@ -24,14 +24,12 @@ module.exports = async function findNearest(coordinates, who) {
     return volunteerWithDistance;
   }
 
-  else if (who == "bloodDonor") {
-    const donors = await bloodDonationData.find();
+  else if (type == "bloodDonor") {
+    const donors = await bloodDonationData.find().populate('profile').exec();
     const donorsWithDistance = donors.map((data) => {
       const donorsCoordinate = JSON.parse(data.coordinates);
       const receiversCoordinate = JSON.parse(coordinates)
-      console.log("v coord ", donorsCoordinate, "d coord ", receiversCoordinate, "name ", data.name)
       const distance = geolib.getDistance(receiversCoordinate, donorsCoordinate, accuracy = 0.01);
-      console.log("distance", distance);
       return {
         donor: data,
         distance: distance,
@@ -44,7 +42,7 @@ module.exports = async function findNearest(coordinates, who) {
 
     return donorsWithDistance;
   }
-  else if (who == "clothDonor") {
+  else if (type == "clothDonor") {
     const donors = await clothDonationData.find();
     const donorsWithDistance = donors.map((data) => {
       const donorsCoordinate = JSON.parse(data.coordinates);

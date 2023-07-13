@@ -19,13 +19,8 @@ const ClothDonationForm = () => {
   //states
   const [loader, setLoader]=useState(false);
   const [detail, setDetail] = useState({
-    name: userContextDetail.userStateData.name,
-    email: userContextDetail.userStateData.email,
-    phone: userContextDetail.userStateData?.phone ? userContextDetail.userStateData?.phone : "",
     quantity: "",
-    address: userContextDetail.userStateData?.address ? userContextDetail.userStateData?.address : "",
     message: "",
-    coordinates: "",
   });
 
   let name, value;
@@ -60,13 +55,8 @@ const ClothDonationForm = () => {
       toast.success("Nearby volunteer has been notified");
       setLoader(false);
       setDetail({
-        name: "",
-        email: "",
-        phone: "",
         quantity: "",
-        address: "",
         message: "",
-        coordinates: "",
       });
 
       router.replace("/");
