@@ -8,20 +8,20 @@ router.post("/", async (req, res) => {
         const response = await userData.findOne({ email: email });
         if (response) {
             console.log("email already exists");
-            return res.status(409).send({message:"email already exists"});
+            return res.status(409).send({ message: "email already exists" });
         }
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
         const hashPassword = await bcrypt.hash(password, salt);
         const hashConfirmPassword = await bcrypt.hash(
-          cpassword,
-          salt
+            cpassword,
+            salt
         );
         const data = new userData({
             type,
             name,
             email,
             password: hashPassword,
-            cpassword:hashConfirmPassword,
+            cpassword: hashConfirmPassword,
             phone,
             picture,
             bio,

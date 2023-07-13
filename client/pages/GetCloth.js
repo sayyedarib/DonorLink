@@ -11,7 +11,7 @@ const GetCloth = () => {
     const router = useRouter();
     const userContextDetail = useContext(userContext);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (!userContextDetail.userStateData.name) {
             router.replace("/auth?prevPath=/GetCloth");
         }
@@ -76,7 +76,7 @@ const GetCloth = () => {
 
                 {nearbyDonor.map(data => <ClothDonorsCard key={data._id} data={data} />)}
             </div>
-                <ToastContainer position="top-left" />
+            <ToastContainer position="top-left" />
         </div>
     )
 }

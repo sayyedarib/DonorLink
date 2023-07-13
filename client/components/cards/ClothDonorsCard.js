@@ -15,7 +15,7 @@ const ClothDonorsCard = ({ data }) => {
                     <span className="font-bold">Email: </span>   {data?.donor?.email}
                 </span>
                 <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                    <span className="font-bold">Distance: </span>   {data?.distance/100000}km
+                    <span className="font-bold">Distance: </span>   {data?.distance / 100000}km
                 </span>
                 <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
                     <span className="font-bold">Address: </span>   {data?.donor?.address?.custom + ", " + data?.donor?.address?.city + ", " + data?.donor?.address?.zip}

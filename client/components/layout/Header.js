@@ -59,8 +59,8 @@ const Header = () => {
                 onClick={handleCopy}
               >
                 <div className="flex items-center">
-                <FaCopy className="mr-2" />
-                <span>Copy</span>
+                  <FaCopy className="mr-2" />
+                  <span>Copy</span>
                 </div>
               </button>
             </div>

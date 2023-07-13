@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const BloodDonorsCard = ({ data }) => {
-    
+
     return (
         <>
             <div className="relative flex w-[22rem] md:w-96 p-7 h-auto flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
@@ -15,7 +15,7 @@ const BloodDonorsCard = ({ data }) => {
                     <span className="font-bold">Email: </span>   {data?.donor?.email}
                 </span>
                 <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                    <span className="font-bold">Distance: </span>   {data?.distance/100000}km
+                    <span className="font-bold">Distance: </span>   {data?.distance / 100000}km
                 </span>
                 <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
                     <span className="font-bold">Address: </span>   {data?.donor?.address?.custom + ", " + data?.donor?.address?.city + ", " + data?.donor?.address?.zip}

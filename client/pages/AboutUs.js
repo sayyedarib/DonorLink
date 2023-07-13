@@ -35,7 +35,7 @@ const AboutUs = () => {
                                     <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
                                         <div className="p-6 bg-white shadow-lg shadow-blue-300">
                                             <span className="text-blue-500 dark:text-blue-400">
-                                                <FcCollect  className='text-4xl'/>
+                                                <FcCollect className='text-4xl' />
                                             </span>
                                             <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 dark:text-gray-400">30+
                                             </p>

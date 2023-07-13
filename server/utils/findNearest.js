@@ -37,14 +37,14 @@ module.exports = async function findNearest(coordinates, who) {
         distance: distance,
       };
     });
-    
-    
+
+
     await donorsWithDistance.sort((a, b) => Number(a.distance) - Number(b.distance));
 
-    
+
     return donorsWithDistance;
   }
-  else if(who == "clothDonor"){
+  else if (who == "clothDonor") {
     const donors = await clothDonationData.find();
     const donorsWithDistance = donors.map((data) => {
       const donorsCoordinate = JSON.parse(data.coordinates);
@@ -57,11 +57,11 @@ module.exports = async function findNearest(coordinates, who) {
         distance: distance,
       };
     });
-    
-    
+
+
     await donorsWithDistance.sort((a, b) => Number(a.distance) - Number(b.distance));
 
-    
+
     return donorsWithDistance;
   }
 };

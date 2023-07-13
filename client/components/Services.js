@@ -16,7 +16,7 @@ const Services = () => {
             return (
               <>
                 <div key={data1.id}>
-                  <Link href={data1.link} onClick={()=>storePreviousUrl(data1.link)}>
+                  <Link href={data1.link} onClick={() => storePreviousUrl(data1.link)}>
                     <ServiceCard service={data1} />
                   </Link>
                 </div>
@@ -30,9 +30,9 @@ const Services = () => {
             return (
               <>
                 <div key={data2.id}>
-                <Link href={data2.link} onClick={()=>storePreviousUrl(data2.link)}>
-                  <ServiceCard service={data2} />
-                </Link>
+                  <Link href={data2.link} onClick={() => storePreviousUrl(data2.link)}>
+                    <ServiceCard service={data2} />
+                  </Link>
                 </div>
               </>
             );

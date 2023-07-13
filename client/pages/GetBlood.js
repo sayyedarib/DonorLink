@@ -9,11 +9,11 @@ const GetBlood = () => {
   const router = useRouter();
   const userContextDetail = useContext(userContext);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!userContextDetail.userStateData.name) {
       router.replace("/auth?prevPath=/GetBlood");
     }
-  } ,[])
+  }, [])
 
   const [blood, setBlood] = useState("");
   const [nearbyDonor, setNearbyDonor] = useState([]);

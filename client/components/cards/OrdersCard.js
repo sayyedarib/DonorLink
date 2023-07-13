@@ -23,7 +23,7 @@ const OrdersCard = ({ data, handleDecision }) => {
                     </span>
                 </div>
                 <div className="flex flex-col p-6 pt-0 gap-3">
-                    {!data.accepted && !data.rejected&& <div className='flex gap-3 justify-between'>
+                    {!data.accepted && !data.rejected && <div className='flex gap-3 justify-between'>
                         <button onClick={() => handleDecision(data._id, "accept")}
                             className="select-none w-full rounded-full bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-full hover:shadow-blue-500/40 hover:bg-blue-900"
                             type="button"
@@ -40,7 +40,7 @@ const OrdersCard = ({ data, handleDecision }) => {
                         </button>
                     </div>
                     }
-                    {!data.collected &&data.accepted&& <button onClick={() => handleDecision(data._id, "collected")}
+                    {!data.collected && data.accepted && <button onClick={() => handleDecision(data._id, "collected")}
                         className="select-none w-full rounded-full bg-green-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-full hover:shadow-blue-500/40 hover:bg-green-900"
                         type="button"
                         data-ripple-light="true"

@@ -11,8 +11,8 @@ router.post("/", async (req, res) => {
         const responseUser = await userData.findOne({ email: email });
         console.log("SR:auth-login", responseVolunteer);
 
-        if(loginType=="google"&&responseVolunteer||responseUser){
-            return res.status(200).send({ userData: responseVolunteer?responseVolunteer:responseUser, message: "loggedIn successfully" })
+        if (loginType == "google" && responseVolunteer || responseUser) {
+            return res.status(200).send({ userData: responseVolunteer ? responseVolunteer : responseUser, message: "loggedIn successfully" })
         }
 
         if (responseVolunteer) {

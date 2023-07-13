@@ -1,38 +1,38 @@
-const router  = require("express").Router();
+const router = require("express").Router();
 const volunteerData = require("../../models/volunteerSchema");
 const bcrypt = require("bcrypt");
 const sendMail = require("../../utils/sendMail");
 const crypto = require("crypto");
 
 router.post("/", async (req, res) => {
-    try {
-      const { picture, name, email,password,cpassword, phone, bio, address, coordinates } = req.body;
-      const response = await volunteerData.findOne({ email: email });
-      if (response) {
-        console.log("email already exists");
-        return res.status(409).send({message:"email already exists"});
-      }
-      const salt = await bcrypt.genSalt(Number(process.env.SALT));
-      const hashPassword = await bcrypt.hash(password, salt);
-      const hashConfirmPassword = await bcrypt.hash(
-        cpassword,
-        salt
-      );
-      const verifyToken = crypto.randomBytes(64).toString("hex");
-      const data = new volunteerData({
-        picture,
-        name,
-        email,
-        password:hashPassword,
-        cpassword:hashConfirmPassword,
-        phone,
-        bio,
-        address,
-        coordinates,
-        verifyToken,
-      });
-      
-      const messageVolunteer = `
+  try {
+    const { picture, name, email, password, cpassword, phone, bio, address, coordinates } = req.body;
+    const response = await volunteerData.findOne({ email: email });
+    if (response) {
+      console.log("email already exists");
+      return res.status(409).send({ message: "email already exists" });
+    }
+    const salt = await bcrypt.genSalt(Number(process.env.SALT));
+    const hashPassword = await bcrypt.hash(password, salt);
+    const hashConfirmPassword = await bcrypt.hash(
+      cpassword,
+      salt
+    );
+    const verifyToken = crypto.randomBytes(64).toString("hex");
+    const data = new volunteerData({
+      picture,
+      name,
+      email,
+      password: hashPassword,
+      cpassword: hashConfirmPassword,
+      phone,
+      bio,
+      address,
+      coordinates,
+      verifyToken,
+    });
+
+    const messageVolunteer = `
       <p><strong>Dear ${name},</strong></p>
       
       <p>Thank you for joining DonorLink as a volunteer! We are thrilled to have you on board and appreciate your commitment to making a positive impact in our community.
@@ -46,15 +46,15 @@ router.post("/", async (req, res) => {
       <p>Best regards,</p>
       <p>The DonorLink Team</p>
       `;
-      
-      await sendMail({email,name, subject:"Thank you for joining DonorLink", message:messageVolunteer});
-      await data.save();
 
-      res.status(200).json({message: "volunteer data saved successfully."});
-    } catch (err) {
-      console.log("got an error while volunteer registration", err);
-      res.status(500).json({message:"got an error while volunteer registration "})
-    }
-  });
+    await sendMail({ email, name, subject: "Thank you for joining DonorLink", message: messageVolunteer });
+    await data.save();
 
-  module.exports = router;
+    res.status(200).json({ message: "volunteer data saved successfully." });
+  } catch (err) {
+    console.log("got an error while volunteer registration", err);
+    res.status(500).json({ message: "got an error while volunteer registration " })
+  }
+});
+
+module.exports = router;

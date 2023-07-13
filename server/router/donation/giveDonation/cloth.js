@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     console.log("nearest volunteer is: ", nearestVolunteer[0].volunteer.name);
     console.log("nearest volunteer email is: ", nearestVolunteer[0].volunteer.email);
 
-    
+
     const data = new clothDonation({
       name,
       email,
@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
       assignedVolunteers: nearestVolunteer,
     });
     // console.log("data ", data);
-    await registeredVolunteer.findOneAndUpdate({email:email}, {workDetails:data});
+    await registeredVolunteer.findOneAndUpdate({ email: email }, { workDetails: data });
 
     await registeredVolunteer.findOneAndUpdate(
       { _id: nearestVolunteer[0].volunteer._id },
@@ -71,7 +71,7 @@ router.post("/", async (req, res) => {
     <p><strong>Best regards,</strong></p>
     <p><strong>The DonorLink Team</strong></p>
   `;
-  
+
 
 
     const messageDonor = `

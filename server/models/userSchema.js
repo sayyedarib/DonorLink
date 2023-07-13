@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 
 const userFormSchema = mongoose.Schema({
-    type:{
-type:String
+    type: {
+        type: String
     },
     name: {
         type: String,
@@ -33,9 +33,9 @@ type:String
         required: false
     },
     address: {
-       custom:{type:String,required:false},
-       city:{type:String, required:false},
-       zip:{type:String, required:false}
+        custom: { type: String, required: false },
+        city: { type: String, required: false },
+        zip: { type: String, required: false }
     },
     coordinates: {
         type: String,

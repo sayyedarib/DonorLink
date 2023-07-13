@@ -6,7 +6,7 @@ export default function App({ Component, pageProps }) {
   return (
 
     <UserState>
-      <Navigation/>
+      <Navigation />
       <Component {...pageProps} />
     </UserState>
 

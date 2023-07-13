@@ -9,9 +9,9 @@ router.post("/", async (req, res) => {
   const { name, email, phone, bloodGroup, address, message, coordinates } =
     req.body;
   const timing = time();
-  const response = await bloodDonation.findOne({email:email});
-  if(response){
-    res.status(409).send({message:"you arleardy registered as blood donor"})
+  const response = await bloodDonation.findOne({ email: email });
+  if (response) {
+    res.status(409).send({ message: "you arleardy registered as blood donor" })
   }
 
   try {
@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
     `;
 
     console.log("SR-router-blood: sending mail ");
-    await sendMail({email,name, subject:"Register as Blood Donor", message:messageDonor});
+    await sendMail({ email, name, subject: "Register as Blood Donor", message: messageDonor });
 
     await data.save();
     res.status(200).json("done");
