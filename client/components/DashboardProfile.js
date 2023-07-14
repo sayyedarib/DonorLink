@@ -6,12 +6,12 @@ const DashboardProfile = ({ userData }) => {
 
   return (
     <div className="w-full px-4 mx-auto mt-60">
-      <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg">
+      <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg shadow-blue-300 rounded-lg">
         <div className="px-6">
           <div className="flex flex-wrap justify-center">
             <div className="w-full px-4 flex justify-center">
               <div className="relative">
-                <img alt="..." src={userData.picture ? userData.picture : "/assets/images/fill-gap/boy.svg"} className="shadow-xl rounded-full w-40 h-40" />
+                <img alt="..." src={userData.picture ? userData.picture : "/assets/images/fill-gap/boy.svg"} className="shadow-lg shadow-blue-300 rounded-full w-40 h-40" />
               </div>
             </div>
             <div className="w-full px-4 text-center">

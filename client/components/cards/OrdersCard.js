@@ -4,7 +4,7 @@ const OrdersCard = ({ data, handleDecision }) => {
 
     return (
         <>
-            <div className="relative flex w-96 h-auto flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
+            <div className="relative flex w-96 h-auto flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg shadow-blue-300">
                 <div className="p-6">
                     <h5 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
                         <span className="font-bold">Donated by: </span>    {data?.workDetails?.name}

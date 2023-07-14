@@ -1,9 +1,9 @@
+import { ToastContainer, toast } from "react-toastify";
 import React, { useState, useContext, useEffect } from 'react';
 import BloodDonorsCard from '@/components/cards/BloodDonorsCard';
 import userContext from '@/context/auth/userContext';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { ToastContainer, toast } from "react-toastify";
 
 const GetBlood = () => {
   const router = useRouter();
@@ -28,6 +28,7 @@ const GetBlood = () => {
       console.log("CL:getblood data.data ", data.data);
       setNearbyDonor(data.data);
       const filteredData = nearbyDonor?.filter((data) => data?.donor?.bloodGroup === blood && data?.distance < 10);
+      console.log(" filteredData ", filteredData);
       if(filteredData.length>0){
         toast.success("we've got the donors in the range of 10km")
         return;
@@ -44,7 +45,7 @@ const GetBlood = () => {
 
 
   return (
-    <div className='flex flex-col h-[74vh] justify-center items-center mx-auto lg:my-12 my-24 gap-20'>
+    <div className='relative z-50 flex flex-col h-[74vh] justify-center items-center mx-auto lg:my-12 my-24 gap-20'>
       <form>
         <label htmlFor="bloodType" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
         <div className="relative">
