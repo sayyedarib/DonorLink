@@ -58,7 +58,7 @@ const AuthPopup = ({ auth }) => {
               withCredentials: true,
             }
           );
-          userContextDetail.updateUserData(response.data.userData);
+          userContextDetail.updateUserData(response.data.profileData);
           setLoginUser({
             email: userObject.email,
             picture: userObject.picture,
@@ -128,12 +128,12 @@ const AuthPopup = ({ auth }) => {
       );
       setLoader(false);
       toast.success("Logged in successfully");
-      userContextDetail.updateUserData(response.data.userData);
+      userContextDetail.updateUserData(response.data.profileData);
       setLoginUser({
         email: "",
         password: "",
       });
-      router.replace(router.query.prevPath);
+      router.replace(router?.query?.prevPath?router?.query?.prevPath:"/");
     } catch (error) {
       if (
         error.response &&
@@ -201,17 +201,14 @@ const AuthPopup = ({ auth }) => {
     }
     try {
       setLoader(true);
-      const url =
-        registerUser.type === "Donor"
-          ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp`
-          : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerRegistration`;
+      const url =`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp`;
       const response = await axios.post(url, registerUser, {
         withCredentials: true,
       });
 
       toast.success("registration successfull");
       {
-        registerUser.type == "Volunteer" &&
+        registerUser.type == "volunteer" &&
           toast.success("verification link sent to your email");
       }
       setRegisterUser({
@@ -248,7 +245,7 @@ const AuthPopup = ({ auth }) => {
   return (
     <>
       <div className="flex justify-center items-center mt-10">
-        <div className="max-w-md w-1/2 mx-auto px-8 py-3 mt-24 mb-16 bg-white span-8 rounded-xl shadow shadow-slate-300">
+        <div className="max-w-md lg:w-1/2 mx-auto px-8 py-3 mt-24 mb-16 bg-white span-8 rounded-xl shadow shadow-slate-300">
           <div
             className="cursor-pointer"
             onClick={() => setStep((prevStep) => prevStep - 1)}
@@ -318,7 +315,7 @@ const AuthPopup = ({ auth }) => {
                               onChange={handleRegisterInput}
                               id="volunteer-radio-id"
                               type="radio"
-                              value="Volunteer"
+                              value="volunteer"
                               name="type"
                               className="w-4 h-4"
                             />
@@ -535,7 +532,7 @@ const AuthPopup = ({ auth }) => {
                       placeholder="Enter phone number here"
                     />
                   </label>
-                  {registerUser?.type == "Volunteer" && (
+                  {registerUser?.type == "volunteer" && (
                     <label htmlFor="bio">
                       <span className="font-medium text-slate-700 pb-2">
                         Bio
@@ -635,7 +632,7 @@ const AuthPopup = ({ auth }) => {
             </div>
           </form>
         </div>
-        <div className="w-1/2">
+        <div className="hidden w-1/2 lg:block">
 
           <img src="/assets/images/fill-gap/auth.webp" alt="auth_vector" />
         </div>

@@ -8,17 +8,16 @@ router.get("/", async (req, res) => {
   try {
     if (id) {
       const volunteer = await volunteerData
-        .findById(id)
+        .findById(id).populate('profile')
         .populate('works.workDetails')
         .exec();
       if (volunteer) {
-        console.log(volunteer.works);
         res.status(200).send({ data: volunteer.works });
       } else {
         res.status(404).json({ message: "Volunteer not found" });
       }
     } else {
-      const volunteers = await volunteerData.find({});
+      const volunteers = await volunteerData.find({}).populate('profile').exec();
       res.status(200).json(volunteers);
     }
   } catch (err) {

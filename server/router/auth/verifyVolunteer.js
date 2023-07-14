@@ -10,12 +10,7 @@ router.get("/:verifyToken", async (req, res) => {
     } else if (volunteerData.verified) {
       res.status(400).send({ message: "Volunteer is already verified" });
     } else {
-      console.log("Before update: ", volunteerData);
-
       await volunteerModel.updateOne({ verifyToken: verifyToken }, { $set: { verified: true } });
-      const updatedVolunteerData = await volunteerModel.findOne({ verifyToken: verifyToken });
-
-      console.log("After update: ", updatedVolunteerData);
 
       res.send(`
         <html>

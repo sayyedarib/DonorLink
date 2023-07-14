@@ -12,14 +12,14 @@ const Volunteers = ({ volunteerData }) => {
               <>
                 <VolunteerCard
                   key={data._id}
-                  name={data?.name}
-                  email={data?.email}
-                  bio={data?.bio}
-                  phone={data?.phone}
+                  name={data?.profile?.name}
+                  email={data?.profile?.email}
+                  bio={data?.profile?.bio}
+                  phone={data?.profile?.phone}
                   picture={
-                    data.picture == ""
+                    data?.profile.picture == ""
                       ? "/assets/images/fill-gap/boy.svg"
-                      : data.picture
+                      : data.profile.picture
                   }
                   link="/"
                 />

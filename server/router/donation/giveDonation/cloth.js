@@ -1,43 +1,31 @@
 const router = require("express").Router();
 const sendMail = require("../../../utils/sendMail");
-const clothDonation = require("../../../models/donation/clothDonation");
-const registeredVolunteer = require("../../../models/volunteerSchema");
+const clothDonationModel = require("../../../models/donation/clothDonation");
+const profileModel = require("../../../models/profileSchema");
+const volunteerModel = require("../../../models/volunteerSchema");
 const findNearest = require("../../../utils/findNearest");
 const time = require("../../../utils/time");
 
 router.post("/", async (req, res) => {
   console.log("SR: cloth donation route");
   // Create a new Date object
-  const { name, email, phone, quantity, address, message, coordinates } =
-    req.body;
+  const { id, quantity, message } = req.body;
   const timing = time();
+  const donorsProfileData = await profileModel.findById(id);
+  const {type, name, email, phone, address, coordinates} =donorsProfileData;
   const nearestVolunteer = await findNearest(coordinates, "volunteer");
-  const donorIsNotVolunteer = await registeredVolunteer.findOne({ email: email });
-
-  if (donorIsNotVolunteer) { res.status(409).send({ message: "you are volunteer ,sumbit your donations directly" }) };
+  console.log("nearestVolunteer", nearestVolunteer);
+  if (type == "volunteer") { res.status(409).send({ message: "you are volunteer ,sumbit your donations directly to storage" }) };
 
   try {
-
-    console.log("address", address);
-    console.log("nearest volunteer is: ", nearestVolunteer[0].volunteer.name);
-    console.log("nearest volunteer email is: ", nearestVolunteer[0].volunteer.email);
-
-
-    const data = new clothDonation({
-      name,
-      email,
-      phone,
+    const data = new clothDonationModel({
+      profile:donorsProfileData._id,
       quantity,
-      address,
-      message,
-      coordinates,
       timing,
-      assignedVolunteers: nearestVolunteer,
+      nearestVolunteers: nearestVolunteer,
     });
-    // console.log("data ", data);
-    await registeredVolunteer.findOneAndUpdate({ email: email }, { workDetails: data });
 
-    await registeredVolunteer.findOneAndUpdate(
+    await volunteerModel.findOneAndUpdate(
       { _id: nearestVolunteer[0].volunteer._id },
       { $push: { works: { workDetails: data } } }
     );
@@ -78,7 +66,8 @@ router.post("/", async (req, res) => {
       <p>Dear <strong>${name}</strong>,</p>
       <p>Thank you for donating ${quantity} cloth(s) through DonorLink. Your contribution will make a difference in someone's life.</p>
       <p>We appreciate your generosity and willingness to help those in need.</p>
-      <p>Our volunteer will be soon at your door step : ${address.custom}</p>
+      <p>Our volunteer named <strong>${nearestVolunteer[0].volunteer.name}</strong> who lives at the distance <strong>${nearestVolunteer[0].distance}km</strong> at <strong>${nearestVolunteer[0].volunteer.address.custom}</strong>  will be soon at your door step : ${address.custom}</p>
+
 
       <p>If you have any further questions or would like to contribute more, please don't hesitate to reach out to us.</p>
       <p>Thank you once again for your support.</p>
