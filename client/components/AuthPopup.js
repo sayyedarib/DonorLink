@@ -245,7 +245,7 @@ const AuthPopup = ({ auth }) => {
   return (
     <>
       <div className="flex justify-center items-center mt-10">
-        <div className="max-w-md w-1/2 mx-auto px-8 py-3 mt-24 mb-16 bg-white span-8 rounded-xl shadow shadow-slate-300">
+        <div className="max-w-md lg:w-1/2 mx-auto px-8 py-3 mt-24 mb-16 bg-white span-8 rounded-xl shadow shadow-slate-300">
           <div
             className="cursor-pointer"
             onClick={() => setStep((prevStep) => prevStep - 1)}
@@ -632,7 +632,7 @@ const AuthPopup = ({ auth }) => {
             </div>
           </form>
         </div>
-        <div className="w-1/2">
+        <div className="hidden w-1/2 lg:block">
 
           <img src="/assets/images/fill-gap/auth.webp" alt="auth_vector" />
         </div>

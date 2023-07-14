@@ -27,7 +27,15 @@ const GetBlood = () => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bloodDonorsList?coordinates=${userContextDetail.userStateData.coordinates}`);
       console.log("CL:getblood data.data ", data.data);
       setNearbyDonor(data.data);
-      toast.success("we've got the donors in the range of 10km")
+      const filteredData = nearbyDonor?.filter((data) => data?.donor?.bloodGroup === blood && data?.distance < 10);
+      if(filteredData.length>0){
+        toast.success("we've got the donors in the range of 10km")
+        return;
+      }
+      else{
+        toast.warning("no donor available in the range of 10km");
+        return;
+      }
     } catch (error) {
       toast.warning("no donor found in the range of 10km")
       console.log("Error while finding nearest donor:", error);
@@ -63,9 +71,9 @@ const GetBlood = () => {
       </form>
       <div className='flex flex-wrap gap-3 items-center justify-center'>
         {
-          nearbyDonor?.filter((data) => data?.donor?.bloodGroup === blood)
+          nearbyDonor?.filter((data) => data?.donor?.bloodGroup === blood&&data?.distance<10)
             .map(filteredData => {
-              // console.log("filteredData ", filteredData);
+              console.log("filteredData ", filteredData);
               return <BloodDonorsCard key={filteredData.donor._id} data={filteredData} />;
             })
         }

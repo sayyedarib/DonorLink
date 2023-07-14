@@ -9,26 +9,9 @@ router.post("/", async (req, res) => {
         const { loginType } = req.query;
         const responseUser = await profileData.findOne({email});
         console.log("responseUser ", responseUser);
-        if(responseUser?.type=="volunteer"){
-            const responseVolunteer = await volunteerData.findOne({'profile':responseUser._id}).populate('profile').populate('works.workDetails').exec();
-            console.log("responseVolunteer ", responseVolunteer);
-            if (loginType == "google") {
-                return res.status(200).send({ profileData: responseVolunteer, message: "loggedIn successfully" })
-            }
-            else{
-                const validPassword = await bcrypt.compare(
-                    password,
-                    responseVolunteer.profile.password
-                );
-                if (!validPassword) {
-                    return res.status(409).send({ message: "Invalid Email or Password" });
-                }
-                return res.status(200).send({ profileData: responseVolunteer, message: "loggedIn successfully" })
-            }
-        }
 
         if (loginType == "google" && responseUser) {
-            return res.status(200).send({ profileData: responseUser.profile, message: "loggedIn successfully" })
+            return res.status(200).send({ profileData: responseUser, message: "loggedIn successfully" })
         }
         else if (responseUser) {
             const validPassword = await bcrypt.compare(

@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
   const timing = time();
   const {_id,name, email} = await profileModel.findById({_id:id});
   console.log("donors email ", _id);
-  const response = await bloodDonation.findOne({ 'profile.email': email });
+  const response = await bloodDonation.findOne({ profile: _id });
   console.log("response ", response);
   if (response) {
     res.status(409).send({ message: "you arleardy registered as blood donor" })

@@ -45,6 +45,7 @@ const BloodDonationForm = () => {
     try {
       console.log("start responsing");
       setLoader(true);
+      toast.success("Thank you for registering as blood donor")
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bloodDonation`,
         detail,
@@ -52,17 +53,18 @@ const BloodDonationForm = () => {
           withCredentials: true,
         }
       );
-
-      toast.success("successfully registered as blood donor")
+      toast.success("successfully registered as blood donor");
       setLoader(false);
       setDetail({
+        id:"",
         bloodGroup: "",
         message: "",
       });
-      // router.replace("/");
+      router.replace("/");
     } catch (err) {
       toast.error("you are already a blood donor.")
       setLoader(false);
+      router.replace("/");
     }
   };
 

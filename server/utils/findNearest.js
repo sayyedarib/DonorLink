@@ -26,7 +26,6 @@ module.exports = async function findNearest(coordinates, type) {
 
   else if (type == "bloodDonor") {
     const donors = await bloodDonationData.find({}).populate('profile').exec();
-    console.log("blood donors ", donors)
     const donorsWithDistance = donors.map((data) => {
       const donorsCoordinate = JSON.parse(data?.profile?.coordinates);
       const receiversCoordinate = JSON.parse(coordinates)

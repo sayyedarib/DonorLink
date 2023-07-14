@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
   const {type, name, email, phone, address, coordinates} =donorsProfileData;
   const nearestVolunteer = await findNearest(coordinates, "volunteer");
   console.log("nearestVolunteer", nearestVolunteer);
-  if (type == "volunteer") { res.status(409).send({ message: "you are volunteer ,sumbit your donations directly" }) };
+  if (type == "volunteer") { res.status(409).send({ message: "you are volunteer ,sumbit your donations directly to storage" }) };
 
   try {
     const data = new clothDonationModel({
@@ -66,7 +66,7 @@ router.post("/", async (req, res) => {
       <p>Dear <strong>${name}</strong>,</p>
       <p>Thank you for donating ${quantity} cloth(s) through DonorLink. Your contribution will make a difference in someone's life.</p>
       <p>We appreciate your generosity and willingness to help those in need.</p>
-      <p>Our volunteer named <strong>${nearestVolunteer[0].volunteer.name}</strong> is lives at the distance <strong>${nearestVolunteer[0].distance}km</strong> at <strong>${nearestVolunteer[0].volunteer.address.custom}</strong>  will be soon at your door step : ${address.custom}</p>
+      <p>Our volunteer named <strong>${nearestVolunteer[0].volunteer.name}</strong> who lives at the distance <strong>${nearestVolunteer[0].distance}km</strong> at <strong>${nearestVolunteer[0].volunteer.address.custom}</strong>  will be soon at your door step : ${address.custom}</p>
 
 
       <p>If you have any further questions or would like to contribute more, please don't hesitate to reach out to us.</p>
