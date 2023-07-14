@@ -1,43 +1,28 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 const clothDonationSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    }
-    ,
-    email: {
-        type: String,
-        required: true
-    },
-    phone: {
-        type: Number,
-        required: true
+    profile: {
+        type: Schema.Types.ObjectId,
+        ref: 'profileModel'
     },
     quantity: {
         type: Number,
         required: true
     },
-    address: {
-        custom: { type: String },
-        city: { type: String },
-        zip: { type: Number }
-    },
     message: {
         type: String,
-        required: false
-    },
-    coordinates: {
-        type: String,
-        required: false
     },
     timing: {
         type: String,
         required: true
     },
-    assignedVolunteers: {
+    nearestVolunteers: {
         type: Array,
-        required: false
+    },
+    assignedVolunteer: {
+        type: Number,
+        default:0
     }
 }, { collection: "clothDonationData" });
 
