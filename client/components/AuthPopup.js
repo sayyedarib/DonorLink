@@ -64,7 +64,7 @@ const AuthPopup = ({ auth }) => {
             picture: userObject.picture,
           });
           toast.success("logged in successfully");
-          router.replace(router.query.prevPath);
+          router.replace(router?.query?.prevPath?router?.query?.prevPath:"/");
         } catch (error) {
           if (
             error.response &&
