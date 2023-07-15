@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
 module.exports = async function sendMail({ email, subject, message,phone, queryMail }) {
-  console.log("I'm inside send Mail");
+
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -11,9 +11,6 @@ module.exports = async function sendMail({ email, subject, message,phone, queryM
       pass: `${process.env.EMAIL_PASSWORD}`,
     },
   });
-  console.log("I've crossed transporter");
-  console.log("email ", email);
-  console.log(queryMail)
   await transporter.sendMail({
     from: `DonorLink`,
     to: email,
