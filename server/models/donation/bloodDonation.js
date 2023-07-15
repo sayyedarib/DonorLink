@@ -1,33 +1,16 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 const bloodDonationSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    }
-    ,
-    email: {
-        type: String,
-        required: true
-    },
-    phone: {
-        type: Number,
-        required: true
-    },
+    profile: {
+        type: Schema.Types.ObjectId,
+        ref: 'profileModel'
+      },
     bloodGroup: {
         type: String,
         required: true
     },
-    address: {
-        custom: { type: String },
-        city: { type: String },
-        zip: { type: Number }
-    },
     message: {
-        type: String,
-        required: false
-    },
-    coordinates: {
         type: String,
         required: false
     },

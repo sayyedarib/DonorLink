@@ -20,13 +20,9 @@ const BloodDonationForm = () => {
 
   const location = useGeoLocation();
   const [detail, setDetail] = useState({
-    name: userContextDetail.userStateData.name,
-    email: userContextDetail.userStateData.email,
-    phone: userContextDetail.userStateData?.phone ? userContextDetail.userStateData?.phone : "",
+    id:userContextDetail?.userStateData?._id,
     bloodGroup: "",
-    address: userContextDetail.userStateData?.address ? userContextDetail.userStateData?.address : "",
     message: "",
-    coordinates: "",
   });
 
   let name, value;
@@ -49,6 +45,7 @@ const BloodDonationForm = () => {
     try {
       console.log("start responsing");
       setLoader(true);
+      toast.success("Thank you for registering as blood donor")
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bloodDonation`,
         detail,
@@ -56,22 +53,18 @@ const BloodDonationForm = () => {
           withCredentials: true,
         }
       );
-
+      toast.success("successfully registered as blood donor");
       setLoader(false);
       setDetail({
-        name: "",
-        email: "",
-        phone: "",
+        id:"",
         bloodGroup: "",
-        address: "",
         message: "",
-        coordinates: "",
       });
-      toast.success("successfully registered as blood donor")
       router.replace("/");
     } catch (err) {
-      setLoader(false);
       toast.error("you are already a blood donor.")
+      setLoader(false);
+      router.replace("/");
     }
   };
 

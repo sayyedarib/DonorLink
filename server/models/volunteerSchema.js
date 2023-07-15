@@ -1,43 +1,10 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const clothDonationData = require('./donation/clothDonation');
-
 
 const volunteerFormSchema = mongoose.Schema({
-  type: { type: String, default: "Volunteer" },
-  picture: {
-    type: String,
-  },
-
-  name: {
-    type: String,
-    required: true
-  }
-  ,
-  email: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-  },
-  cpassword: {
-    type: String,
-  },
-  phone: {
-    type: Number,
-    required: true
-  },
-  bio: {
-    type: String,
-  },
-  address: {
-    custom: { type: String },
-    city: { type: String },
-    zip: { type: String }
-  },
-  coordinates: {
-    type: String,
+  profile: {
+    type: Schema.Types.ObjectId,
+    ref: 'profileModel'
   },
   verified: {
     type: Boolean,
@@ -51,7 +18,7 @@ const volunteerFormSchema = mongoose.Schema({
     {
       workDetails: {
         type: Schema.Types.ObjectId,
-        ref: 'clothDonationData' // Reference the clothDonationData model
+        ref: 'clothDonationData'
       },
       accepted: {
         type: Boolean,
@@ -70,4 +37,4 @@ const volunteerFormSchema = mongoose.Schema({
 }, { collection: "volunteersData" });
 
 
-module.exports = mongoose.model("volunteerFormModel", volunteerFormSchema);
+module.exports = mongoose.model("volunteerModel", volunteerFormSchema);

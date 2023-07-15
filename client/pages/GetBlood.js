@@ -1,9 +1,9 @@
+import { ToastContainer, toast } from "react-toastify";
 import React, { useState, useContext, useEffect } from 'react';
 import BloodDonorsCard from '@/components/cards/BloodDonorsCard';
 import userContext from '@/context/auth/userContext';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { ToastContainer, toast } from "react-toastify";
 
 const GetBlood = () => {
   const router = useRouter();
@@ -26,8 +26,15 @@ const GetBlood = () => {
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bloodDonorsList?coordinates=${userContextDetail.userStateData.coordinates}`);
       console.log("CL:getblood data.data ", data.data);
-      setNearbyDonor(data.data.filter(data => data.distance / 1000000 < 1));
-      toast.success("we've got the donors in the range of 10km")
+      setNearbyDonor(data.data);
+      const filteredData = nearbyDonor?.filter((data) => data?.donor?.bloodGroup === blood && data?.distance < 10);
+      console.log(" filteredData ", filteredData);
+      if(filteredData.length>0){
+        toast.success("we've got the donors in the range of 10km")
+      }
+      else{
+        toast.warning("no donor available in the range of 10km");
+      }
     } catch (error) {
       toast.warning("no donor found in the range of 10km")
       console.log("Error while finding nearest donor:", error);
@@ -36,7 +43,7 @@ const GetBlood = () => {
 
 
   return (
-    <div className='flex flex-col h-[74vh] justify-center items-center mx-auto lg:my-12 my-24 gap-20'>
+    <div className='relative z-50 flex flex-col h-[74vh] justify-center items-center mx-auto lg:my-12 my-24 gap-20'>
       <form>
         <label htmlFor="bloodType" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
         <div className="relative">
@@ -63,9 +70,9 @@ const GetBlood = () => {
       </form>
       <div className='flex flex-wrap gap-3 items-center justify-center'>
         {
-          nearbyDonor?.filter((data) => data.donor.bloodGroup === blood)
+          nearbyDonor?.filter((data) => data?.donor?.bloodGroup === blood&&data?.distance<10)
             .map(filteredData => {
-              // console.log("filteredData ", filteredData);
+              console.log("filteredData ", filteredData);
               return <BloodDonorsCard key={filteredData.donor._id} data={filteredData} />;
             })
         }
