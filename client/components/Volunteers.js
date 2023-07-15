@@ -5,7 +5,7 @@ const Volunteers = ({ volunteerData }) => {
   return (
     <>
       <section className="bg-blue-50 flex flex-col text-white px-5 py-3 gap-20">
-        <h1 className="text-center text-4xl sm:text-5xl font-bold text-blue-600">Star Volunteers</h1>
+        <h1 className="text-center text-4xl sm:text-5xl font-bold text-blue-600">Our Volunteers</h1>
         <div className="flex flex-wrap gap-8 justify-center">
           {volunteerData?.map((data) => {
             return (
