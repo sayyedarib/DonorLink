@@ -81,9 +81,7 @@ router.post("/", async (req, res) => {
 
 
     await sendMail({ email: nearestVolunteer[0].volunteer.email, name, subject: "Cloth Donation alert", message: messageVolunteer });
-
     await sendMail({ email, name, subject: "Thanks Message", message: messageDonor });
-
     res.status(200).send({ message: "Thank you for donating cloth." });
   } catch (err) {
     console.log(

@@ -3,7 +3,7 @@ import axios from "axios";
 import {queryResponseId, response_error, response_success } from '../styles/pages/contactus.module.css';
 
 const ContactUs = () => {
-    const [query, setQuery] = useState({ topic: "", phone: "", email: "", message: "" });
+    const [query, setQuery] = useState({ subject: "", phone: "", email: "", message: "" });
 
     const handleInput = (e) => {
         const { name, value } = e.target;
@@ -13,8 +13,10 @@ const ContactUs = () => {
     const handleQuery = async  () => {
         const popup = document.createElement('span');
         popup.id = queryResponseId;
-        await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/sendMail`,
-            query
+        await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/sendQuery`,
+            query,             {
+                withCredentials: true,
+              }
         ).then(res => {
             popup.textContent = "Your query has been sent";
             popup.className = response_success;
@@ -23,10 +25,12 @@ const ContactUs = () => {
             popup.className = response_error;
         });
 
-        document.getElementsByClassName("contactUsForm")[0].appendChild(popup);
+        document.getElementsByClassName("contactUsForm")[0]?.appendChild(popup);
         setTimeout(() => {
-            document.getElementsByClassName("contactUsForm")[0].removeChild(popup);
+            document.getElementsByClassName("contactUsForm")[0]?.removeChild(popup);
         }, 5000);
+
+        setQuery({ subject: "", phone: "", email: "", message: "" });
     }
 
     return (
@@ -116,16 +120,16 @@ const ContactUs = () => {
                     <h1 className="text-center text-blue-800 font-bold text-2xl">Contact Us</h1>
                     <form action="" className="mt-10">
                         <div className="flex flex-col space-y-5">
-                            <label htmlFor="topic">
+                            <label htmlFor="subject">
                                 <span className="font-medium text-slate-700 pb-2">Topic</span>
                                 <input
                                     onChange={handleInput}
-                                    value={query.topic}
-                                    id="topic"
-                                    name="topic"
+                                    value={query.subject}
+                                    id="subject"
+                                    name="subject"
                                     type="text"
                                     className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
-                                    placeholder="Enter Releated Topic"
+                                    placeholder="Enter Releated topic"
                                 />
                             </label>
 
