@@ -7,9 +7,9 @@ import { FcCollect } from "react-icons/fc";
 const AboutUs = () => {
     return (
         <>
-            <section className="py-10 lg:py-20 bg-blue-50 font-poppin">
+            <section className="py-10 lg:py-20 bg-blue-50 font-poppin mt-4">
                 <div className="max-w-6xl py-4 mx-auto lg:py-6 md:px-6">
-                    <div className="flex flex-wrap ">
+                    <div className="flex flex-wrap-reverse">
                         <div className="w-full px-4 mb-10 lg:w-1/2 lg:mb-0 ">
                             <div className="lg:max-w-md">
                                 <div className="px-4 pl-4 mb-6 border-l-4 border-blue-500">
@@ -66,7 +66,7 @@ const AboutUs = () => {
                             </div>
                         </div>
                         <div className="w-full px-4 mb-10 lg:w-1/2 lg:mb-0">
-                            <div className='flex flex-wrap gap-5'>
+                            <div className='flex flex-wrap gap-2 lg:gap-5 justify-center items-center'>
                                 <span className='flex flex-col text-center gap-3 font-semibold text-2xl '>
                                     <img src="/assets/images/img/me.webp" alt="member_1" className="w-48 h-48 rounded-full" />
                                     Aarib</span>
