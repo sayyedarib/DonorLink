@@ -12,27 +12,30 @@ router.post("/", async (req, res) => {
   const { id, quantity, message } = req.body;
   const timing = time();
   const donorsProfileData = await profileModel.findById(id);
-  const {type, name, email, phone, address, coordinates} =donorsProfileData;
+  const { type, name, email, phone, address, coordinates } = donorsProfileData;
   const nearestVolunteer = await findNearest(coordinates, "volunteer");
-  console.log("nearestVolunteer", nearestVolunteer);
+  // console.log("nearestVolunteer", nearestVolunteer);
   if (type == "volunteer") { res.status(409).send({ message: "you are volunteer ,sumbit your donations directly to storage" }) };
 
   try {
     const data = new clothDonationModel({
-      profile:donorsProfileData._id,
+      profile: donorsProfileData._id,
       quantity,
+      message,
       timing,
       nearestVolunteers: nearestVolunteer,
     });
-
+    console.log("cloth donation data ", data);
+    console.log("nearestVolunteer[0].volunteer._id ", nearestVolunteer[0].volunteer._id);
     await volunteerModel.findOneAndUpdate(
-      { _id: nearestVolunteer[0].volunteer._id },
-      { $push: { works: { workDetails: data } } }
+      { profile: nearestVolunteer[0].volunteer._id },
+      { $push: { works: { workDetails: data._id } } },
     );
 
     console.log("SR-router-cloth: sending mail ");
 
     await data.save();
+
 
     const messageVolunteer = `
     <p><strong>Dear ${nearestVolunteer[0].volunteer.name},</strong></p>

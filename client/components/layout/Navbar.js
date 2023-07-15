@@ -57,7 +57,7 @@ const Navigation = () => {
                   <ul className="flex flex-col shadow-lg rounded-lg overflow-hidden ">
 
                     <Link
-                      href={`/${userContextDetail.userStateData.name}`}
+                      href={`/${userContextDetail.userStateData._id}`}
                       className="hover:bg-dark-hard bg-blue-50 hover:text-white hover:bg-blue-700 px-4 py-2 text-black lg:text-dark-soft"
                     >
                       Dashboard
@@ -96,7 +96,7 @@ const Navigation = () => {
                     <ul className="flex flex-col shadow-lg rounded-lg overflow-hidden ">
 
                       <Link
-                        href={`/${userContextDetail.userStateData.name}`}
+                        href={`/${userContextDetail.userStateData._id}`}
                         className="hover:bg-dark-hard bg-blue-50 hover:text-white hover:bg-blue-700 px-4 py-2 text-black lg:text-dark-soft"
                       >
                         Dashboard

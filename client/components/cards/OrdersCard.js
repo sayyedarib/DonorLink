@@ -1,25 +1,25 @@
 import React from "react";
 
 const OrdersCard = ({ data, handleDecision }) => {
-
+    console.log("orders card ", data);
     return (
         <>
             <div className="relative flex w-96 h-auto flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg shadow-blue-300">
                 <div className="p-6">
                     <h5 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                        <span className="font-bold">Donated by: </span>    {data?.workDetails?.name}
+                        <span className="font-bold">Donated by: </span>    {data?.workDetails?.profile?.name}
                     </h5>
                     <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                        <span className="font-bold">Phone: </span>   {data?.workDetails?.phone}
+                        <span className="font-bold">Phone: </span>   {data?.workDetails?.profile?.phone}
                     </span>
                     <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                        <span className="font-bold">Address: </span>   {data.workDetails?.address?.custom}
+                        <span className="font-bold">Address: </span>   {data?.workDetails?.profile?.address?.custom}
                     </span>
                     <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                        <span className="font-bold">Message: </span>   {data?.workDetails?.message}
+                        <span className="font-bold">Message: </span>   {data?.workDetails?.profile?.message}
                     </span>
                     <span className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                        <span className="font-bold">Distance: </span>   distance
+                        <span className="font-bold">Distance: </span> {data?.workDetails?.nearestVolunteers[data?.workDetails?.assignedVolunteer]?.distance}km
                     </span>
                 </div>
                 <div className="flex flex-col p-6 pt-0 gap-3">

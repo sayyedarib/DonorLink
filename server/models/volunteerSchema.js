@@ -37,4 +37,4 @@ const volunteerFormSchema = mongoose.Schema({
 }, { collection: "volunteersData" });
 
 
-module.exports = mongoose.model("volunteerFormModel", volunteerFormSchema);
+module.exports = mongoose.model("volunteerModel", volunteerFormSchema);
