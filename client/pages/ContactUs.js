@@ -112,7 +112,7 @@ const ContactUs = () => {
                         </div>
                     </div>
                 </div>
-                <div className="lg:w-[28rem] w-full p-8 my-10 bg-white rounded-xl shadow-xl shadow-blue-200 contactUsForm">
+                <div className="lg:w-[28rem] w-full p-8 my-10 bg-white rounded-xl shadow-xl shadow-blue-200">
                     <h1 className="text-center text-blue-800 font-bold text-2xl">Contact Us</h1>
                     <form action="" className="mt-10">
                         <div className="flex flex-col space-y-5">
