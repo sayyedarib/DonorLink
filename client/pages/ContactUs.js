@@ -1,22 +1,37 @@
 import React, { useState } from 'react'
+import axios from "axios";
+import {queryResponseId, response_error, response_success } from '../styles/pages/contactus.module.css';
 
 const ContactUs = () => {
-    const [query, setQuery] = useState({ topic: "", name: "", email: "", message: "" });
+    const [query, setQuery] = useState({ topic: "", phone: "", email: "", message: "" });
 
     const handleInput = (e) => {
         const { name, value } = e.target;
         setQuery({ ...query, [name]: value })
-    }
+    };
 
-    const handleQuery = () => {
+    const handleQuery = async  () => {
+        const popup = document.createElement('span');
+        popup.id = queryResponseId;
+        await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/sendMail`,
+            query
+        ).then(res => {
+            popup.textContent = "Your query has been sent";
+            popup.className = response_success;
+        }).catch(err => {
+            popup.textContent = "Error Occured. Try Again";
+            popup.className = response_error;
+        });
 
+        document.getElementsByClassName("contactUsForm")[0].appendChild(popup);
+        setTimeout(() => {
+            document.getElementsByClassName("contactUsForm")[0].removeChild(popup);
+        }, 5000);
     }
 
     return (
         <div>
-
             <section className=" flex flex-wrap mx-10 mt-24 justify-between items-center">
-
                 <div className="">
                     <div className="mb-12 max-w-[570px] lg:mb-0">
                         <h2
@@ -97,7 +112,7 @@ const ContactUs = () => {
                         </div>
                     </div>
                 </div>
-                <div className="lg:w-[28rem] w-full p-8 my-10 bg-white rounded-xl shadow-xl shadow-blue-200">
+                <div className="lg:w-[28rem] w-full p-8 my-10 bg-white rounded-xl shadow-xl shadow-blue-200 contactUsForm">
                     <h1 className="text-center text-blue-800 font-bold text-2xl">Contact Us</h1>
                     <form action="" className="mt-10">
                         <div className="flex flex-col space-y-5">
@@ -110,7 +125,7 @@ const ContactUs = () => {
                                     name="topic"
                                     type="text"
                                     className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
-                                    placeholder="Enter your blood group here"
+                                    placeholder="Enter Releated Topic"
                                 />
                             </label>
 
@@ -123,7 +138,7 @@ const ContactUs = () => {
                                     name="email"
                                     type="email"
                                     className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
-                                    placeholder="Enter your blood group here"
+                                    placeholder="email"
                                 />
                             </label>
                             <label htmlFor="phone">
@@ -133,9 +148,9 @@ const ContactUs = () => {
                                     value={query.phone}
                                     id="phone"
                                     name="phone"
-                                    type="number"
+                                    type="number"    
                                     className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
-                                    placeholder="Enter your blood group here"
+                                    placeholder="Phone number"
                                 />
                             </label>
                             <label htmlFor="message">

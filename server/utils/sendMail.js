@@ -1,22 +1,25 @@
 const nodemailer = require("nodemailer");
 
-module.exports = async function sendMail({ email, name, subject, message }) {
-  console.log("I'm inside send Mail");
+module.exports = async function sendMail(req, res) {
+  const { email, phone, topic, message } = req.body;
+  const receiverEmail = "sayyedaribhussain4321@gmail.com";
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
+    service: "gmail",
     auth: {
-      user: "sayyedaribhussain4321@gmail.com",
+      user: receiverEmail,
       pass: `${process.env.EMAIL_PASSWORD}`,
     },
   });
-  console.log("I've crossed transporter");
-  console.log("email ", email, "name ", name);
-  await transporter.sendMail({
+  transporter.sendMail({
     from: `DonorLink`,
-    to: email,
-    subject: subject,
-    html: message,
+    to: receiverEmail,
+    subject: `DonorLink - Regarding: ${topic}`,
+    text: `${message} \n\n Email: ${email} \n Phone no: ${phone}`
+  }, (err, info) => {
+    if(err) {
+      console.log(`Error occured during mail ${err}`);
+      res.status(500).send("Error Occured");
+    } else
+      res.status(200).send("Mail Sent Successfully");
   });
 };
