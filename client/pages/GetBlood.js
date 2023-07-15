@@ -31,11 +31,9 @@ const GetBlood = () => {
       console.log(" filteredData ", filteredData);
       if(filteredData.length>0){
         toast.success("we've got the donors in the range of 10km")
-        return;
       }
       else{
         toast.warning("no donor available in the range of 10km");
-        return;
       }
     } catch (error) {
       toast.warning("no donor found in the range of 10km")
