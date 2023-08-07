@@ -7,7 +7,6 @@ import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/router";
 import "react-toastify/dist/ReactToastify.css";
 import { BiArrowBack } from "react-icons/bi";
-import { getPreviousUrl } from "@/hooks/prevUrl";
 
 const AuthPopup = ({ auth }) => {
   const router = useRouter();
@@ -39,6 +38,9 @@ const AuthPopup = ({ auth }) => {
     },
   });
 
+  const [emailValid, setEmailValid] = useState(true);
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+
   //google sigin callback function
   const handleCallBackResponse = async (res) => {
     try {
@@ -64,7 +66,9 @@ const AuthPopup = ({ auth }) => {
             picture: userObject.picture,
           });
           toast.success("logged in successfully");
-          router.replace(router?.query?.prevPath?router?.query?.prevPath:"/");
+          router.replace(
+            router?.query?.prevPath ? router?.query?.prevPath : "/"
+          );
         } catch (error) {
           if (
             error.response &&
@@ -133,8 +137,9 @@ const AuthPopup = ({ auth }) => {
         email: "",
         password: "",
       });
-      router.replace(router?.query?.prevPath?router?.query?.prevPath:"/");
+      router.replace(router?.query?.prevPath ? router?.query?.prevPath : "/");
     } catch (error) {
+      setLoader(false);
       if (
         error.response &&
         error.response.status >= 400 &&
@@ -166,18 +171,55 @@ const AuthPopup = ({ auth }) => {
     setRegisterUser({ ...registerUser, picture: base64 });
   };
 
+  const getLocation = () => {
+    // Check if geolocation is available in the browser
+    if ("geolocation" in navigator) {
+      // Request the user's location
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // Update the coordinates in the registerUser state
+          setRegisterUser((prevState) => ({
+            ...prevState,
+            coordinates: JSON.stringify({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            }),
+          }));
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+          toast.error(
+            "Failed to get your location. Please give access to location for getting in touch with you when needed."
+          );
+        }
+      );
+    } else {
+      toast.error("Geolocation is not available in your browser.");
+    }
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   //handle registration
   const handleRegisterInput = (e) => {
     const { name, value } = e.target;
     console.log(registerUser);
+    // Check if the input is an email (only if the input is for the email field)
+    if (name === "email") {
+      const isValidEmail = validateEmail(value);
+      setEmailValid(isValidEmail);
+      setEmailErrorMessage(isValidEmail ? "" : "Invalid email format");
+    }
     if (step === 1) {
       setRegisterUser({
         ...registerUser,
         [name]: value,
-        coordinates: `${location.loaded
-          ? JSON.stringify(location.coordinates)
-          : "Could not access the location"
-          }`,
+        coordinates: `${
+          location.loaded ? JSON.stringify(location.coordinates) : ""
+        }`,
       });
     } else if (step === 2) {
       if (name == "phone" || name == "bio") {
@@ -199,38 +241,49 @@ const AuthPopup = ({ auth }) => {
       toast.error("password and confirm password mismatched");
       return;
     }
+    if (
+      registerUser.coordinates === "" ||
+      registerUser.coordinates === "undefined"
+    ) {
+      toast.error(
+        "please give access to location for getting in touch with you when needed"
+      );
+      await getLocation();
+      return;
+    }
     try {
       setLoader(true);
-      const url =`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp`;
+      const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp`;
       const response = await axios.post(url, registerUser, {
         withCredentials: true,
       });
-
-      toast.success("registration successfull");
-      {
-        registerUser.type == "volunteer" &&
-          toast.success("verification link sent to your email");
+      if (response.status == 200) {
+        toast.success("registration successfull");
+        {
+          registerUser.type == "volunteer" &&
+            toast.success("verification link sent to your email");
+        }
+        setRegisterUser({
+          type: "",
+          name: "",
+          email: "",
+          password: "",
+          cpassword: "",
+          phone: "",
+          picture: "",
+          coordinates: "",
+          bio: "",
+          address: {
+            custom: "",
+            city: "",
+            zip: "",
+          },
+        });
+        router.replace("/auth");
+        setStep(1);
+        setRegister(false);
+        setLoader(false);
       }
-      setRegisterUser({
-        type: "",
-        name: "",
-        email: "",
-        password: "",
-        cpassword: "",
-        phone: "",
-        picture: "",
-        coordinates: "",
-        bio: "",
-        address: {
-          custom: "",
-          city: "",
-          zip: "",
-        },
-      });
-      setLoader(false);
-      setRegister(false);
-      setStep(1);
-      router.replace("/auth");
     } catch (error) {
       if (
         error.response &&
@@ -380,9 +433,17 @@ const AuthPopup = ({ auth }) => {
                       id="email"
                       name="email"
                       type="email"
-                      className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                      className={`w-full py-3 border ${
+                        !emailValid ? "border-red-500" : "border-slate-200"
+                      } rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow`}
                       placeholder="Enter email address"
+                      required
                     />
+                    {!emailValid && (
+                      <div className="text-red-500 text-sm">
+                        {emailErrorMessage}
+                      </div>
+                    )}
                   </label>
 
                   <label htmlFor="password">
@@ -453,9 +514,7 @@ const AuthPopup = ({ auth }) => {
                     }}
                     className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border-indigo-700 hover:shadow inline-flex space-x-2 items-center justify-center"
                   >
-                    <span
-
-                    >
+                    <span>
                       {register ? (
                         step === 2 ? (
                           "Register"
@@ -530,6 +589,7 @@ const AuthPopup = ({ auth }) => {
                       type="number"
                       className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
                       placeholder="Enter phone number here"
+                      required
                     />
                   </label>
                   {registerUser?.type == "volunteer" && (
@@ -592,7 +652,7 @@ const AuthPopup = ({ auth }) => {
                     </label>
                   </div>
                   <button
-                    type="button"
+                    type="submit"
                     onClick={(e) => {
                       if (register && step === 2) {
                         handleRegistration();
@@ -633,7 +693,6 @@ const AuthPopup = ({ auth }) => {
           </form>
         </div>
         <div className="hidden w-1/2 lg:block">
-
           <img src="/assets/images/fill-gap/auth.webp" alt="auth_vector" />
         </div>
         <ToastContainer position="top-left" />

@@ -29,13 +29,12 @@ const BloodDonationForm = () => {
   const handleInput = (e) => {
     name = e.target.name;
     value = e.target.value;
+
+    value = value.toUpperCase();
+
     setDetail({
       ...detail,
       [name]: value,
-      coordinates: `${location.loaded
-        ? JSON.stringify(location.coordinates)
-        : "Could not access the location"
-        }`,
     });
   };
 
@@ -45,7 +44,6 @@ const BloodDonationForm = () => {
     try {
       console.log("start responsing");
       setLoader(true);
-      toast.success("Thank you for registering as blood donor")
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bloodDonation`,
         detail,
@@ -53,19 +51,26 @@ const BloodDonationForm = () => {
           withCredentials: true,
         }
       );
-      toast.success("successfully registered as blood donor");
       setLoader(false);
       setDetail({
-        id:"",
+        id: "",
         bloodGroup: "",
         message: "",
       });
+      // Check the response status to determine whether it was successful or not
+      if (response.status === 200) {
+        toast.success("Thank you for registering as a blood donor");
+        toast.success("Successfully registered as a blood donor");
+      } else {
+        toast.error("An error occurred while registering as a blood donor");
+      }
       router.replace("/");
     } catch (err) {
-      toast.error("you are already a blood donor.")
+      toast.error("You are already a blood donor.");
       setLoader(false);
       router.replace("/");
     }
+    
   };
 
   return (
