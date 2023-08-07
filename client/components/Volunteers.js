@@ -17,9 +17,9 @@ const Volunteers = ({ volunteerData }) => {
                   bio={data?.profile?.bio}
                   phone={data?.profile?.phone}
                   picture={
-                    data?.profile.picture == ""
+                    data?.profile?.picture == ""
                       ? "/assets/images/fill-gap/boy.svg"
-                      : data.profile.picture
+                      : data?.profile?.picture
                   }
                   link="/"
                 />
