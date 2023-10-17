@@ -1,68 +1,38 @@
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-# DonorLink
-DonorLink is a web application that connects donors with people in need. Built using Next.js, Express, and MongoDB Atlas, it enables donors to fill out a form and share their location, and uses geolocation to match them with nearby volunteers. The application also includes a payment gateway using Razorpay for secure online donations(payment gateway KYC is under test mode so for now UPI QR is shown).
+## Getting Started
 
-![Home](https://github.com/sayyedarib/DonorLink/assets/90370535/2ac06b21-a10b-4b62-b0db-3e020a996f1c)
-
-# Features
-
-Join Us as Volunteer, Donor, or needy.
-![signUp](https://github.com/sayyedarib/DonorLink/assets/90370535/afd75e80-feda-4bfb-890c-d27ab8dcabd8)
-
-Easy-to-use form for donors to fill out
-![providehelp](https://github.com/sayyedarib/DonorLink/assets/90370535/7582e92e-a50c-4dbc-888f-ef47e8c56b5c)
-
-![donate cloth](https://github.com/sayyedarib/DonorLink/assets/90370535/ff01981d-b51f-464b-9054-b153e6fe58d3)
-
-
-
-Geolocation to match donors with nearby volunteers
-<br/>
-Nodemailer to send email notifications with donor locations to volunteers
-![email](https://github.com/sayyedarib/DonorLink/assets/90370535/c73057eb-2286-4ee5-b698-08fe93e00f9e)
-
-
-# Getting started
-Clone the repository to your local machine
-Install dependencies using npm install
+First, run the development server:
 
 ```bash
-cd client
-
 npm run dev
 # or
 yarn dev
-```
-Start the development server using npm run start
-```bash
-cd server
-
-npm run start
 # or
-yarn start
+pnpm dev
 ```
 
-# Contributing
-If you would like to contribute to the development of DonorLink, please follow these steps:
-<div><ul>
-<li>Fork the repository to your own GitHub account</li>
-<li>clone the repo</li>
-<li>Create a new branch with your changes: git checkout -b my-feature</li>
-<li>Commit your changes: git commit -m "Add new feature"</li>
-<li>Push your changes to your fork: git push origin my-feature</li>
-<li>Create a pull request on the main repository</li>
-</ul>
-  </div>
-  
-  # Future Plans
-We are continuously working to add new feature and make the website more user friendly:
-<div><ul>
-<li>Integrating payment gateway</li>
-<li>Provide dashboard to donors</li>
-<li>Open the registration for NGOs</li>
-<li>Reseaching more to build trust</li>
-</ul>
-  </div>
-  
-# Credits
-DonorLink was developed by Aarib, Rafey, and Areeb in Vercera Hackathon February 2023.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
