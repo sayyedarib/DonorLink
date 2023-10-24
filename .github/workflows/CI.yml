@@ -18,8 +18,8 @@ jobs:
 
       - name: Install client dependencies
         run: npm install
-        working-directory: ./client
+        working-directory: ./
 
       - name: Build Next.js app
         run: npm run build
-        working-directory: ./client
+        working-directory: ./
