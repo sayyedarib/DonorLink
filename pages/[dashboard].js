@@ -40,7 +40,7 @@ const Volunteer = ({volunteersData}) => {
 
             {/* <div className="flex flex-wrap xl:flex-nowrap gap-3 justify-center items-center m-5"> */}
             {works?.filter(data => !data.collected && !data.accepted && !data.rejected).map((filteredData, index) => {
-             return <OrdersCard key={index} data={filteredData} handleDecision={handleDecision} />
+             return <div key={index}><OrdersCard data={filteredData} handleDecision={handleDecision} /></div>
             })}
 
             {/* </div> */}
@@ -56,7 +56,7 @@ const Volunteer = ({volunteersData}) => {
             {/* <div className="flex flex-wrap xl:flex-nowrap gap-3 justify-center items-center m-5"> */}
 
             {works?.filter(data => data.accepted && !data.collected).map((filteredData, index) => {
-             return <OrdersCard key={index} data={filteredData} handleDecision={handleDecision} />
+             return <div key={index}><OrdersCard data={filteredData} handleDecision={handleDecision} /></div>
             })}
 
             {/* </div> */}
@@ -71,7 +71,7 @@ const Volunteer = ({volunteersData}) => {
 
             {/* <div className="flex flex-wrap xl:flex-nowrap gap-3 justify-center items-center m-5"> */}
             {works?.filter(data => data.accepted && data.collected).map((filteredData, index) => {
-              return <OrdersCard key={index} data={filteredData} handleDecision={handleDecision} />
+              return <div key={index}><OrdersCard data={filteredData} handleDecision={handleDecision} /></div>
             })}
             {/* </div> */}
           </div>
@@ -88,7 +88,7 @@ export default Volunteer;
 export const getServerSideProps = async (context) => {
   const { dashboard } = context.query;
   const _id = dashboard;
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList?particular/${_id}`);
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList/${_id}`);
   return {
     props: {
       volunteersData: data.data,

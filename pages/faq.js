@@ -58,9 +58,11 @@ function faq() {
                 <h1 className="text-center text-4xl sm:text-5xl font-bold text-blue-600">Frequently Asked Questions</h1>
                 <section className="max-w-6xl mx-auto text-center">
                     {
-                        faqList.map(faq => {
-                            return (
-                                <Accordion key={faq.title} title={faq.title} content={faq.content} />
+                        faqList.map((faq, index) => {
+                            return (<div key={index}>
+
+                                <Accordion  title={faq.title} content={faq.content} />
+                            </div>
                             )
                         })
                     }

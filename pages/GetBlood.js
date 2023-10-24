@@ -71,7 +71,7 @@ const GetBlood = () => {
         {
           nearbyDonor?.filter((data) => data?.donor?.bloodGroup === blood&&data?.distance<10)
             .map(filteredData => {
-              return <BloodDonorsCard key={filteredData.donor._id} data={filteredData} />;
+              return <div key={filteredData.donor._id}><BloodDonorsCard data={filteredData} /></div>
             })
         }
 

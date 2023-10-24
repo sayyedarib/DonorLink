@@ -77,7 +77,7 @@ const GetCloth = () => {
                         :
                         <div className="flex gap-5 flex-wrap justify-center items-center mt-10">
 
-                            {nearbyDonor.map(data => <ClothDonorsCard key={data._id} data={data} />)}
+                            {nearbyDonor.map(data =><div key={data._id}><ClothDonorsCard data={data} /></div>)}
                         </div>}
                 </div>
             </div>

@@ -5,24 +5,27 @@ const Volunteers = ({ volunteerData }) => {
   return (
     <>
       <section className="bg-blue-50 flex flex-col text-white px-5 py-3 gap-20">
-        <h1 className="text-center text-4xl sm:text-5xl font-bold text-blue-600">Our Volunteers</h1>
+        <h1 className="text-center text-4xl sm:text-5xl font-bold text-blue-600">
+          Our Volunteers
+        </h1>
         <div className="flex flex-wrap gap-8 justify-center">
           {volunteerData?.map((data, index) => {
             return (
               <>
-                <VolunteerCard
-                  key={data._id+index}
-                  name={data?.profile?.name}
-                  email={data?.profile?.email}
-                  bio={data?.profile?.bio}
-                  phone={data?.profile?.phone}
-                  picture={
-                    data?.profile?.picture == ""
-                      ? "/assets/images/fill-gap/boy.svg"
-                      : data?.profile?.picture
-                  }
-                  link="/"
-                />
+                <div key={data._id + index}>
+                  <VolunteerCard
+                    name={data?.profile?.name}
+                    email={data?.profile?.email}
+                    bio={data?.profile?.bio}
+                    phone={data?.profile?.phone}
+                    picture={
+                      data?.profile?.picture == ""
+                        ? "/assets/images/fill-gap/boy.svg"
+                        : data?.profile?.picture
+                    }
+                    link="/"
+                  />
+                </div>
               </>
             );
           })}
