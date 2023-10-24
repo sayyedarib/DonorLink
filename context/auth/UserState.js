@@ -13,7 +13,6 @@ const UserState = (props) => {
 
 
 const updateUserData=async (loginUser)=>{
-  console.log("userStateData ", loginUser);
   // localStorage.setItem("userData", loginUser.profile);
   await setUserStateData(loginUser);
 }

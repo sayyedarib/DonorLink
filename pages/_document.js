@@ -6,7 +6,6 @@ export default function Document() {
     <Html lang="en">
       <Head >
         <Script src="https://accounts.google.com/gsi/client" strategy="beforeInteractive"></Script>
-        <title>DonorLink</title>
       </Head>
       <body>
         <Main />

@@ -89,13 +89,13 @@ const AuthPopup = ({ auth }) => {
 
   //google sign in propmt on page load and click on google sign in button
   useEffect(() => {
-    google.accounts.id.initialize({
-      client_id:
-        "515977534331-f3oimqtepkerndbdqel0hqg0tjskimft.apps.googleusercontent.com",
+    console.log("next public google client id ", process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID);
+    window?.google.accounts.id.initialize({
+      client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
       callback: handleCallBackResponse,
     });
 
-    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+    window?.google.accounts.id.renderButton(document.getElementById("signInDiv"), {
       theme: "dark",
       type: "standard",
       shape: "rectangular",
@@ -167,7 +167,6 @@ const AuthPopup = ({ auth }) => {
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertToBase64(file);
-    console.log(base64);
     setRegisterUser({ ...registerUser, picture: base64 });
   };
 
@@ -206,7 +205,6 @@ const AuthPopup = ({ auth }) => {
   //handle registration
   const handleRegisterInput = (e) => {
     const { name, value } = e.target;
-    console.log(registerUser);
     // Check if the input is an email (only if the input is for the email field)
     if (name === "email") {
       const isValidEmail = validateEmail(value);

@@ -1,7 +1,6 @@
 import React from "react";
 
 const OrdersCard = ({ data, handleDecision }) => {
-    console.log("orders card ", data);
     return (
         <>
             <div className="relative flex w-96 h-auto flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg shadow-blue-300">

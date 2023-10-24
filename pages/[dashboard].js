@@ -6,7 +6,7 @@ import DashboardProfile from "@/components/DashboardProfile";
 
 const Volunteer = ({volunteersData}) => {
   const [decision, setDecision] = useState(0);
-  const [works, setWorks] = useState(volunteersData.works);
+  const [works, setWorks] = useState(volunteersData?.works);
 
   const handleDecision = async (id, answer) => {
 
@@ -39,8 +39,8 @@ const Volunteer = ({volunteersData}) => {
           <div className="flex flex-wrap justify-center items-center gap-3 m-3">
 
             {/* <div className="flex flex-wrap xl:flex-nowrap gap-3 justify-center items-center m-5"> */}
-            {works?.filter(data => !data.collected && !data.accepted && !data.rejected).map(filteredData => {
-             return <OrdersCard data={filteredData} handleDecision={handleDecision} />
+            {works?.filter(data => !data.collected && !data.accepted && !data.rejected).map((filteredData, index) => {
+             return <OrdersCard key={index} data={filteredData} handleDecision={handleDecision} />
             })}
 
             {/* </div> */}
@@ -55,8 +55,8 @@ const Volunteer = ({volunteersData}) => {
 
             {/* <div className="flex flex-wrap xl:flex-nowrap gap-3 justify-center items-center m-5"> */}
 
-            {works?.filter(data => data.accepted && !data.collected).map(filteredData => {
-             return <OrdersCard data={filteredData} handleDecision={handleDecision} />
+            {works?.filter(data => data.accepted && !data.collected).map((filteredData, index) => {
+             return <OrdersCard key={index} data={filteredData} handleDecision={handleDecision} />
             })}
 
             {/* </div> */}
@@ -70,8 +70,8 @@ const Volunteer = ({volunteersData}) => {
           </div>    <div className="flex flex-wrap justify-center items-center gap-3 m-3">
 
             {/* <div className="flex flex-wrap xl:flex-nowrap gap-3 justify-center items-center m-5"> */}
-            {works?.filter(data => data.accepted && data.collected).map(filteredData => {
-              return <OrdersCard data={filteredData} handleDecision={handleDecision} />
+            {works?.filter(data => data.accepted && data.collected).map((filteredData, index) => {
+              return <OrdersCard key={index} data={filteredData} handleDecision={handleDecision} />
             })}
             {/* </div> */}
           </div>
@@ -88,7 +88,7 @@ export default Volunteer;
 export const getServerSideProps = async (context) => {
   const { dashboard } = context.query;
   const _id = dashboard;
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList?particular=${_id}`);
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList?particular/${_id}`);
   return {
     props: {
       volunteersData: data.data,

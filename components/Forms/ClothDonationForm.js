@@ -11,7 +11,7 @@ const ClothDonationForm = () => {
   const userContextDetail = useContext(userContext);
   const location = useGeoLocation();
 
-  console.log("userContextDetail?.userStateData?.name ", userContextDetail?.userStateData);
+  // console.log("userContextDetail?.userStateData?.name ", userContextDetail?.userStateData);
   if (!userContextDetail?.userStateData?.name) {
     router.replace("/auth?prevPath=/forms/clothDonation");
   }
@@ -26,7 +26,7 @@ const ClothDonationForm = () => {
 
   let name, value;
   const handleInput = (e) => {
-    console.log("userContextDetail.userStateData.name 2", userContextDetail?.userStateData);
+    // console.log("userContextDetail.userStateData.name 2", userContextDetail?.userStateData);
     name = e.target.name;
     value = e.target.value;
     setDonationDetail({
@@ -38,7 +38,6 @@ const ClothDonationForm = () => {
   const handleDonate = async (e) => {
     e.preventDefault();
     try {
-      console.log("start responsing");
       setLoader(true);
       toast.success("Thank you for donation");
       const response = await axios.post(

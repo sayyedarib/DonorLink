@@ -42,7 +42,6 @@ const BloodDonationForm = () => {
     e.preventDefault();
 
     try {
-      console.log("start responsing");
       setLoader(true);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bloodDonation`,

@@ -18,7 +18,6 @@ const GetBlood = () => {
   const [blood, setBlood] = useState("");
   const [nearbyDonor, setNearbyDonor] = useState([]);
 
-  useEffect(() => { console.log(nearbyDonor?.filter((data) => data.donor.bloodGroup == blood)), [nearbyDonor] })
   const handleClick = async (e) => {
     e.preventDefault();
 
@@ -72,7 +71,6 @@ const GetBlood = () => {
         {
           nearbyDonor?.filter((data) => data?.donor?.bloodGroup === blood&&data?.distance<10)
             .map(filteredData => {
-              console.log("filteredData ", filteredData);
               return <BloodDonorsCard key={filteredData.donor._id} data={filteredData} />;
             })
         }
