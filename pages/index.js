@@ -26,7 +26,6 @@ export default function Home({ volunteersData }) {
       );
       setDataFetched(true);
       const fetchedRecordData = await res.json();
-      console.log("fetchedRecordData ", fetchedRecordData);
       setRecordsData(fetchedRecordData);
     }
 else{
@@ -73,12 +72,20 @@ else{
 }
 
 export const getServerSideProps = async (context) => {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList/all`);
-  return {
-    props: {
-      volunteersData: data,
-    },
-  };
+  try{
+    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList/all`);
+    return {
+      props: {
+        volunteersData: data,
+      },
+    }
+  }catch(error){
+    return {
+      props: {
+        volunteersData: [],
+      },
+    }
+  }
 };
 
 

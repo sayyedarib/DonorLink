@@ -88,12 +88,19 @@ export default Volunteer;
 export const getServerSideProps = async (context) => {
   const { dashboard } = context.query;
   const _id = dashboard;
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList/${_id}`);
-  return {
-    props: {
-      volunteersData: data.data,
-    },
-  };
-}
-;
+  try{
+    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList/${_id}`);
+    return {
+      props: {
+        volunteersData: data?.data,
+      },
+    };
+  }catch(error){
+    return {
+      props: {
+        volunteersData: [],
+      },
+    }
+  }
+};
 
