@@ -89,8 +89,7 @@ const AuthPopup = ({ auth }) => {
 
   //google sign in propmt on page load and click on google sign in button
   useEffect(() => {
-    console.log("next public google client id ", process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID);
-    window?.google.accounts.id.initialize({
+    window?.google?.accounts?.id.initialize({
       client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
       callback: handleCallBackResponse,
     });
@@ -251,7 +250,13 @@ const AuthPopup = ({ auth }) => {
     }
     try {
       setLoader(true);
-      const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp`;
+      let url;
+      if(type == "volunteer"){
+        url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerRegistration`;
+      }else{
+        url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/signUp`;
+      }
+      console.log("sending post request to ", url, " with data ", registerUser);
       const response = await axios.post(url, registerUser, {
         withCredentials: true,
       });
@@ -283,6 +288,7 @@ const AuthPopup = ({ auth }) => {
         setLoader(false);
       }
     } catch (error) {
+      console.log("error in signup ", error);
       if (
         error.response &&
         error.response.status >= 400 &&

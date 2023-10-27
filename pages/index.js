@@ -10,57 +10,14 @@ import Records from "@/components/Records";
 
 const Services = dynamic(() => import("@/components/Services"));
 
-export default function Home({ volunteersData }) {
-  const [recordsData, setRecordsData] = useState({
-    donations: "0",
-    volunteers: "0",
-    distributions: "0"
-  });
-
-  const [dataFetched, setDataFetched] = useState(false);
-
-  const getRecordsData = async () => {
-    if (!dataFetched) {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/recordsData`
-      );
-      setDataFetched(true);
-      const fetchedRecordData = await res.json();
-      setRecordsData(fetchedRecordData);
-    }
-else{
-  return;
-}
-  };
-
-  const handleInfiniteScroll = async () => {
-    try {
-      if (
-        (window.innerHeight + document.documentElement.scrollTop) * 1.2 >=
-        document.documentElement.scrollHeight
-      ) {
-        getRecordsData();
-      }
-    } catch (error) {
-      console.log("Error in handleInfiniteScroll function", error);
-    }
-  };
-
-  useEffect(() => {
-    if (!dataFetched) {
-      getRecordsData();
-    }
-
-    window.addEventListener("scroll", handleInfiniteScroll);
-    return () => window.removeEventListener("scroll", handleInfiniteScroll);
-  }, [dataFetched]);
-
+export default function Home({ volunteersData, recordsData }) {
   return (
     <>
       <Head>
+        <title>DonorLink</title>
       </Head>
       <div className="flex flex-col gap-10 bg-blue-50">
-        <Header />
+        <Header/>
         <Services />
         <Volunteers volunteerData={volunteersData} />
         <Records data={recordsData} />
@@ -73,10 +30,12 @@ else{
 
 export const getServerSideProps = async (context) => {
   try{
-    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList/all`);
+    const volunteeListrData = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList`);
+    const recordsData = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/recordsData`);
     return {
       props: {
-        volunteersData: data,
+        volunteersData: volunteeListrData.data,
+        recordsData: recordsData.data,
       },
     }
   }catch(error){

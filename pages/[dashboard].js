@@ -58,8 +58,6 @@ const Volunteer = ({volunteersData}) => {
             {works?.filter(data => data.accepted && !data.collected).map((filteredData, index) => {
              return <div key={index}><OrdersCard data={filteredData} handleDecision={handleDecision} /></div>
             })}
-
-            {/* </div> */}
           </div>
           <div
             className="mt-20 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
@@ -68,12 +66,9 @@ const Volunteer = ({volunteersData}) => {
               Collected
             </span>
           </div>    <div className="flex flex-wrap justify-center items-center gap-3 m-3">
-
-            {/* <div className="flex flex-wrap xl:flex-nowrap gap-3 justify-center items-center m-5"> */}
             {works?.filter(data => data.accepted && data.collected).map((filteredData, index) => {
               return <div key={index}><OrdersCard data={filteredData} handleDecision={handleDecision} /></div>
             })}
-            {/* </div> */}
           </div>
         </div>
       )}
@@ -89,7 +84,7 @@ export const getServerSideProps = async (context) => {
   const { dashboard } = context.query;
   const _id = dashboard;
   try{
-    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteerList/${_id}`);
+    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/volunteer?_id=${_id}`);
     return {
       props: {
         volunteersData: data?.data,
