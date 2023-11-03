@@ -1,14 +1,12 @@
 import "@/styles/globals.css";
-import UserState from "@/context/auth/UserState";
-import Navigation from "@/components/layout/Navbar";
+import States from "@/context/States";
+import Navbar from "@/components/layout/Navbar";
 
 export default function App({ Component, pageProps }) {
   return (
-
-    <UserState>
-      <Navigation />
+    <States>
+      <Navbar />
       <Component {...pageProps} />
-    </UserState>
-
+    </States>
   );
 }

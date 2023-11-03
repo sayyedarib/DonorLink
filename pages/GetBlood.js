@@ -1,19 +1,19 @@
 import { ToastContainer, toast } from "react-toastify";
-import React, { useState, useContext, useEffect } from 'react';
-import BloodDonorsCard from '@/components/cards/BloodDonorsCard';
-import userContext from '@/context/auth/userContext';
-import { useRouter } from 'next/router';
-import axios from 'axios';
+import React, { useState, useContext, useEffect } from "react";
+import BloodDonorsCard from "@/components/cards/BloodDonorsCard";
+import contexts from "@/context/contexts";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 const GetBlood = () => {
   const router = useRouter();
-  const userContextDetail = useContext(userContext);
+  const userContextDetail = useContext(contexts);
 
   useEffect(() => {
     if (!userContextDetail.userStateData.name) {
       router.replace("/auth?prevPath=/GetBlood");
     }
-  }, [])
+  }, []);
 
   const [blood, setBlood] = useState("");
   const [nearbyDonor, setNearbyDonor] = useState([]);
@@ -23,31 +23,51 @@ const GetBlood = () => {
 
     try {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bloodDonorsList?coordinates=${userContextDetail.userStateData.coordinates}`);
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bloodDonorsList?coordinates=${userContextDetail.userStateData.coordinates}`,
+      );
       console.log("CL:getblood data.data ", data.data);
       setNearbyDonor(data.data);
-      const filteredData = nearbyDonor?.filter((data) => data?.donor?.bloodGroup === blood && data?.distance < 10);
+      const filteredData = nearbyDonor?.filter(
+        (data) => data?.donor?.bloodGroup === blood && data?.distance < 10,
+      );
       console.log(" filteredData ", filteredData);
-      if(filteredData.length>0){
-        toast.success("we've got the donors in the range of 10km")
-      }
-      else{
+      if (filteredData.length > 0) {
+        toast.success("we've got the donors in the range of 10km");
+      } else {
         toast.warning("no donor available in the range of 10km");
       }
     } catch (error) {
-      toast.warning("no donor found in the range of 10km")
+      toast.warning("no donor found in the range of 10km");
       console.log("Error while finding nearest donor:", error);
     }
   };
 
-
   return (
-    <div className='relative z-50 flex flex-col h-[74vh] justify-center items-center mx-auto lg:my-12 my-24 gap-20'>
+    <div className="relative z-50 flex flex-col h-[74vh] justify-center items-center mx-auto lg:my-12 my-24 gap-20">
       <form>
-        <label htmlFor="bloodType" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+        <label
+          htmlFor="bloodType"
+          className="mb-2 text-sm font-medium text-gray-900 sr-only"
+        >
+          Search
+        </label>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg aria-hidden="true" className="w-5 h-5 text-gray-500 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <svg
+              aria-hidden="true"
+              className="w-5 h-5 text-gray-500 "
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
+            </svg>
           </div>
           <input
             type="search"
@@ -67,14 +87,18 @@ const GetBlood = () => {
           </button>
         </div>
       </form>
-      <div className='flex flex-wrap gap-3 items-center justify-center'>
-        {
-          nearbyDonor?.filter((data) => data?.donor?.bloodGroup === blood&&data?.distance<10)
-            .map(filteredData => {
-              return <div key={filteredData.donor._id}><BloodDonorsCard data={filteredData} /></div>
-            })
-        }
-
+      <div className="flex flex-wrap gap-3 items-center justify-center">
+        {nearbyDonor
+          ?.filter(
+            (data) => data?.donor?.bloodGroup === blood && data?.distance < 10,
+          )
+          .map((filteredData) => {
+            return (
+              <div key={filteredData.donor._id}>
+                <BloodDonorsCard data={filteredData} />
+              </div>
+            );
+          })}
       </div>
       <ToastContainer position="top-left" />
     </div>
@@ -82,5 +106,3 @@ const GetBlood = () => {
 };
 
 export default GetBlood;
-
-

@@ -1,20 +1,20 @@
-import userContext from "@/context/auth/userContext";
+import contexts from "@/context/contexts";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
 import "react-toastify/dist/ReactToastify.css";
 
-export const SignUp = () => {
+const Login = () => {
   const router = useRouter();
-  const userContextDetail = useContext(userContext);
+  const context = useContext(contexts);
 
   //states
   const [loader, setLoader] = useState(false);
   const [emailValid, setEmailValid] = useState(true);
 
-  const [user, setUser] = useState({
+  const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
@@ -25,8 +25,8 @@ export const SignUp = () => {
   };
 
   const handleLoginInput = (e) => {
-    setUser({
-      ...user,
+    setUserData({
+      ...userData,
       [e.target.name]: e.target.value,
     });
   };
@@ -39,10 +39,10 @@ export const SignUp = () => {
         userObject,
         {
           withCredentials: true,
-        }
+        },
       );
-      userContextDetail.updateUserData(response.data.profileData);
-      setUser({
+      context.updateUserData(response.data.profileData);
+      setUserData({
         email: userObject.email,
         picture: userObject.picture,
       });
@@ -65,7 +65,7 @@ export const SignUp = () => {
       callback: handleCallBackResponse,
     });
 
-    window?.google.accounts.id.renderButton(
+    window?.google?.accounts?.id?.renderButton(
       document.getElementById("signInDiv"),
       {
         theme: "dark",
@@ -74,10 +74,10 @@ export const SignUp = () => {
         text: "Sign in with Google",
         maxWidth: 380,
         width: "auto",
-      }
+      },
     );
 
-    google.accounts.id.prompt();
+    google?.accounts?.id?.prompt();
   }, []);
 
   const handleLogin = async (e) => {
@@ -85,27 +85,30 @@ export const SignUp = () => {
     try {
       setLoader(true);
 
-      const isValidEmail = validateEmail(user.email);
+      const isValidEmail = validateEmail(userData.email);
       setEmailValid(isValidEmail);
-      setEmailErrorMessage(isValidEmail ? "" : "Invalid email format");
+      console.log("handle login called");
+      // setEmailErrorMessage(isValidEmail ? "" : "Invalid email format");
       if (!isValidEmail) {
         return;
       }
-
+      console.log("handle login called 2");
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login?loginType=manual`,
-        loginUser,
+        userData,
         {
           withCredentials: true,
-        }
+        },
       );
+      console.log("handle login called 3");
       setLoader(false);
       toast.success("Logged in successfully");
-      userContextDetail.updateUserData(response.data.profileData);
-      setUser({
+      context.updateUserData(response.data.profileData);
+      setUserData({
         email: "",
         password: "",
       });
+      contexts.updatePopupState();
       router.replace(router?.query?.prevPath ? router?.query?.prevPath : "/");
     } catch (error) {
       setLoader(false);
@@ -120,7 +123,13 @@ export const SignUp = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col max-w-md lg:w-1/2 mx-auto px-8 py-6 mt-24 mb-16 bg-white span-8 rounded-xl shadow-lg shadow-blue-300">
+      <div
+        onClick={context.updatePopupState}
+        className="flex flex-col items-end justify-end w-full cursor-pointer"
+      >
+        X
+      </div>
       <form action="" className="my-2">
         <div className="flex flex-col space-y-3">
           <label htmlFor="email">
@@ -131,7 +140,7 @@ export const SignUp = () => {
               onChange={(e) => {
                 handleLoginInput(e);
               }}
-              value={user.email}
+              value={userData.email}
               id="email"
               name="email"
               type="email"
@@ -142,7 +151,7 @@ export const SignUp = () => {
               required
             />
             {!emailValid && (
-              <div className="text-red-500 text-sm">{emailErrorMessage}</div>
+              <div className="text-red-500 text-sm">invalid email</div>
             )}
           </label>
 
@@ -152,7 +161,7 @@ export const SignUp = () => {
               onChange={(e) => {
                 handleLoginInput(e);
               }}
-              value={user.password}
+              value={userData.password}
               id="password"
               name="password"
               type="password"
@@ -160,14 +169,6 @@ export const SignUp = () => {
               placeholder="Enter your password"
             />
           </label>
-
-          <div className="flex flex-row justify-end">
-            <div>
-              <a href="#" className="font-semibold text-indigo-600">
-                Forgot Password?
-              </a>
-            </div>
-          </div>
 
           <button
             type="button"
@@ -193,8 +194,22 @@ export const SignUp = () => {
           <div className="my-5 flex items-center justify-center">
             <div id="signInDiv"></div>
           </div>
+          <div className="flex flex-col items-end justify-end">
+            <span className="font-normal text-sm">
+              Don't have an account!{" "}
+              <a href="/auth" className="font-medium text-base text-indigo-600">
+                SignUp
+              </a>
+            </span>
+            <a href="#" className="font-normal text-md text-indigo-600">
+              Forgot Password?
+            </a>
+          </div>
         </div>
       </form>
+      <ToastContainer position="top-left" />
     </div>
   );
 };
+
+export default Login;

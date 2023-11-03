@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import userContext from "@/context/auth/userContext";
 import useGeoLocation from "hooks/useGeoLocation";
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/router";
@@ -37,7 +36,7 @@ const SignUp = ({ auth }) => {
 
   //google sigin callback function
   const handleCallBackResponse = async (res) => {
-    if(step == 2){
+    if (step == 2) {
       setStep(1);
       return;
     }
@@ -49,7 +48,6 @@ const SignUp = ({ auth }) => {
         email: userObject.email,
         picture: userObject.picture,
       });
-
     } catch (error) {
       console.log("CL: error in if statemenet ", error);
     }
@@ -57,21 +55,24 @@ const SignUp = ({ auth }) => {
 
   //google sign in propmt on page load and click on google sign in button
   useEffect(() => {
-    window?.google?.accounts?.id.initialize({
+    window?.google?.accounts?.id?.initialize({
       client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
       callback: handleCallBackResponse,
     });
 
-    window?.google.accounts.id.renderButton(document.getElementById("signInDiv"), {
-      theme: "dark",
-      type: "standard",
-      shape: "rectangular",
-      text: "Sign up with Google",
-      maxWidth: 380,
-      width: "auto",
-    });
+    window?.google?.accounts?.id?.renderButton(
+      document.getElementById("signInDiv"),
+      {
+        theme: "dark",
+        type: "standard",
+        shape: "rectangular",
+        text: "Sign up with Google",
+        maxWidth: 380,
+        width: "auto",
+      },
+    );
 
-    google.accounts.id.prompt();
+    google?.accounts?.id?.prompt();
   }, []);
 
   //handle image
@@ -112,9 +113,9 @@ const SignUp = ({ auth }) => {
         (error) => {
           console.error("Error getting location:", error);
           toast.error(
-            "Failed to get your location. Please give access to location for getting in touch with you when needed."
+            "Failed to get your location. Please give access to location for getting in touch with you when needed.",
           );
-        }
+        },
       );
     } else {
       toast.error("Geolocation is not available in your browser.");
@@ -129,7 +130,7 @@ const SignUp = ({ auth }) => {
   //handle registration
   const handleRegisterInput = (e) => {
     const { name, value } = e.target;
-    
+
     // Check if the input is an email (only if the input is for the email field)
     if (name === "email") {
       const isValidEmail = validateEmail(value);
@@ -140,8 +141,9 @@ const SignUp = ({ auth }) => {
       setRegisterUser({
         ...registerUser,
         [name]: value,
-        coordinates: `${location.loaded ? JSON.stringify(location.coordinates) : ""
-          }`,
+        coordinates: `${
+          location.loaded ? JSON.stringify(location.coordinates) : ""
+        }`,
       });
     } else if (step === 2) {
       if (name == "phone" || name == "bio") {
@@ -169,7 +171,7 @@ const SignUp = ({ auth }) => {
       registerUser.coordinates === "undefined"
     ) {
       toast.error(
-        "please give access to location for getting in touch with you when needed"
+        "please give access to location for getting in touch with you when needed",
       );
       getLocation();
       return;
@@ -240,7 +242,6 @@ const SignUp = ({ auth }) => {
             <div className="flex flex-col space-y-3">
               {step === 1 && (
                 <>
-
                   <div className="flex gap-3 justify-center items-center">
                     <img
                       src={
@@ -342,62 +343,63 @@ const SignUp = ({ auth }) => {
                       placeholder="Enter name here"
                     />
                   </label>
-              <label htmlFor="email">
-                <span className="font-medium text-slate-700 pb-2">
-                  Email address
-                </span>
-                <input
-                  onChange={(e) => {
-                    handleRegisterInput(e);
-                  }}
-                  value={registerUser.email}
-                  id="email"
-                  name="email"
-                  type="email"
-                  className={`w-full py-3 border ${!emailValid ? "border-red-500" : "border-slate-200"
-                    } rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow`}
-                  placeholder="Enter email address"
-                  required
-                />
-                {!emailValid && (
-                  <div className="text-red-500 text-sm">
-                    {emailErrorMessage}
-                  </div>
-                )}
-              </label>
+                  <label htmlFor="email">
+                    <span className="font-medium text-slate-700 pb-2">
+                      Email address
+                    </span>
+                    <input
+                      onChange={(e) => {
+                        handleRegisterInput(e);
+                      }}
+                      value={registerUser.email}
+                      id="email"
+                      name="email"
+                      type="email"
+                      className={`w-full py-3 border ${
+                        !emailValid ? "border-red-500" : "border-slate-200"
+                      } rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow`}
+                      placeholder="Enter email address"
+                      required
+                    />
+                    {!emailValid && (
+                      <div className="text-red-500 text-sm">
+                        {emailErrorMessage}
+                      </div>
+                    )}
+                  </label>
 
-              <label htmlFor="password">
-                <span className="font-medium text-slate-700 pb-2">
-                  Password
-                </span>
-                <input
-                  onChange={(e) => {
-                    handleRegisterInput(e);
-                  }}
-                  value={registerUser.password}
-                  id="password"
-                  name="password"
-                  type="password"
-                  className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
-                  placeholder="Enter your password"
-                />
-              </label>
-              <label htmlFor="cpassword">
-                <span className="font-medium text-slate-700 pb-2">
-                  Confirm Password
-                </span>
-                <input
-                  onChange={handleRegisterInput}
-                  value={registerUser.cpassword}
-                  id="cpassword"
-                  name="cpassword"
-                  type="password"
-                  className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
-                  placeholder="Enter your confirm-password"
-                  />
-              </label>
-            </>
-                )}
+                  <label htmlFor="password">
+                    <span className="font-medium text-slate-700 pb-2">
+                      Password
+                    </span>
+                    <input
+                      onChange={(e) => {
+                        handleRegisterInput(e);
+                      }}
+                      value={registerUser.password}
+                      id="password"
+                      name="password"
+                      type="password"
+                      className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                      placeholder="Enter your password"
+                    />
+                  </label>
+                  <label htmlFor="cpassword">
+                    <span className="font-medium text-slate-700 pb-2">
+                      Confirm Password
+                    </span>
+                    <input
+                      onChange={handleRegisterInput}
+                      value={registerUser.cpassword}
+                      id="cpassword"
+                      name="cpassword"
+                      type="password"
+                      className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                      placeholder="Enter your confirm-password"
+                    />
+                  </label>
+                </>
+              )}
 
               {step === 2 && (
                 <>
@@ -477,7 +479,7 @@ const SignUp = ({ auth }) => {
                   </div>
                 </>
               )}
-              
+
               <button
                 type="button"
                 onClick={(e) => {
@@ -487,7 +489,7 @@ const SignUp = ({ auth }) => {
                   } else if (step == 1) {
                     if (registerUser.type == "") {
                       toast.error(
-                        "please select user type: Donor, voulunteer, Needy"
+                        "please select user type: Donor, voulunteer, Needy",
                       );
                       return;
                     } else {
@@ -502,13 +504,14 @@ const SignUp = ({ auth }) => {
                 <span>
                   {step === 2 ? (
                     "Register"
-                  ) : loader ? <img
-                    src="/assets/images/fill-gap/loader.gif"
-                    alt="loader_img"
-                  /> :
+                  ) : loader ? (
+                    <img
+                      src="/assets/images/fill-gap/loader.gif"
+                      alt="loader_img"
+                    />
+                  ) : (
                     "Next"
-                  }
-
+                  )}
                 </span>
               </button>
               <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">

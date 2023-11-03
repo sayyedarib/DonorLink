@@ -1,7 +1,7 @@
-import React from 'react';
-import Link from 'next/link';
-import { AiFillGithub } from 'react-icons/ai';
-import { BiLogoGmail } from 'react-icons/bi';
+import React from "react";
+import Link from "next/link";
+import { AiFillGithub } from "react-icons/ai";
+import { BiLogoGmail } from "react-icons/bi";
 
 const Footer = () => {
   return (
@@ -9,16 +9,23 @@ const Footer = () => {
       <footer className="w-full bg-blue-50 px-9">
         <hr className="border-blue-gray-50" />
         <div className="flex flex-row flex-wrap items-center justify-center my-3 gap-y-6 gap-x-12 bg-blue-50 text-center md:justify-between">
-          <div className='flex gap-3 items-center'>
-            <img src="/assets/images/icon/logo.svg" alt="logo" className="w-10" /><span className='font-bold text-4xl mx-4 text-blue-950'>DonorLink</span>
+          <div className="flex gap-3 items-center">
+            <img
+              src="/assets/images/icon/logo.svg"
+              alt="logo"
+              className="w-10"
+            />
+            <span className="font-bold text-4xl mx-4 text-blue-950">
+              DonorLink
+            </span>
           </div>
 
-          <div className='flex gap-5'>
+          <div className="flex gap-5">
             <Link href="https://www.github.com/sayyedarib/donorlink">
-              <AiFillGithub className='text-3xl text-blue-900' />
+              <AiFillGithub className="text-3xl text-blue-900" />
             </Link>
             <Link href="mailto:sayyedaribhussain4321@gmail.com">
-              <BiLogoGmail className='text-3xl text-blue-900' />
+              <BiLogoGmail className="text-3xl text-blue-900" />
             </Link>
           </div>
 
@@ -63,7 +70,7 @@ const Footer = () => {
         </span>
       </footer>
     </>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

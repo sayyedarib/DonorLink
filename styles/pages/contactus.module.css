@@ -1,17 +1,17 @@
-#queryResponseId{
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-    color: white;
-    letter-spacing: 2px;
-    margin-top: 5px;
-    border-radius: 1rem;
+#queryResponseId {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  color: white;
+  letter-spacing: 2px;
+  margin-top: 5px;
+  border-radius: 1rem;
 }
 
 .response_success {
-    background-color: green;
+  background-color: green;
 }
 
 .response_error {
-    background-color: red;
+  background-color: red;
 }

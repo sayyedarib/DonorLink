@@ -10,13 +10,13 @@
   padding: 40px 0 40px 0;
 }
 
-.volunteerSection h1{
-    font-size: 55px;
+.volunteerSection h1 {
+  font-size: 55px;
 }
 
-.volunteerSection div{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
+.volunteerSection div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
 }

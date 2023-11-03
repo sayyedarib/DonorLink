@@ -21,8 +21,8 @@ const Header = () => {
           </h1>
           <h2 className="">
             We are a platform of donation that bridge the gap between willing
-            donors and needy people maintaining the trust with 100% transparency.
-            Join us as a volunteer, donor, or people in need.
+            donors and needy people maintaining the trust with 100%
+            transparency. Join us as a volunteer, donor, or people in need.
           </h2>
           <div className="flex gap-4 flex-wrap">
             <button
@@ -51,9 +51,15 @@ const Header = () => {
             >
               <AiFillCloseCircle className="text-2xl" />
             </span>
-            <img src="/assets/images/img/QR.png" alt="QR" className="w-96 h-96" />
+            <img
+              src="/assets/images/img/QR.png"
+              alt="QR"
+              className="w-96 h-96"
+            />
             <div className="absolute bottom-0 left-0 right-0 bg-white text-black text-center py-3">
-              <span className="p-3"><b>UPI ID</b>:sayyedaribhussain4321@okhdfcbank</span>
+              <span className="p-3">
+                <b>UPI ID</b>:sayyedaribhussain4321@okhdfcbank
+              </span>
               <button
                 className="bg-blue-700 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mt-3"
                 onClick={handleCopy}

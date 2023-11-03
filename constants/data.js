@@ -1,8 +1,7 @@
-
 import { BiDonateBlood } from "react-icons/bi";
 
-import { MdFastfood} from "react-icons/md";
-import { GiClothes,GiHeartOrgan } from "react-icons/gi";
+import { MdFastfood } from "react-icons/md";
+import { GiClothes, GiHeartOrgan } from "react-icons/gi";
 import { FaRupeeSign } from "react-icons/fa";
 
 const gradient = "url(#blue-gradient)";
@@ -21,7 +20,7 @@ const provideHelpService = [
     title: "Donate Blood",
     text: " A single act of giving, a drop of life, can bridge the gap between despair and hope. Donate blood, ignite the flame of compassion, and be the lifeline that saves lives",
     link: "/forms/bloodDonation",
-  }
+  },
 ];
 
 const getHelpService = [
@@ -48,7 +47,6 @@ const getHelpService = [
   },
 ];
 
-
-const data = { provideHelpService, getHelpService};
+const data = { provideHelpService, getHelpService };
 
 export default data;
