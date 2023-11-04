@@ -48,6 +48,7 @@ const Login = () => {
       });
       localStorage.setItem("userData", JSON.stringify(userData));
       toast.success("logged in successfully");
+      context.updatePopupState();
       router.replace(router?.query?.prevPath ? router?.query?.prevPath : "/");
     } catch (error) {
       if (
@@ -108,6 +109,7 @@ const Login = () => {
         "userData",
         JSON.stringify(response.data.profileData),
       );
+      context.updatePopupState();
       context.updateUserData(response.data.profileData);
       setUserData({
         email: "",
