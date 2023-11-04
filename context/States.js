@@ -5,6 +5,13 @@ import axios from "axios";
 const States = (props) => {
   const [popupState, setPopupState] = useState(false);
   const [userStateData, setUserStateData] = useState({});
+  
+  useEffect(()=>{
+    const data  = JSON.parse(localStorage.getItem("userData"))
+    if(data){
+      setUserStateData(data)
+    }
+  }, [])
 
   const updatePopupState = () => {
     setPopupState(!popupState);

@@ -46,6 +46,7 @@ const Login = () => {
         email: userObject.email,
         picture: userObject.picture,
       });
+      localStorage.setItem("userData", JSON.stringify(userData));
       toast.success("logged in successfully");
       router.replace(router?.query?.prevPath ? router?.query?.prevPath : "/");
     } catch (error) {
@@ -103,6 +104,7 @@ const Login = () => {
       console.log("handle login called 3");
       setLoader(false);
       toast.success("Logged in successfully");
+      localStorage.setItem("userData", JSON.stringify(response.data.profileData));
       context.updateUserData(response.data.profileData);
       setUserData({
         email: "",
