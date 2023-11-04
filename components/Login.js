@@ -104,7 +104,10 @@ const Login = () => {
       console.log("handle login called 3");
       setLoader(false);
       toast.success("Logged in successfully");
-      localStorage.setItem("userData", JSON.stringify(response.data.profileData));
+      localStorage.setItem(
+        "userData",
+        JSON.stringify(response.data.profileData),
+      );
       context.updateUserData(response.data.profileData);
       setUserData({
         email: "",

@@ -194,7 +194,7 @@ const SignUp = ({ auth }) => {
           registerUser.type == "volunteer" &&
             toast.success("verification link sent to your email");
         }
-        
+
         localStorage.setItem("userData", JSON.stringify(registerUser));
         setRegisterUser({
           type: "",
